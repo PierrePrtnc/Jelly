@@ -15,6 +15,7 @@ public class MySqlClient {
     private String dbURL = "";
     private String user = "";
     private String password = "";
+    private String database = "";
     private java.sql.Connection dbConnect = null;
     private java.sql.Statement dbStatement = null;
  
@@ -24,31 +25,26 @@ public class MySqlClient {
      * @param user
      * @param password
      */
-    public MySqlClient(String url, String user, String password) {
+    public MySqlClient(String url, String user, String password, String database) {
         this.dbURL = url;
         this.user = user;
         this.password = password;
+        this.database = database;
     }
  
     /**
-     * Connecter à la base de donnée
-     * @return false en cas d'échec
+     * Connecter Ã  la base de donnÃ©e
+     * @return false en cas d'Ã©chec
      */
     public Boolean connect() {
         try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            this.dbConnect = DriverManager.getConnection("jdbc:mysql:" + this.dbURL, this.user, this.password);
+            //Class.forName("com.mysql.jdbc.Driver").newInstance();
+            this.dbConnect = DriverManager.getConnection("jdbc:mysql://" + this.dbURL + "/" + this.database, this.user, this.password);
             this.dbStatement = this.dbConnect.createStatement();
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(MySqlClient.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MySqlClient.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(MySqlClient.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(MySqlClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
         return false;
     }
  
@@ -85,7 +81,7 @@ public class MySqlClient {
      * @param args
      */
     public static void main(String[] args) {
-    	MySqlClient mysqlCli = new MySqlClient("remotemysql.com:3306", "", "");
+    	MySqlClient mysqlCli = new MySqlClient("remotemysql.com:3306", "EvR1zSObCT", "eMA8QUCWIG", "EvR1zSObCT");
         if (mysqlCli.connect()) {
             try {
                 ResultSet rs = mysqlCli.exec("SELECT * FROM user");
