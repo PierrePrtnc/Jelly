@@ -2,14 +2,18 @@ package jelly.dao;
 
 import java.sql.*;
 
+/**
+ * Class MySqlDAOUser
+ * @author Weslie Rabeson, Arthur Leblanc
+ */
 import jelly.database.MySqlClient;
 
-public class MySqlDAOUser {
+public class MySqlDAOUser implements UserDAO {
 	
 	/**
 	 * Variable to access the database
 	 */
-	MySqlClient sql = new MySqlClient("remotemysql.com:3306", "EvR1zSObCT", "eMA8QUCWIG", "EvR1zSObCT");
+	MySqlClient sql = MySqlDAOFactory.getConnection();
 
 	/**
 	 * inserts parameters into the database with a statement like
@@ -151,6 +155,29 @@ public class MySqlDAOUser {
 		sql.close();
 		return null;
 	}
+
+	/**
+	 * Returns a boolean indicating the truthfulness of the user information.
+	 * @return boolean
+	 * 					True if the information of the user is found in the database, false otherwise.
+	 */
+	public boolean checkUserInfo(String mailUser, String password) {
+		String query = "select mailUser, passwordUser from user where mailUser = ? and passwordUser = ?";
+		if(sql.connect()) {
+			try {
+				PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
+				pQuery.setString(1, mailUser);
+				pQuery.setString(2, password);
+				ResultSet res = pQuery.executeQuery();
+				return res.next();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		sql.close();
+		return false;
+	}
 	
 //	public static void main(String[] args) {
 //		MySqlDAOUser db = new MySqlDAOUser();
@@ -181,6 +208,8 @@ public class MySqlDAOUser {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
+//		System.out.println("Check login : " + db.checkUserInfo("test@test.com", "test"));
+//		
 //	}
 	
 }
