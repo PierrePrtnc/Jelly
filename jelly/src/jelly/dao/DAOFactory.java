@@ -19,12 +19,8 @@ public abstract class DAOFactory {
 	 * 				The name of the database (mySQL, Oracle ...)
 	 * @return DAOFactory
 	 */
-	public static DAOFactory getDAOFactory(String dbName) {
-		switch (dbName) {
-		case "mySQL":
-			return new MySqlDAOFactory();
-		default:
-			return null;
-		}
+	public static DAOFactory getDAOFactory() {
+		return MySqlDAOFactory.getInstance();
 	}
+	
 }

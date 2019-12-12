@@ -16,7 +16,7 @@ public class JellyFacade {
 	 * JellyFacade constructor. Instanciate the DAOfactory working with mySQL.
 	 */
 	public JellyFacade() {
-		this.fact = DAOFactory.getDAOFactory("mySQL");
+		this.fact = DAOFactory.getDAOFactory();
 	}
 	
 	/**

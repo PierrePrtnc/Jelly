@@ -9,6 +9,7 @@ import jelly.database.MySqlClient;
  */
 public class MySqlDAOFactory extends DAOFactory {
 	
+	private static MySqlDAOFactory fact;
 	/**
 	 * Returns an instance of one of the subclasses of the class UserDAO.
 	 * @return UserDAO
@@ -17,6 +18,12 @@ public class MySqlDAOFactory extends DAOFactory {
 		return new MySqlDAOUser();
 	}
 	
+	public static MySqlDAOFactory getInstance() {
+		if (fact == null) {
+			fact = new MySqlDAOFactory();
+		}
+		return fact;
+	}
 	/**
 	 * Returns an instance of the class MySqlClient, taking care of the connection to the database.
 	 * @return MySqlClient
