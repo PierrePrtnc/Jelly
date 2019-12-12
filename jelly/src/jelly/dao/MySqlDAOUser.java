@@ -191,7 +191,7 @@ public class MySqlDAOUser implements UserDAO {
 		sql.close();
 		return false;
 	}
-	
+
 //	public static void main(String[] args) {
 //		MySqlDAOUser db = new MySqlDAOUser();
 //		if(db.insertUser("testJava2", "testJava2", "testJava2@mail.com", "testJava2", "testJava2")) {
@@ -205,7 +205,7 @@ public class MySqlDAOUser implements UserDAO {
 //		}
 //		System.out.println("Check login : " + db.checkUserInfo("test@test.com", "test"));
 //		System.out.println(db.readUser("test@test.com"));
-//		
+//
 //	}
-	
+
 }

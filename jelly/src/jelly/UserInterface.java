@@ -15,6 +15,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import jelly.notification.NotificationHandler;
 
 /**
  * Class LoginView.
@@ -22,7 +23,7 @@ import javafx.stage.Window;
  *
  */
 
-public class UserInterface extends Application {
+public class UserInterface extends NotificationHandler {
 	
 	//Facade linked to the GUI
 	private JellyFacade jellyFacade = new JellyFacade();
