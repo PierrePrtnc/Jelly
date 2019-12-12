@@ -2,6 +2,7 @@ package jelly.dao;
 
 import java.sql.*;
 
+import jelly.User;
 /**
  * Class MySqlDAOUser
  * @author Weslie Rabeson, Arthur Leblanc
@@ -116,15 +117,16 @@ public class MySqlDAOUser implements UserDAO {
 	 * 		select * from table where column = parameter
 	 * 
 	 * @param mailUser
-	 * @return
+	 * @return User
 	 */
-	public ResultSet readUser(String mailUser) {
+	public User readUser(String mailUser) {
 		String query = "select * from user where mailUser = ?";
 		if(sql.connect()) {
 			try {
 				PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
 				pQuery.setString(1, mailUser);
-				return pQuery.executeQuery();
+				ResultSet res = pQuery.executeQuery();
+				return new User(res.getString("firstNameUser"), res.getString("lastNameUser"), res.getString("mailUser"), res.getString("pseudoUser"));
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

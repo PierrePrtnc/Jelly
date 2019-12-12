@@ -28,8 +28,10 @@ public class JellyFacade {
 	 * @return boolean
 	 * 				True if the login is successful, false otherwise.
 	 */
-	public boolean login(String mail, String password) {
+	public User login(String mail, String password) {
 		UserDAO user = fact.getUserDAO();
-		return user.checkUserInfo(mail, password);
+		if (user.checkUserInfo(mail, password))
+			return user.readUser(mail);
+		return null;
 	}
 }
