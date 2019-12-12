@@ -10,7 +10,6 @@ import jelly.User;
 import jelly.database.MySqlClient;
 
 public class MySqlDAOUser implements UserDAO {
-	
 	/**
 	 * Variable to access the database
 	 */
@@ -121,12 +120,22 @@ public class MySqlDAOUser implements UserDAO {
 	 */
 	public User readUser(String mailUser) {
 		String query = "select * from user where mailUser = ?";
+		String firstName = "";
+		String lastName = "";
+		String mail = "";
+		String pseudo = "";
 		if(sql.connect()) {
 			try {
 				PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
 				pQuery.setString(1, mailUser);
 				ResultSet res = pQuery.executeQuery();
-				return new User(res.getString("firstNameUser"), res.getString("lastNameUser"), res.getString("mailUser"), res.getString("pseudoUser"));
+				while (res.next()) {
+					 firstName = res.getString(2);
+					 lastName = res.getString(3);
+					 mail = res.getString(4);
+					 pseudo = res.getString(5);
+				}
+				return new User(firstName, lastName, mail, pseudo);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -157,6 +166,8 @@ public class MySqlDAOUser implements UserDAO {
 		sql.close();
 		return null;
 	}
+
+
 
 	/**
 	 * Returns a boolean indicating the truthfulness of the user information.
@@ -192,25 +203,8 @@ public class MySqlDAOUser implements UserDAO {
 //		if(db.deleteUser("testJava@mail.com")) {
 //			System.out.println("Delete OK");
 //		}
-//		ResultSet res = db.readUser("weslie.rabeson@gmail.com");
-//		try {
-//			while(res.next()) {
-//				System.out.println("Valeur: " + res.getString(2));
-//			}
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		res = db.readAllUsers();
-//		try {
-//			while(res.next()) {
-//				System.out.println("Valeur: " + res.getString(2));
-//			}
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 //		System.out.println("Check login : " + db.checkUserInfo("test@test.com", "test"));
+//		System.out.println(db.readUser("test@test.com"));
 //		
 //	}
 	
