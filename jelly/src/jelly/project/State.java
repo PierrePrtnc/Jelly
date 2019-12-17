@@ -13,7 +13,7 @@ package jelly.project;
  * @author Arthur Leblanc
  * @version 0.1
  */
-public enum State extends Board {
+public enum State {
 	ToDo,
 	InProgress,
 	Finished,

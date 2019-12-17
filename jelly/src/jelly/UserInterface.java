@@ -23,7 +23,7 @@ import jelly.notification.NotificationHandler;
  *
  */
 
-public class UserInterface extends NotificationHandler {
+public class UserInterface extends Application {
 	
 	//Facade linked to the GUI
 	private JellyFacade jellyFacade = new JellyFacade();
