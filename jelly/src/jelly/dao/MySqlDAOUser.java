@@ -30,7 +30,8 @@ public class MySqlDAOUser implements UserDAO {
 	public boolean insertUser(String firstNameUser, String lastNameUser, String mailUser, String pseudoUser, String passwordUser) {
 		String query = "insert into user (firstNameUser, lastNameUser, mailUser, pseudoUser, passwordUser) values(?,?,?,?,?)";
 		if(sql.connect()) {
-			if(readUser(mailUser) == null) {
+			System.out.println(readUser(mailUser).getFirstNameUser());
+			if(readUser(mailUser) == null || readUser(mailUser).getFirstNameUser().equals("")) {
 				try {
 					PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
 					pQuery.setString(1, firstNameUser);
@@ -40,9 +41,11 @@ public class MySqlDAOUser implements UserDAO {
 					pQuery.setString(5, passwordUser);
 					pQuery.executeUpdate();
 					pQuery.close();
+					System.out.println("ok");
 					return true;
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
+					System.out.println("1");
 					e.printStackTrace();
 				}	
 			} 

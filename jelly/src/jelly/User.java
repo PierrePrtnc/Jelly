@@ -1,11 +1,6 @@
 package jelly;
 
 
-import java.util.*;
-import jelly.project.*;
-
-import jelly.notification.*;
-
 /**
  * User management class
  * @author Anthony Dupré
@@ -32,16 +27,7 @@ public class User {
      * Pseudo of the user
      */
     public String pseudoUser;
-
-	/**
-	 * Collection of all the projects of the user
-	 */
-	public Collection<Project> projects;
-
-	/**
-	 * Collection of all the notifications of the user
-	 */
-	public Collection<Notification> notifications;
+    
 
     /**
     	*Constructor.
@@ -112,63 +98,10 @@ public class User {
 	}
 
     /**
-     * @param pseudoUser pseudo to be set
+     * @param pseudo pseudo to be set
      */
 	public void setPseudoUser(String pseudoUser) {
 		this.pseudoUser = pseudoUser;
-	}
-
-	/**
-	 * @return the collection of the projects of the user
-	 */
-	public Collection<Project> getProjects() {
-		// TODO implement here
-		return null;
-	}
-
-	/**
-	 * @return a project of the user
-	 */
-	public Project getProject() {
-		// TODO implement here
-		return null;
-	}
-
-	/**
-	 * @return the collection of the notifications of the user
-	 */
-	public Collection<Notification> getNotifications() {
-		// TODO implement here
-		return null;
-	}
-
-	/**
-	 * @return a notification of the user
-	 */
-	public Notification getNotification() {
-		// TODO implement here
-		return null;
-	}
-
-	/**
-	 * @param name name of the project
-	 * @param description description of the project
-	 * @param initialDate date of the project beginning
-	 * @param finalDate date of the project end
-	 * @return
-	 */
-	public void createProject(String name, String description, Date initialDate, Date finalDate) {
-		// TODO implement here
-	}
-
-	/**
-	 * @param name name of the project
-	 * @param desciption description of the project
-	 * @param boards initial boards of the project
-	 * @return
-	 */
-	public void createProject(String name, String desciption, Collection<Board> boards) {
-		// TODO implement here
 	}
 
 }
