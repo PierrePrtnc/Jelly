@@ -1,8 +1,10 @@
 package jelly.dao;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import jelly.User;
+import jelly.project.Project;
 
 /**
  * Interface UserDAO
@@ -17,5 +19,6 @@ public interface UserDAO {
 	public User readUser(String mailUser);
 	public ResultSet readAllUsers();
 	public boolean checkUserInfo(String mailUser, String password);
+	public ArrayList<Project> getAllProjectsByUser(String mailUser);
 	
 }

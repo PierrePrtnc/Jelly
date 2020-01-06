@@ -58,10 +58,12 @@ public class Project {
 	 *
      * @param name name of the project 
      * @param description description of the project 
-     * @param Collection<Board> initial boards of the project
+     * @param boards initial boards of the project
      */
     public Project(String name, String description, Collection<Board> boards) {
-        // TODO implement here
+        this.nameProject = name;
+        this.descriptionProject = description;
+        this.boards = boards;
     }
 
     /**
@@ -73,7 +75,10 @@ public class Project {
      * @param finalDate date of the project end
      */
     public Project(String name, String description, Date initialDate, Date finalDate) {
-        // TODO implement here
+        this.nameProject = name;
+        this.descriptionProject = description;
+        this.initialDateProject = initialDate;
+        this.finalDateProject = finalDate;
     }
 
     /**
@@ -81,16 +86,16 @@ public class Project {
      */
     public String getProjectName() {
         // TODO implement here
-        return "";
+        return this.nameProject;
     }
 
     /**
 	 * Change the name of the project.
 	 *
-     * @param String name to be set
+     * @param name to be set
      */
     public void setProjectName(String name) {
-        // TODO implement here
+        this.nameProject = name;
     }
 
     /**
@@ -98,7 +103,7 @@ public class Project {
      */
     public String getProjectDescription() {
         // TODO implement here
-        return "";
+        return this.descriptionProject;
     }
 
     /**
@@ -107,15 +112,14 @@ public class Project {
      * @param description to be set
      */
     public void setProjectDescription(String description) {
-        // TODO implement here
+        this.descriptionProject = description;
     }
 
     /**
      * @return the collection of all the steps of the project. This allows to get the Gantt Diagram of the project
      */
     public Collection<Step> getGanttDiagram() {
-        // TODO implement here
-        return null;
+        return ((Board) boards).getSteps();
     }
 
     /**
@@ -123,7 +127,7 @@ public class Project {
      */
     public Date getInitialDate() {
         // TODO implement here
-        return null;
+        return this.initialDateProject;
     }
 
     /**
@@ -131,7 +135,7 @@ public class Project {
      * @param initialDate date to be set as the initial date of the project
      */
     public void setInitialDate(Date initialDate) {
-        // TODO implement here
+        this.initialDateProject = initialDate;
     }
 
     /**
@@ -139,7 +143,7 @@ public class Project {
      */
     public Date getFinalDate() {
         // TODO implement here
-        return null;
+        return this.finalDateProject;
     }
 
     /**
@@ -147,7 +151,7 @@ public class Project {
      * @param finalDate date to be set as the final date of the project
      */
     public void setFinalDate(Date finalDate) {
-        // TODO implement here
+        this.finalDateProject = finalDate;
     }
 
     /**
@@ -155,7 +159,7 @@ public class Project {
      */
     public Collection<Board> getBoards() {
         // TODO implement here
-        return null;
+        return boards;
     }
 
     /**
@@ -244,7 +248,7 @@ public class Project {
     /**
 	 * Send a notification to all the collaborators once someone modifies the project.
      * @param sender collaborator who modified something in a project, and broadcasts a modifications to all the other collaborators
-     * @param Collection<Collaborator> All the collaborators who are going to receive the notification related to the project modification
+     * @param receivers All the collaborators who are going to receive the notification related to the project modification
      */
     public void broadcastToMembers(Collaborator sender, Collection<Collaborator> receivers) {
         // TODO implement here

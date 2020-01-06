@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox fx:id="window" prefHeight="227.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jelly.ui.controller.LoginController">
+<fx:include source="../header.fxml"/>
+   <children>
+      <BorderPane prefHeight="283.0" prefWidth="640.0">
+         <center>
+            <GridPane prefHeight="130.0" prefWidth="640.0" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="360.0" minWidth="10.0" prefWidth="252.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="483.199951171875" minWidth="10.0" prefWidth="388.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="106.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="119.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="131.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TextField fx:id="emailField" prefHeight="26.0" prefWidth="212.0" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets right="150.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail address" GridPane.halignment="CENTER">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+                  <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets right="150.0" />
+                     </GridPane.margin>
+                  </PasswordField>
+                  <Button fx:id="loginButton" defaultButton="true" mnemonicParsing="false" onAction="#handle" onMouseEntered="#handleMouseEntered" onMouseExited="#handleMouseExited" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #ACD6FA;" text="Login" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="TOP">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Hyperlink onAction="#handleSignUp" text="Sign up" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Hyperlink>
+               </children>
+            </GridPane>
+         </center>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </BorderPane>
+   </children>
+</VBox>

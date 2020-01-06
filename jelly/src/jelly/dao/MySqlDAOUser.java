@@ -1,6 +1,8 @@
 package jelly.dao;
 
 import java.sql.*;
+import java.sql.Date;
+import java.util.*;
 
 import jelly.User;
 /**
@@ -8,6 +10,7 @@ import jelly.User;
  * @author Weslie Rabeson, Arthur Leblanc
  */
 import jelly.database.MySqlClient;
+import jelly.project.Project;
 
 public class MySqlDAOUser implements UserDAO {
 	/**
@@ -17,9 +20,9 @@ public class MySqlDAOUser implements UserDAO {
 
 	/**
 	 * inserts parameters into the database with a statement like
-	 * 
+	 *
 	 * 		insert into table (columns) values (values)
-	 * 
+	 *
 	 * @param firstNameUser
 	 * @param lastNameUser
 	 * @param mailUser
@@ -30,8 +33,7 @@ public class MySqlDAOUser implements UserDAO {
 	public boolean insertUser(String firstNameUser, String lastNameUser, String mailUser, String pseudoUser, String passwordUser) {
 		String query = "insert into user (firstNameUser, lastNameUser, mailUser, pseudoUser, passwordUser) values(?,?,?,?,?)";
 		if(sql.connect()) {
-			System.out.println(readUser(mailUser).getFirstNameUser());
-			if(readUser(mailUser) == null || readUser(mailUser).getFirstNameUser().equals("")) {
+			if(readUser(mailUser) == null) {
 				try {
 					PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
 					pQuery.setString(1, firstNameUser);
@@ -41,24 +43,22 @@ public class MySqlDAOUser implements UserDAO {
 					pQuery.setString(5, passwordUser);
 					pQuery.executeUpdate();
 					pQuery.close();
-					System.out.println("ok");
 					return true;
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
-					System.out.println("1");
 					e.printStackTrace();
-				}	
-			} 
+				}
+			}
 		}
 		sql.close();
 		return false;
 	}
-	
+
 	/**
 	 * updates values from the database with given parameters with a statement like
-	 * 
+	 *
 	 * 		update table set column = newValue
-	 * 
+	 *
 	 * @param firstNameUser
 	 * @param lastNameUser
 	 * @param mailUser
@@ -88,12 +88,12 @@ public class MySqlDAOUser implements UserDAO {
 		sql.close();
 		return false;
 	}
-	
+
 	/**
 	 * deletes a row from the database with given parameter with a statement like
-	 * 
+	 *
 	 * 		delete from table where column = parameter
-	 * 
+	 *
 	 * @param mailUser
 	 * @return
 	 */
@@ -112,12 +112,12 @@ public class MySqlDAOUser implements UserDAO {
 		sql.close();
 		return false;
 	}
-	
+
 	/**
 	 * reads a row from the database with the given parameter, with a statement like
-	 * 
+	 *
 	 * 		select * from table where column = parameter
-	 * 
+	 *
 	 * @param mailUser
 	 * @return User
 	 */
@@ -147,12 +147,12 @@ public class MySqlDAOUser implements UserDAO {
 		sql.close();
 		return null;
 	}
-	
+
 	/**
 	 * reads several rows from the database with a statement like
-	 * 
+	 *
 	 * 		select * from user
-	 * 
+	 *
 	 * @return
 	 */
 	public ResultSet readAllUsers() {
@@ -164,7 +164,7 @@ public class MySqlDAOUser implements UserDAO {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}	
+			}
 		}
 		sql.close();
 		return null;
@@ -194,6 +194,60 @@ public class MySqlDAOUser implements UserDAO {
 		sql.close();
 		return false;
 	}
+
+	public int getIdByMailUser(String mailUser) {
+		String query = "select idUser from user where mailUser = ?";
+		int id = 0;
+		if(sql.connect()) {
+			try {
+				PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
+				pQuery.setString(1, mailUser);
+				ResultSet res = pQuery.executeQuery();
+				while (res.next()) {
+					id = res.getInt(1);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		sql.close();
+		return id;
+	}
+
+	public ArrayList<Project> getAllProjectsByUser(String mailUser) {
+		int id = getIdByMailUser(mailUser);
+		if (id != 0) {
+			String query = "select * from project where idCreator = ?";
+
+			String nameProject = "";
+			String descriptionProject = "";
+			Date initialDateProject;
+			Date finalDateProject;
+			List<Project> projects = new ArrayList<Project>();
+			if(sql.connect()) {
+				try {
+					PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
+					pQuery.setInt(1, id);
+					ResultSet res = pQuery.executeQuery();
+					while (res.next()) {
+						nameProject = res.getString(2);
+						descriptionProject = res.getString(3);
+						initialDateProject = res.getDate(4);
+						finalDateProject = res.getDate(5);
+						projects.add(new Project(nameProject, descriptionProject, new java.util.Date(initialDateProject.getTime()), new java.util.Date(finalDateProject.getTime())));
+					}
+					return (ArrayList) projects;
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			sql.close();
+		}
+		return null;
+	}
+
 
 //	public static void main(String[] args) {
 //		MySqlDAOUser db = new MySqlDAOUser();
