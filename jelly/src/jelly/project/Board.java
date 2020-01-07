@@ -14,10 +14,10 @@ import java.util.*;
  * <p>
  * Furthermore, a Board contains a collection of Steps. A member of the project can add or delete a Step from the collection.
  * </p>
- * 
+ *
  * @see Project
  * @see Step
- * 
+ *
  * @author Arthur Leblanc
  * @version 0.1
  */
@@ -25,7 +25,7 @@ public class Board {
 
     /**
      * The name of the Board. This name can be changed. 
-     * 
+     *
      * @see Board#getBoardName()
      * @see Board#setBoardName(String)
      */
@@ -36,9 +36,9 @@ public class Board {
      * <p>
      * It is possible to add or delete Steps from the collection.
      * </p>
-     * 
+     *
      * @see Step
-     * 
+     *
      * @see Board#getStep(Step)
      * @see Board#addStep(Step)
      * @see Board#removeStep(Step)
@@ -48,18 +48,18 @@ public class Board {
 
     /**
      * The state of the Board. The state can either be "to do", "in progress", "finished" or "re do".
-     * 
+     *
      * @see State
-     * 
+     *
      * @see Board#getState()
      */
     public State state;
 
     /**
      * The project in which the Board was created.
-     * 
+     *
      * @see Project
-     * 
+     *
      * @see Board#getProject()
      */
     public Project project;
@@ -70,145 +70,169 @@ public class Board {
      * At the construction of a Board object, the state of the board is set to "to do" and
      * an empty collection of Steps is created.
      * </p>
-     * 
+     *
      * @param boardName
      *                  The name of the Board.
-     * 
+     * @param project
+     *                  The project to which the Board is linked to
+     *
      * @see Board#nameBoard
      * @see Board#state
      * @see Board#steps
      */
-    public void Board(String boardName) {
-        // TODO implement here
+    public Board(String boardName) {
+        this.nameBoard = boardName;
+    }
+
+    /**
+     * <p>
+     * At the construction of a Board object, the state of the board is set to "to do" and
+     * an empty collection of Steps is created.
+     * </p>
+     *
+     * @param boardName
+     *                  The name of the Board.
+     * @param project
+     *                  The project to which the Board is linked to
+     *
+     * @see Board#nameBoard
+     * @see Board#state
+     * @see Board#steps
+     */
+    public Board(String boardName, Project project) {
+        this.nameBoard = boardName;
+        this.project = project;
     }
 
     /**
      * Constructor of Board.
-     * 
+     *
      * At the construction of a Board object, the state of the board is set to "to do".
-     * 
+     *
      * @param boardName
      *                  The name of the Board.
      * @param steps
      *                  A collection of Step.
-     * 
+     *
      * @see Board#nameBoard
      * @see Board#state
      * @see Board#steps
      */
-    public void Board(String nameBoard, Collection<Step> steps) {
-        // TODO implement here
+    public Board(String nameBoard, Collection<Step> steps, Project project) {
+        this.nameBoard = nameBoard;
+        this.steps = steps;
+        this.project = project;
     }
 
     /**
      * Returns the name of the Board.
-     * 
+     *
      * @return the name of the Board, as a String.
      */
     public String getBoardName() {
-        // TODO implement here
-        return "";
+        return this.nameBoard;
     }
 
     /**
      * Replaces the current name of the Board with the new name specified as argument.
-     * 
+     *
      * @param name
-     *              The name of the Board. 
+     *              The name of the Board.
      */
     public void setBoardName(String name) {
-        // TODO implement here
+        this.nameBoard = nameBoard;
     }
 
     /**
      * Returns all the steps stored in the Step collection of the Board.
-     * 
+     *
      * @return The steps stored in the Step collection of the Board, as a Collection of Step.
-     * 
+     *
      * @see Step
      */
     public Collection<Step> getSteps() {
-        // TODO implement here
-        return null;
+        return this.steps;
     }
 
     /**
      * Returns a step, stored in the Step collection of the Board.
-     * 
+     *
      * @param step
-     *              A Step, stored in the Step collection of the Board.  
-     * 
+     *              A Step, stored in the Step collection of the Board.
+     *
      * @return The Step, stored in the Step collection of the Board.
-     * 
+     *
      * @see Step
      */
     public Step getStep(Step step) {
-        // TODO implement here
+        for (Step s : this.steps) {
+            if (s.equals((Step) step)) {
+                return s;
+            }
+        }
         return null;
     }
 
     /**
      * Adds a Step to the Step collection of the Board.
-     * 
+     *
      * @param Step
      *              A Step
-     * 
-     * @see Step 
+     *
+     * @see Step
      */
     public void addStep(Step step) {
-        // TODO implement here
+        this.steps.add(step);
     }
 
     /**
      * Removes a Step from the Step collection of the Board.
-     * 
+     *
      * @param Step
      *              A Step, stored in the Step collection of the Board.
-     * 
+     *
      * @see Step
      */
     public void removeStep(Step step) {
-        // TODO implement here
+        this.steps.remove((Step) step);
 
     }
 
     /**
      * Removes all the steps from the Step collection of the Board.
-     * 
+     *
      * @see Step
      */
     public void removeAllSteps() {
-        // TODO implement here
+        this.steps.clear();
 
     }
 
     /**
      * Returns the current State of the Board.
-     * 
+     *
      * @return The current State of the Board, as a State.
-     * 
+     *
      * @see State
      */
     public State getState() {
-        // TODO implement here
-        return null;
+        return this.state;
     }
 
     /**
      * Returns the Project in which the Board was created.
-     * 
-     * @return The Project in which the Board was created, as a Project. 
-     * 
+     *
+     * @return The Project in which the Board was created, as a Project.
+     *
      * @see Project
      */
     public Project getProject() {
-        // TODO implement here
-        return null;
+        return this.project;
     }
 
     /**
      * Returns the information of the Board.
-     * 
+     *
      * @return The information of the Board, as a String.
      */
     @Override

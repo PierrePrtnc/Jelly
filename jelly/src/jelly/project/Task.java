@@ -12,9 +12,9 @@ import java.util.*;
  * <li> A step, corresponding to the step in which the task was created.</li>
  * </ul>
  * </p>
- * 
+ *
  * @see Board
- * 
+ *
  * @author Arthur Leblanc
  * @version 0.1
  */
@@ -22,7 +22,7 @@ public class Task {
 
     /**
      * The description of the Task. This description can be changed.
-     * 
+     *
      * @see Task#getTaskDesc()
      * @see Task#setTaskDesc(String)
      */
@@ -30,9 +30,9 @@ public class Task {
 
     /**
      * The state of the Task. The state can either be "to do", "in progress", "finished" or "re do".
-     * 
+     *
      * @see State
-     * 
+     *
      * @see Task#getTaskState()
      * @see Task#setTaskState(State)
      */
@@ -40,81 +40,78 @@ public class Task {
 
     /**
      * The step in which the Task was created.
-     * 
+     *
      * @see Step
-     * 
+     *
      * @see Task#getStep()
      */
     public Step step;
 
     /**
      * Default constructor of Task.
-     * 
+     *
      * At the construction of a Task object, the state is set to "to do". 
-     * 
+     *
      * @param desc
      *                  The description of the task.
-     * 
+     *
      * @see Task#description
      * @see Task#state
      */
-    public void Task(String desc) {
-        // TODO implement here
+    public Task(String desc) {
+        this.description = desc;
     }
 
     /**
      * Returns the description of the task.
-     * 
+     *
      * @return the description of the task, as a String.
      */
     public String getTaskDesc() {
-        // TODO implement here
-        return "";
+        return this.description;
     }
 
     /**
      * Replaces the current description of the task with the new description specified as argument.
-     * 
-     * @param desc 
+     *
+     * @param desc
      *              The description of the task.
      */
     public void setTaskDesc(String desc) {
-        // TODO implement here
+        this.description = desc;
     }
 
     /**
      * Returns the state of the task.
-     * 
+     *
      * @return the state of the task, as a State.
      */
     public State getTaskState() {
-        // TODO implement here
-        return null;
+        return this.state;
     }
 
     /**
      * Replaces the current state of the task with the new state specified as argument.
-     * 
+     *
      * @param state
-     *              The state of the task. 
+     *              The state of the task.
      */
     public void setTaskState(State state) {
-        // TODO implement here
+        this.state = state;
     }
 
     /**
      * Returns the step in which the task was created.
-     * 
+     *
      * @return the step in which the task was created, as a Step.
      */
     public Step getStep() {
-        // TODO implement here
-        return null;
+        return this.step;
     }
 
     /**
      * Returns the information of the Task.
-     * 
+     *
      * @return The information of the Task, as a String.
      */
     @Override
