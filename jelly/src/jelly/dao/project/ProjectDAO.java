@@ -6,6 +6,7 @@ import jelly.project.Project;
 import jelly.project.Step;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -16,4 +17,5 @@ public interface ProjectDAO {
     public boolean deleteProject(int idProject);
     public Project readProject(int idProject);
     public ResultSet readAllProjects();
+    public ArrayList<Project> getAllProjectsByUser(String mailUser);
 }

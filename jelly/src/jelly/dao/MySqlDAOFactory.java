@@ -1,5 +1,7 @@
 package jelly.dao;
 
+import jelly.dao.project.MySqlDAOProject;
+import jelly.dao.project.ProjectDAO;
 import jelly.database.MySqlClient;
 
 /**
@@ -16,6 +18,10 @@ public class MySqlDAOFactory extends DAOFactory {
 	 */
 	public UserDAO getUserDAO() {
 		return new MySqlDAOUser();
+	}
+
+	public ProjectDAO getProjectDAO() {
+		return new MySqlDAOProject();
 	}
 	
 	public static MySqlDAOFactory getInstance() {

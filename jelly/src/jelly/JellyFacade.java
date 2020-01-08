@@ -2,6 +2,7 @@ package jelly;
 
 import jelly.dao.DAOFactory;
 import jelly.dao.UserDAO;
+import jelly.dao.project.ProjectDAO;
 import jelly.project.Project;
 
 import java.util.ArrayList;
@@ -61,8 +62,8 @@ public class JellyFacade {
 	}
 
 	public ArrayList<Project> getAllProjectsByUser(String mailUser) {
-		UserDAO user = fact.getUserDAO();
-		return user.getAllProjectsByUser(mailUser);
+		ProjectDAO project = fact.getProjectDAO();
+		return project.getAllProjectsByUser(mailUser);
 	}
 
 }

@@ -2,6 +2,8 @@ package jelly.dao.project;
 
 import jelly.User;
 import jelly.dao.MySqlDAOFactory;
+import jelly.dao.MySqlDAOUser;
+import jelly.dao.UserDAO;
 import jelly.database.MySqlClient;
 import jelly.project.Board;
 import jelly.project.Project;
@@ -14,8 +16,10 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 public class MySqlDAOProject implements ProjectDAO {
 
@@ -130,6 +134,40 @@ public class MySqlDAOProject implements ProjectDAO {
             }
         }
         sql.close();
+        return null;
+    }
+
+    public ArrayList<Project> getAllProjectsByUser(String mailUser) {
+        MySqlDAOUser user = new MySqlDAOUser();
+        int id = user.getIdByMailUser(mailUser);
+        if (id != 0) {
+            String query = "select * from project where idCreator = ?";
+
+            String nameProject = "";
+            String descriptionProject = "";
+            java.sql.Date initialDateProject;
+            java.sql.Date finalDateProject;
+            List<Project> projects = new ArrayList<Project>();
+            if(sql.connect()) {
+                try {
+                    PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
+                    pQuery.setInt(1, id);
+                    ResultSet res = pQuery.executeQuery();
+                    while (res.next()) {
+                        nameProject = res.getString(2);
+                        descriptionProject = res.getString(3);
+                        initialDateProject = res.getDate(4);
+                        finalDateProject = res.getDate(5);
+                        projects.add(new Project(nameProject, descriptionProject, new java.util.Date(initialDateProject.getTime()), new java.util.Date(finalDateProject.getTime())));
+                    }
+                    return (ArrayList) projects;
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+            sql.close();
+        }
         return null;
     }
 /*

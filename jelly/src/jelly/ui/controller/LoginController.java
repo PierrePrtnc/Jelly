@@ -18,16 +18,20 @@ import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Window;
 import jelly.JellyFacade;
 import jelly.User;
 
 public class LoginController implements Initializable{
+
+	@FXML
+	Menu homeMenu;
+
+	public void showMenu() {
+		System.out.println("test");
+	}
 	
 	@FXML 
     private TextField emailField; 

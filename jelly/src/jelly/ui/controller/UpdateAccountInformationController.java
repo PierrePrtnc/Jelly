@@ -96,7 +96,9 @@ public class UpdateAccountInformationController {
             showAlert(Alert.AlertType.ERROR, window.getScene().getWindow(), "Error", emptyFields);
 		}
 		else {
-			if(!(passwordField.getText().equals(passwordConfirmationField.getText()))) {
+			if(passwordField.getText().length() < 5){
+				showAlert(Alert.AlertType.ERROR, window.getScene().getWindow(), "Error", "Your password has to be 5 characters long at least");
+			} else if(!(passwordField.getText().equals(passwordConfirmationField.getText()))) {
 				showAlert(Alert.AlertType.ERROR, window.getScene().getWindow(), "Error", "Password and password confirmaion have to be equals");
 			}
 			else {

@@ -65,6 +65,21 @@ public class HomeController {
     }
 
     public void showCreateProject(ActionEvent actionEvent) {
+        if(!(connectedUser.equals(null)||connectedUser.getFirstNameUser().contentEquals(""))) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
+            Parent root;
+            try {
+                root = loader.load();
+                this.scene.setRoot(root);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            ((HomeController)loader.getController()).connectedUser = connectedUser;
+            ((HomeController)loader.getController()).jellyFacade = jellyFacade;
+            ((HomeController)loader.getController()).setScene(scene);
+        }
+
     }
 
     public void logOff(ActionEvent actionEvent) {

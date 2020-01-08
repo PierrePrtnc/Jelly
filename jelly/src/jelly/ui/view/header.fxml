@@ -9,14 +9,14 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.shape.Line?>
 
-<BorderPane prefHeight="86.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="86.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jelly.ui.controller.HeaderController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
          <menus>
-            <Menu fx:id="homeMenu" mnemonicParsing="false" text="Home" />
+            <Menu fx:id="homeMenu" mnemonicParsing="false" text="Home"/>
             <Menu mnemonicParsing="false" text="Help">
                <items>
-                  <MenuItem mnemonicParsing="false" text="About" />
+                  <MenuItem mnemonicParsing="false" text="About" onAction="#showMenu"/>
                </items>
             </Menu>
          </menus>

@@ -215,39 +215,6 @@ public class MySqlDAOUser implements UserDAO {
 		return id;
 	}
 
-	public ArrayList<Project> getAllProjectsByUser(String mailUser) {
-		int id = getIdByMailUser(mailUser);
-		if (id != 0) {
-			String query = "select * from project where idCreator = ?";
-
-			String nameProject = "";
-			String descriptionProject = "";
-			Date initialDateProject;
-			Date finalDateProject;
-			List<Project> projects = new ArrayList<Project>();
-			if(sql.connect()) {
-				try {
-					PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
-					pQuery.setInt(1, id);
-					ResultSet res = pQuery.executeQuery();
-					while (res.next()) {
-						nameProject = res.getString(2);
-						descriptionProject = res.getString(3);
-						initialDateProject = res.getDate(4);
-						finalDateProject = res.getDate(5);
-						projects.add(new Project(nameProject, descriptionProject, new java.util.Date(initialDateProject.getTime()), new java.util.Date(finalDateProject.getTime())));
-					}
-					return (ArrayList) projects;
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			sql.close();
-		}
-		return null;
-	}
-
 
 //	public static void main(String[] args) {
 //		MySqlDAOUser db = new MySqlDAOUser();
