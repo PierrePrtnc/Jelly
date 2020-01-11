@@ -1,10 +1,7 @@
 package jelly.dao.project;
 
 import jelly.User;
-import jelly.project.Board;
-import jelly.project.Project;
-import jelly.project.Step;
-import jelly.project.Task;
+import jelly.project.*;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;

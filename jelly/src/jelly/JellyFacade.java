@@ -8,10 +8,7 @@ import jelly.dao.project.ProjectDAO;
 import jelly.dao.project.StepDAO;
 import jelly.dao.project.TaskDAO;
 import jelly.notification.Notification;
-import jelly.project.Board;
-import jelly.project.Project;
-import jelly.project.Step;
-import jelly.project.Task;
+import jelly.project.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -86,17 +83,6 @@ public class JellyFacade {
 		return project.getAllProjectsByUser(mailUser);
 	}
 
-	public List<Step> getAllStepsByBoard(int boardID) {
-		StepDAO step = fact.getStepDAO();
-		return step.getAllStepsByBoard(boardID);
-	}
-
-	public List<Task> getAllTasksByStep(int stepID) {
-		TaskDAO step = fact.getTaskDAO();
-		return step.getAllTasksByStep(stepID);
-	}
-
-	public boolean insertProject(String name, String description, Date initialDate, Date finalDate, User creator) {
 	/**
 	 *
 	 * @param name 			the name of the project to create
