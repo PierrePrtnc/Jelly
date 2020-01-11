@@ -1,5 +1,6 @@
 package jelly.dao;
 
+import jelly.dao.notification.NotificationDAO;
 import jelly.dao.project.BoardDAO;
 import jelly.dao.project.ProjectDAO;
 import jelly.dao.project.StepDAO;
@@ -26,6 +27,8 @@ public abstract class DAOFactory {
 
 	public abstract TaskDAO getTaskDAO();
 	
+	public abstract NotificationDAO getNotificationDAO();
+	
 	/**
 	 * Returns an instance of one of the subclasses of DAOFactory, depending on the database chosen as parameter.
 	 * @param dbName
@@ -35,5 +38,5 @@ public abstract class DAOFactory {
 	public static DAOFactory getDAOFactory() {
 		return MySqlDAOFactory.getInstance();
 	}
-	
+
 }

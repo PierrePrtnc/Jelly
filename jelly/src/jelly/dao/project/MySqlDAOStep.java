@@ -186,36 +186,37 @@ public class MySqlDAOStep implements StepDAO {
         return null;
     }
 
-    /**
-     *
-     * @param idBoard
-     * @return
-     */
-    @Override
-    public ArrayList<Step> getAllStepsByBoard(int idBoard) {
-        String query = "select * from step where idBoard = ?";
-        String nameStep = "";
-        java.sql.Date initialDateStep;
-        java.sql.Date finalDateStep;
-        List<Step> steps = new ArrayList<Step>();
-        if(sql.connect()) {
-            try {
-                PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
-                pQuery.setInt(1, idBoard);
-                ResultSet res = pQuery.executeQuery();
-                while (res.next()) {
-                    nameStep = res.getString(2);
-                    initialDateStep = res.getDate(3);
-                    finalDateStep = res.getDate(4);
-                    steps.add(new Step(nameStep, new java.util.Date(initialDateStep.getTime()), new java.util.Date(finalDateStep.getTime())));
+    public ArrayList<Step> getAllStepsByBoard(int boardID) {
+        if (boardID != 0) {
+            String query = "select * from step where idBoard = ?";
+
+            String nameStep = "";
+            int stateStep;
+            int difficultyStep;
+            java.sql.Date initialDateStep;
+            java.sql.Date finalDateStep;
+            List<Step> steps = new ArrayList<Step>();
+            if(sql.connect()) {
+                try {
+                    PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
+                    pQuery.setInt(1, boardID);
+                    ResultSet res = pQuery.executeQuery();
+                    while (res.next()) {
+                        nameStep = res.getString(2);
+                        initialDateStep = res.getDate(3);
+                        finalDateStep = res.getDate(4);
+                        stateStep = res.getInt(6);
+                        difficultyStep = res.getInt(7);
+                        steps.add(new Step(nameStep, initialDateStep, finalDateStep, stateStep, difficultyStep));
+                    }
+                    return (ArrayList) steps;
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
                 }
-                return (ArrayList) steps;
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
             }
+            sql.close();
         }
-        sql.close();
         return null;
     }
 }

@@ -9,16 +9,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Window;
 import jelly.JellyFacade;
+import jelly.User;
 
 public class UpdateAccountInformationController {
 	
 	private JellyFacade jellyFacade = new JellyFacade();
-	private Scene scene;
+	protected Scene scene;
 	@FXML
 	protected TextField firstNameField;
 	@FXML
@@ -35,6 +37,11 @@ public class UpdateAccountInformationController {
 	private Button updateButton;
 	@FXML
     private VBox window;
+	@FXML
+	protected User connectedUser;
+	
+	@FXML
+	protected Label notificationNumber;
 	
 	public UpdateAccountInformationController() {
 		
@@ -112,6 +119,17 @@ public class UpdateAccountInformationController {
 			}
 		}
 	}
+	
+    public void showHome() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
+        Parent root;
+        root = loader.load();
+        this.scene.setRoot(root);
+        ((HomeController)loader.getController()).connectedUser = connectedUser;
+        ((HomeController)loader.getController()).jellyFacade = jellyFacade;
+		((HomeController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
+        ((HomeController)loader.getController()).setScene(scene);
+    }
 	
 	public void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
 	    Alert alert = new Alert(alertType);

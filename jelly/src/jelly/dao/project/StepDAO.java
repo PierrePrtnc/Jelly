@@ -2,7 +2,7 @@ package jelly.dao.project;
 
 import jelly.User;
 import jelly.project.Board;
-import jelly.project.State;
+import jelly.project.Project;
 import jelly.project.Step;
 import jelly.project.Task;
 
@@ -18,5 +18,5 @@ public interface StepDAO {
     public boolean deleteStep(int idStep);
     public Step readStep(int idStep);
     public ResultSet readAllSteps();
-    public ArrayList<Step> getAllStepsByBoard(int idBoard);
+    public ArrayList<Step> getAllStepsByBoard(int boardID);
 }

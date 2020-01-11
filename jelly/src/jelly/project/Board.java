@@ -63,11 +63,9 @@ public class Board {
     public Project project;
 
     /**
-     * The project in which the Board was created.
-     *
-     * @see Board#getIdBoard()
+     * Number ID for a board
      */
-    public int idBoard;
+    private int idBoard = 0;
 
     /**
      * Default constructor of Board.
@@ -78,9 +76,6 @@ public class Board {
      *
      * @param boardName
      *                  The name of the Board.
-     * @param project
-     *                  The project to which the Board is linked to
-     *
      * @see Board#nameBoard
      * @see Board#steps
      */
@@ -136,7 +131,7 @@ public class Board {
      *
      * At the construction of a Board object, the state of the board is set to "to do".
      *
-     * @param boardName
+     * @param nameBoard
      *                  The name of the Board.
      * @param steps
      *                  A collection of Step.
@@ -202,7 +197,7 @@ public class Board {
     /**
      * Adds a Step to the Step collection of the Board.
      *
-     * @param Step
+     * @param step
      *              A Step
      *
      * @see Step
@@ -214,7 +209,7 @@ public class Board {
     /**
      * Removes a Step from the Step collection of the Board.
      *
-     * @param Step
+     * @param step
      *              A Step, stored in the Step collection of the Board.
      *
      * @see Step
@@ -272,18 +267,19 @@ public class Board {
     }
 
     /**
-     * getter for board id
-     * @return id of board
+     *
+     * @return the id of the last board created
      */
     public int getIdBoard() {
         return idBoard;
     }
 
     /**
-     * setter for board id
+     * sets the value for the id of the latest board
+     *
      * @param idBoard
      */
-    public void setIdBoard(int idBoard) {
+    public  void setIdBoard(int idBoard) {
         this.idBoard = idBoard;
     }
 

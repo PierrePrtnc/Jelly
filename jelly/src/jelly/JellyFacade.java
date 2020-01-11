@@ -2,14 +2,20 @@ package jelly;
 
 import jelly.dao.DAOFactory;
 import jelly.dao.UserDAO;
+import jelly.dao.notification.NotificationDAO;
 import jelly.dao.project.BoardDAO;
 import jelly.dao.project.ProjectDAO;
 import jelly.dao.project.StepDAO;
 import jelly.dao.project.TaskDAO;
-import jelly.project.*;
+import jelly.notification.Notification;
+import jelly.project.Board;
+import jelly.project.Project;
+import jelly.project.Step;
+import jelly.project.Task;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Class JellyFacade.
@@ -80,6 +86,17 @@ public class JellyFacade {
 		return project.getAllProjectsByUser(mailUser);
 	}
 
+	public List<Step> getAllStepsByBoard(int boardID) {
+		StepDAO step = fact.getStepDAO();
+		return step.getAllStepsByBoard(boardID);
+	}
+
+	public List<Task> getAllTasksByStep(int stepID) {
+		TaskDAO step = fact.getTaskDAO();
+		return step.getAllTasksByStep(stepID);
+	}
+
+	public boolean insertProject(String name, String description, Date initialDate, Date finalDate, User creator) {
 	/**
 	 *
 	 * @param name 			the name of the project to create
@@ -93,6 +110,16 @@ public class JellyFacade {
 		ProjectDAO project = fact.getProjectDAO();
 		UserDAO user = fact.getUserDAO();
 		return project.insertProject(name, description, initialDate, finalDate, creator);
+	}
+	
+	public ArrayList<Notification> getUnreadNotificationList(User user){
+		NotificationDAO notification = fact.getNotificationDAO();
+		return notification.unreadNotifications(user);
+	}
+	
+	public boolean deleteNotification(int idNotification, User user) {
+		NotificationDAO notification = fact.getNotificationDAO();
+		return notification.deleteNotification(idNotification, user);
 	}
 
 	/**

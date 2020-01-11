@@ -99,16 +99,15 @@ public class LoginController implements Initializable{
 			try {
 				User connectedUser = jellyFacade.login(emailField.getText(), passwordField.getText());
 				if(!(connectedUser.equals(null)||connectedUser.getFirstNameUser().contentEquals(""))) {
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
-				Parent root;
-				root = loader.load();
-				this.scene.setRoot(root);
-				((HomeController)loader.getController()).connectedUser = connectedUser;
-				((HomeController)loader.getController()).jellyFacade = jellyFacade;
-				((HomeController)loader.getController()).setScene(scene);
-
-		}
-			
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
+					Parent root;
+					root = loader.load();
+					this.scene.setRoot(root);
+					((HomeController)loader.getController()).connectedUser = connectedUser;
+					((HomeController)loader.getController()).jellyFacade = jellyFacade;
+					((HomeController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
+					((HomeController)loader.getController()).setScene(scene);
+				}
 			}
 			catch(Exception e) {
 				showAlert(Alert.AlertType.ERROR, window.getScene().getWindow(), "Error", "Invalid information");

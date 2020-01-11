@@ -46,6 +46,8 @@ public class GanttCreationController {
 
     @FXML
     private Button cancelButton;
+    
+    @FXML protected Label notificationNumber;
 
     public void setScene(Scene scene) {
         this.scene = scene;
@@ -75,6 +77,8 @@ public class GanttCreationController {
                 ((GanttEditController)loader.getController()).jellyFacade = jellyFacade;
                 ((GanttEditController)loader.getController()).project = project;
                 ((GanttEditController)loader.getController()).setScene(scene);
+				((GanttEditController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
+
 
             }
             else
@@ -90,6 +94,8 @@ public class GanttCreationController {
         ((ProjectCreationController)loader.getController()).connectedUser = connectedUser;
         ((ProjectCreationController)loader.getController()).jellyFacade = jellyFacade;
         ((ProjectCreationController)loader.getController()).setScene(scene);
+		((ProjectCreationController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
+
     }
 
     public void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {

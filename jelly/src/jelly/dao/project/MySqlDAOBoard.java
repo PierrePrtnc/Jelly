@@ -2,6 +2,7 @@ package jelly.dao.project;
 
 import jelly.User;
 import jelly.dao.MySqlDAOFactory;
+import jelly.dao.MySqlDAOUser;
 import jelly.database.MySqlClient;
 import jelly.project.Board;
 import jelly.project.Project;

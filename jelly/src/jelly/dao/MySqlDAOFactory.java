@@ -1,8 +1,10 @@
 package jelly.dao;
 
-import jelly.dao.project.MySqlDAOProject;
-import jelly.dao.project.ProjectDAO;
+import jelly.dao.notification.MySqlDAONotification;
+import jelly.dao.notification.NotificationDAO;
+import jelly.dao.project.*;
 import jelly.database.MySqlClient;
+import jelly.project.Board;
 
 /**
  * Class MySqlDAOFactory
@@ -23,6 +25,22 @@ public class MySqlDAOFactory extends DAOFactory {
 	public ProjectDAO getProjectDAO() {
 		return new MySqlDAOProject();
 	}
+
+	public BoardDAO getBoardDAO() {
+		return new MySqlDAOBoard();
+	}
+
+	public StepDAO getStepDAO() {
+		return new MySqlDAOStep();
+	}
+
+	public TaskDAO getTaskDAO() { return new MySqlDAOTask(); }
+
+	@Override
+	public NotificationDAO getNotificationDAO() {
+		// TODO Auto-generated method stub
+		return new MySqlDAONotification();
+	}
 	
 	public static MySqlDAOFactory getInstance() {
 		if (fact == null) {
@@ -37,6 +55,7 @@ public class MySqlDAOFactory extends DAOFactory {
 	public static MySqlClient getConnection() {
 		return new MySqlClient("remotemysql.com:3306", "EvR1zSObCT", "eMA8QUCWIG", "EvR1zSObCT");
 	}
+
 	
 
 }

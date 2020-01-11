@@ -38,6 +38,9 @@ public class ProjectCreationController {
 
     @FXML
     private Button createProjectButton;
+    
+	@FXML
+	protected Label notificationNumber;
 
     @FXML
     private Hyperlink homeHyperLink;
@@ -52,6 +55,7 @@ public class ProjectCreationController {
         this.scene.setRoot(root);
         ((HomeController)loader.getController()).connectedUser = connectedUser;
         ((HomeController)loader.getController()).jellyFacade = jellyFacade;
+		((HomeController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
         ((HomeController)loader.getController()).setScene(scene);
     }
 
@@ -62,11 +66,12 @@ public class ProjectCreationController {
         this.scene.setRoot(root);
         ((GanttCreationController)loader.getController()).connectedUser = connectedUser;
         ((GanttCreationController)loader.getController()).jellyFacade = jellyFacade;
+		((GanttCreationController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
         ((GanttCreationController)loader.getController()).setScene(scene);
     }
 
-    //TODO Améliorer la sécurité : restreindre le nombre de caractères pour le nom / description
-    // Check si les dates sont cohérentes
+    //TODO Am�liorer la s�curit� : restreindre le nombre de caract�res pour le nom / description
+    // Check si les dates sont coh�rentes
     public void createProject() throws IOException {
         if (this.projectNameInput.getText().isEmpty())
             showAlert(Alert.AlertType.ERROR, projectNameInput.getScene().getWindow(), "Error", "Please enter the name of the project");

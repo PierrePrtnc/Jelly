@@ -44,6 +44,9 @@ public class GanttEditController {
 
     @FXML
     private ScrollPane scrollPaneGantt;
+    
+    @FXML
+    protected Label notificationNumber;
 
     public void setScene(Scene scene) throws ParseException {
         this.scene = scene;
