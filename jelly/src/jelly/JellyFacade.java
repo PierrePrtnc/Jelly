@@ -144,14 +144,13 @@ public class JellyFacade {
 
 	/************************** BOARD METHODS ********************************/
 
-	BoardDAO board = fact.getBoardDAO();
-
 	/**
 	 *
 	 * @param idProject		the ID of the project to display the boards of
 	 * @return a list of boards corresponding to the given project
 	 */
 	public ArrayList<Board> getAllBoardsByProject(int idProject) {
+		BoardDAO board = fact.getBoardDAO();
 		return board.getAllBoardsByProject(idProject);
 	}
 
@@ -163,6 +162,7 @@ public class JellyFacade {
 	 * @return the created board
 	 */
 	public Board insertBoard(String nameBoard, String descriptionBoard, int idProject) {
+		BoardDAO board = fact.getBoardDAO();
 		return board.insertBoard(nameBoard, descriptionBoard, idProject);
 	}
 
@@ -174,6 +174,7 @@ public class JellyFacade {
 	 * @return true if the board was successfully updated
 	 */
 	public boolean updateBoard(int idBoard, String nameBoard, String descriptionBoard) {
+		BoardDAO board = fact.getBoardDAO();
 		return board.updateBoard(idBoard, nameBoard, descriptionBoard);
 	}
 
@@ -183,6 +184,7 @@ public class JellyFacade {
 	 * @return true if the board was successfully deleted
 	 */
 	public boolean deleteBoard(int idBoard) {
+		BoardDAO board = fact.getBoardDAO();
 		return board.deleteBoard(idBoard);
 	}
 
@@ -192,12 +194,11 @@ public class JellyFacade {
 	 * @return the board to read
 	 */
 	public Board readBoard(int idBoard) {
+		BoardDAO board = fact.getBoardDAO();
 		return board.readBoard(idBoard);
 	}
 
 	/************************** STEP METHODS ********************************/
-
-	StepDAO step = fact.getStepDAO();
 
 	/**
 	 *
@@ -205,6 +206,7 @@ public class JellyFacade {
 	 * @return a list of steps that belong to the given board
 	 */
 	public ArrayList<Step> getAllStepsByBoard(int idBoard) {
+		StepDAO step = fact.getStepDAO();
 		return step.getAllStepsByBoard(idBoard);
 	}
 
@@ -218,6 +220,7 @@ public class JellyFacade {
 	 * @return the step created
 	 */
 	public Step insertStep(String name, Date initialDate, Date finalDate, State state, int idBoard) {
+		StepDAO step = fact.getStepDAO();
 		return step.insertStep(name, initialDate, finalDate, state, idBoard);
 	}
 
@@ -231,6 +234,7 @@ public class JellyFacade {
 	 * @return	true if the step was successfully updated
 	 */
 	public boolean updateStep(int idStep, String name, Date initialDate, Date finalDate, State state) {
+		StepDAO step = fact.getStepDAO();
 		return step.updateStep(idStep, name, initialDate, finalDate, state);
 	}
 
@@ -240,6 +244,7 @@ public class JellyFacade {
 	 * @return	true if the step was successfully deleted
 	 */
 	public boolean deleteStep(int idStep) {
+		StepDAO step = fact.getStepDAO();
 		return step.deleteStep(idStep);
 	}
 
@@ -249,12 +254,11 @@ public class JellyFacade {
 	 * @return	the step read from the database
 	 */
 	public Step readStep(int idStep) {
+		StepDAO step = fact.getStepDAO();
 		return step.readStep(idStep);
 	}
 
 	/************************** TASK METHODS ********************************/
-
-	TaskDAO task = fact.getTaskDAO();
 
 	/**
 	 *
@@ -262,6 +266,7 @@ public class JellyFacade {
 	 * @return a list of tasks that belong to the given step
 	 */
 	public ArrayList<Task> getAllTasksByStep(int idStep) {
+		TaskDAO task = fact.getTaskDAO();
 		return task.getAllTasksByStep(idStep);
 	}
 
@@ -273,6 +278,7 @@ public class JellyFacade {
 	 * @return	the task created
 	 */
 	public Task insertTask(String desc, State state, int idStep) {
+		TaskDAO task = fact.getTaskDAO();
 		return task.insertTask(desc, state, idStep);
 	}
 
@@ -284,6 +290,7 @@ public class JellyFacade {
 	 * @return	true if the task was update successfully
 	 */
 	public boolean updateTask(int idTask, String desc, State state) {
+		TaskDAO task = fact.getTaskDAO();
 		return task.updateTask(idTask, desc, state);
 	}
 
@@ -293,6 +300,7 @@ public class JellyFacade {
 	 * @return	true if the task was deleted successfully
 	 */
 	public boolean deleteTask(int idTask) {
+		TaskDAO task = fact.getTaskDAO();
 		return task.deleteTask(idTask);
 	}
 
@@ -302,6 +310,7 @@ public class JellyFacade {
 	 * @return	the task to display
 	 */
 	public Task readTask(int idTask) {
+		TaskDAO task = fact.getTaskDAO();
 		return task.readTask(idTask);
 	}
 
