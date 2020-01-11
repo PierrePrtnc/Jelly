@@ -2,7 +2,9 @@ package jelly;
 
 import jelly.dao.DAOFactory;
 import jelly.dao.UserDAO;
+import jelly.dao.notification.NotificationDAO;
 import jelly.dao.project.ProjectDAO;
+import jelly.notification.Notification;
 import jelly.project.Project;
 
 import java.util.ArrayList;
@@ -76,6 +78,16 @@ public class JellyFacade {
 		ProjectDAO project = fact.getProjectDAO();
 		UserDAO user = fact.getUserDAO();
 		return project.insertProject(name, description, initialDate, finalDate, creator);
+	}
+	
+	public ArrayList<Notification> getUnreadNotificationList(User user){
+		NotificationDAO notification = fact.getNotificationDAO();
+		return notification.unreadNotifications(user);
+	}
+	
+	public boolean deleteNotification(int idNotification, User user) {
+		NotificationDAO notification = fact.getNotificationDAO();
+		return notification.deleteNotification(idNotification, user);
 	}
 
 

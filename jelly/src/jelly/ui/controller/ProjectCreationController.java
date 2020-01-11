@@ -38,6 +38,9 @@ public class ProjectCreationController {
 
     @FXML
     private Button createProjectButton;
+    
+	@FXML
+	protected Label notificationNumber;
 
     @FXML
     private Hyperlink homeHyperLink;
@@ -52,6 +55,7 @@ public class ProjectCreationController {
         this.scene.setRoot(root);
         ((HomeController)loader.getController()).connectedUser = connectedUser;
         ((HomeController)loader.getController()).jellyFacade = jellyFacade;
+		((HomeController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
         ((HomeController)loader.getController()).setScene(scene);
     }
 
@@ -62,11 +66,12 @@ public class ProjectCreationController {
         this.scene.setRoot(root);
         ((GanttCreationController)loader.getController()).connectedUser = connectedUser;
         ((GanttCreationController)loader.getController()).jellyFacade = jellyFacade;
+		((GanttCreationController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
         ((GanttCreationController)loader.getController()).setScene(scene);
     }
 
-    //TODO AmÃ©liorer la sÃ©curitÃ© : restreindre le nombre de caractÃ¨res pour le nom / description
-    // Check si les dates sont cohÃ©rentes
+    //TODO Améliorer la sécurité : restreindre le nombre de caractères pour le nom / description
+    // Check si les dates sont cohérentes
     public void createProject() throws IOException {
         if (this.projectNameInput.getText().isEmpty())
             showAlert(Alert.AlertType.ERROR, projectNameInput.getScene().getWindow(), "Error", "Please enter the name of the project");
@@ -80,7 +85,7 @@ public class ProjectCreationController {
             Date startingDate = Date.from(projectStartingDateDP.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
             Date endingDate = Date.from(projectEndingDateDP.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
             if (jellyFacade.insertProject(projectNameInput.getText(), projectDescriptionInput.getText(), startingDate, endingDate, connectedUser)) {
-                showAlert(Alert.AlertType.INFORMATION, projectNameInput.getScene().getWindow(), "Success", "Insertion effectuÃ©e !");
+                showAlert(Alert.AlertType.INFORMATION, projectNameInput.getScene().getWindow(), "Success", "Insertion effectuée !");
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
                 Parent root;
                 root = loader.load();

@@ -10,7 +10,7 @@ import jelly.ui.controller.LoginController;
 /**
  * Class LoginView.
  * @author Pierre Partinico
- *♣
+ *
  */
 
 public class MainView extends Application {

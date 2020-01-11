@@ -41,6 +41,9 @@ public class HomeController {
 
     @FXML
     private Label welcomeLabel;
+    
+	@FXML
+	protected Label notificationNumber;
 
     private Scene scene;
 
@@ -49,15 +52,16 @@ public class HomeController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/updateInformationUI.fxml"));
                 Parent root;
                 root = loader.load();
-                Stage stage = new Stage();
-                stage.setTitle("Jelly - My information");
-                stage.setScene(new Scene(root, 800, 500));
+                this.scene.setRoot(root);
                 ((UpdateAccountInformationController)loader.getController()).setScene(scene);
+                ((UpdateAccountInformationController)loader.getController()).connectedUser = connectedUser;
                 ((UpdateAccountInformationController)loader.getController()).firstNameField.setText(connectedUser.getFirstNameUser());
                 ((UpdateAccountInformationController)loader.getController()).lastNameField.setText(connectedUser.getLastNameUser());
                 ((UpdateAccountInformationController)loader.getController()).pseudoField.setText(connectedUser.getPseudoUser());
                 ((UpdateAccountInformationController)loader.getController()).emailField.setText(connectedUser.getMailUser());
-                stage.show();
+				((UpdateAccountInformationController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
+
+
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -77,6 +81,8 @@ public class HomeController {
             }
             ((ProjectCreationController)loader.getController()).connectedUser = connectedUser;
             ((ProjectCreationController)loader.getController()).jellyFacade = jellyFacade;
+			((ProjectCreationController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
+
             ((ProjectCreationController)loader.getController()).setScene(scene);
         }
 

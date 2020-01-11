@@ -184,8 +184,6 @@ public class MySqlDAOProject implements ProjectDAO {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
         System.out.println(db.readProject(2).getInitialDate());
-
     }*/
 }

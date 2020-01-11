@@ -38,7 +38,23 @@ public class Collaborator {
         // TODO implement here
     }
 
-    /**
+    public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	/**
      * removes a given Board from the collection of boards of the current project
      * if the removal was successful, the Board to remove is returned
      * @param Board 
