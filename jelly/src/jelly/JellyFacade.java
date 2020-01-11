@@ -97,16 +97,6 @@ public class JellyFacade {
 		UserDAO user = fact.getUserDAO();
 		return project.insertProject(name, description, initialDate, finalDate, creator);
 	}
-	
-	public ArrayList<Notification> getUnreadNotificationList(User user){
-		NotificationDAO notification = fact.getNotificationDAO();
-		return notification.unreadNotifications(user);
-	}
-	
-	public boolean deleteNotification(int idNotification, User user) {
-		NotificationDAO notification = fact.getNotificationDAO();
-		return notification.deleteNotification(idNotification, user);
-	}
 
 	/**
 	 *

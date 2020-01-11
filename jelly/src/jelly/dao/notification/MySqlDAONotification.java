@@ -15,8 +15,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
-
 public class MySqlDAONotification implements NotificationDAO {
 	
 	MySqlClient sql = MySqlDAOFactory.getConnection();
