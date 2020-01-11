@@ -47,6 +47,23 @@ public class HomeController {
 
     private Scene scene;
 
+    
+    public void showUnreadNotifications() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+            Parent root;
+            root = loader.load();
+            this.scene.setRoot(root);
+			((NotificationsController)loader.getController()).emailUser = connectedUser.getMailUser();
+			((NotificationsController)loader.getController()).currentUser = connectedUser;
+
+            ((NotificationsController)loader.getController()).setScene(scene);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     public void showPersonalInfo(ActionEvent actionEvent) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/updateInformationUI.fxml"));
@@ -89,6 +106,18 @@ public class HomeController {
     }
 
     public void logOff(ActionEvent actionEvent) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/loginUI.fxml"));
+        Parent root;
+        try {
+            root = loader.load();
+            this.scene.setRoot(root);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        ((LoginController)loader.getController()).jellyFacade = jellyFacade;
+        ((LoginController)loader.getController()).setScene(scene);
     }
 
     public void setScene(Scene scene) {

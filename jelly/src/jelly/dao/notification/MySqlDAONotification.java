@@ -15,6 +15,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
+
 public class MySqlDAONotification implements NotificationDAO {
 	
 	MySqlClient sql = MySqlDAOFactory.getConnection();
@@ -69,7 +71,7 @@ public class MySqlDAONotification implements NotificationDAO {
     @Override
     public boolean deleteNotification(int idNotification, User user) {
     	String query = "select idUser from user where mailUser = ?";
-    	String query2 = "delete from from notification_journal where idUser = ? and idNotification = ?";
+    	String query2 = "delete from notification_journal where idUser = ? and idNotification = ?";
     	int idUser = 0;
 		if(sql.connect()) {
 			try {
@@ -79,7 +81,7 @@ public class MySqlDAONotification implements NotificationDAO {
 				while (res.next()) {
 					 idUser = res.getInt(1);
 				}
-				PreparedStatement pQuery2 = sql.getDbConnect().prepareStatement(query);
+				PreparedStatement pQuery2 = sql.getDbConnect().prepareStatement(query2);
 				pQuery2.setInt(1, idUser);
 				pQuery2.setInt(2, idNotification);
 				pQuery2.executeUpdate();			
@@ -93,12 +95,21 @@ public class MySqlDAONotification implements NotificationDAO {
     }
     
     @Override
-    public boolean updateNotification(int idNotification) {
-		String query = "update notification_journal set  isRead = 1 where idNotification = ?";
+    public boolean updateNotification(int idNotification, User user) {
+    	String queryInt = "Select idUser from user where mailUser = ?";
+		String query = "update notification_journal set  isRead = 1 where idNotification = ? and idUser = ?";
 		if(sql.connect()) {
 			try {
+				PreparedStatement pQueryInt = sql.getDbConnect().prepareStatement(queryInt);
+				pQueryInt.setString(1,  user.getMailUser());
+				ResultSet res = pQueryInt.executeQuery();
+				int idUser = 0;
+				while(res.next()) {
+					idUser = res.getInt(1);
+				}
 				PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
 				pQuery.setInt(1, idNotification);
+				pQuery.setInt(2, idUser);
 				pQuery.executeUpdate();
 				pQuery.close();
 				return true;
@@ -143,9 +154,9 @@ public class MySqlDAONotification implements NotificationDAO {
 					String lastName = "";
 					String mail = "";
 					String pseudo = "";
-					pQuery3.setInt(1, (int) idusers.get(i));
+					pQuery3.setInt(1, idusers.get(i));
 					ResultSet res3 = pQuery3.executeQuery();
-					while (res.next()) {
+					while (res3.next()) {
 						 firstName = res3.getString(2);
 						 lastName = res3.getString(3);
 						 mail = res3.getString(4);
@@ -153,6 +164,7 @@ public class MySqlDAONotification implements NotificationDAO {
 					}
 					receivers[i] = new User(firstName, lastName, mail, pseudo);
 				}
+				
 		    	String query4 = "select * from collaborator where idCollaborator = ?";
 				PreparedStatement pQuery4 = sql.getDbConnect().prepareStatement(query4);
 				pQuery4.setInt(1, idOriginator);
@@ -163,6 +175,7 @@ public class MySqlDAONotification implements NotificationDAO {
 					 idSender = res4.getInt(3);
 					 idProject = res4.getInt(2);
 				}
+				
 		    	String query5 = "select * from project where idProject = ?";	
 				PreparedStatement pQuery5 = sql.getDbConnect().prepareStatement(query5);
 				pQuery5.setInt(1, idProject);
@@ -177,6 +190,7 @@ public class MySqlDAONotification implements NotificationDAO {
 					 initialDate = res5.getDate(4);
 					 finalDate = res5.getDate(5);
 				}
+
 				Project project = new Project(nameProject, descProject, initialDate, finalDate);
 				PreparedStatement pQuery6 = sql.getDbConnect().prepareStatement(query3);
 				pQuery6.setInt(1, idSender);
@@ -217,7 +231,7 @@ public class MySqlDAONotification implements NotificationDAO {
 					 idUser = res.getInt(1);
 				}
 				PreparedStatement pQuery2 = sql.getDbConnect().prepareStatement(query2);
-				pQuery.setInt(1, idUser);
+				pQuery2.setInt(1, idUser);
 				ResultSet res2 = pQuery2.executeQuery();
 				ArrayList<Notification> result = new ArrayList<Notification>();
 			    while (res2.next()) {
@@ -291,7 +305,6 @@ public class MySqlDAONotification implements NotificationDAO {
 		sql.close();
 		return null;
 	}
-    
 
 
 }

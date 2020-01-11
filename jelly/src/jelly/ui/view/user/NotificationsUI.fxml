@@ -20,40 +20,53 @@
 <?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jelly.ui.controller.HomeController">
-      <children>
-      <MenuBar>
-        <menus>
-          <Menu mnemonicParsing="false" text="Home">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Sign in">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jelly.ui.controller.NotificationsController">
+<children>
+<BorderPane prefHeight="86.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+         <menus>
+            <Menu fx:id="homeMenu" mnemonicParsing="false" text="Home" />
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="About" />
+               </items>
+            </Menu>
+         </menus>
       </MenuBar>
-      <BorderPane prefHeight="100.0" prefWidth="600.0">
-         <center>
-            <ImageView fitHeight="73.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-               <image>
-                  <Image url="@../../../../../lib/jellyLogo.png" />
-               </image></ImageView>
-         </center>
-         <right>
+
+   </top>
+   <left>
+                              <Hyperlink onAction="#showHome" prefHeight="31.0" prefWidth="136.0" text="&lt;&lt; Return to home">
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <BorderPane.margin>
+                  <Insets top="100.0" />
+               </BorderPane.margin>
+                     </Hyperlink>
+                     </left>
+
+   <center>
+      <ImageView fitHeight="78.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@../../../../../lib/jellyLogo.png" />
+         </image>
+         <BorderPane.margin>
+            <Insets right="90.0" top="15.0" />
+         </BorderPane.margin>
+      </ImageView>
+   </center>
+    <right>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="29.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="button" onAction="#showUnreadNotifications" layoutY="8.0" mnemonicParsing="false" prefHeight="8.0" prefWidth="70.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Button fx:id="button" layoutY="8.0" mnemonicParsing="false" prefHeight="8.0" prefWidth="70.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       		<graphic>
               <ImageView fitHeight="32.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                 <image>
@@ -74,7 +87,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Label fx:id="notificationNumber" text="5" />
+                  <Label fx:id="notificationNumber" text="0" />
                </children>
             </StackPane>
          </children>
@@ -83,10 +96,22 @@
                </BorderPane.margin>
       </AnchorPane>
          </right>
-      </BorderPane>
+   <bottom>
+      <Line endX="208.5" startX="-100.0" stroke="#5e5a5a" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets top="10.0" />
+         </BorderPane.margin>
+      </Line>
+   </bottom>
+</BorderPane>
+      <Hyperlink text="View all notifications" onAction="#allNotifications">
+         <VBox.margin>
+            <Insets left="30.0" />
+         </VBox.margin>
+      </Hyperlink>
       <BorderPane prefHeight="526.0" prefWidth="600.0">
          <top>
-            <Label fx:id="welcomeLabel" text="Welcome" BorderPane.alignment="CENTER">
+            <Label fx:id="welcomeLabel" text="Unread notifications" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets top="10.0" />
                </BorderPane.margin>
@@ -95,22 +120,10 @@
                </font>
             </Label>
          </top>
-         <left>
-            <VBox prefHeight="257.0" prefWidth="142.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Hyperlink fx:id="myInfoLink" onAction="#showPersonalInfo" prefHeight="23.0" prefWidth="144.0" text="My personal information" />
-                  <Hyperlink fx:id="newProjectLink" onAction="#showCreateProject" prefHeight="23.0" prefWidth="150.0" text="Create new project" />
-                  <Hyperlink fx:id="logOffLink" onAction="#logOff" prefHeight="23.0" prefWidth="150.0" text="Log off" />
-               </children>
-               <BorderPane.margin>
-                  <Insets left="15.0" top="50.0" />
-               </BorderPane.margin>
-            </VBox>
-         </left>
          <center>
             <ScrollPane prefHeight="357.0" prefWidth="364.0" BorderPane.alignment="CENTER">
                <content>
-                  <GridPane fx:id="projectsGridPane" prefHeight="164.0" prefWidth="408.0">
+                  <GridPane fx:id="notificationsGridPane" prefHeight="164.0" prefWidth="408.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="405.0" minWidth="0.0" prefWidth="150.0" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="459.0" minWidth="10.0" prefWidth="180.0" />
@@ -130,5 +143,5 @@
             </ScrollPane>
          </center>
       </BorderPane>
-   </children>
-</VBox>
+      </children>
+ </VBox>

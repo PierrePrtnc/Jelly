@@ -26,8 +26,8 @@ import jelly.collaboration.Collaborator;
 import jelly.notification.Notification;
 import jelly.project.Project;
 
-public class NotificationsController {
-
+public class AllNotificationsController {
+	
 	private JellyFacade jellyFacade = new JellyFacade();
 	protected String emailUser;
 	protected User currentUser;
@@ -50,7 +50,7 @@ public class NotificationsController {
 	}
     
 	public void setScene(Scene scene) {
-		notifications = jellyFacade.getUnreadNotificationList(jellyFacade.getUser(emailUser));
+		notifications = jellyFacade.getAllNotificationList(jellyFacade.getUser(emailUser));
 		System.out.println(notifications.size());
         User currentuser = jellyFacade.getUser(emailUser);
         notificationsGridPane.setPrefHeight(460);
@@ -102,16 +102,15 @@ public class NotificationsController {
 				Button deleteNotification = new Button("Delete");
 				final int k = i;
 				deleteNotification.setOnAction(e ->{
-					System.out.println(notifications.get(k).getIdNotification());
 					jellyFacade.deleteNotification(notifications.get(k).getIdNotification(), currentuser);
 			        try {
-			            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+			            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/AllNotificationsUI.fxml"));
 			            Parent root;
 			            root = loader.load();
 			            this.scene.setRoot(root);
-						((NotificationsController)loader.getController()).emailUser = emailUser;
-						((NotificationsController)loader.getController()).currentUser = currentuser;
-			            ((NotificationsController)loader.getController()).setScene(scene);
+						((AllNotificationsController)loader.getController()).emailUser = currentuser.getMailUser();
+						((AllNotificationsController)loader.getController()).currentUser = currentuser;
+			            ((AllNotificationsController)loader.getController()).setScene(scene);
 
 			        } catch (IOException ex) {
 			            ex.printStackTrace();
@@ -137,16 +136,16 @@ public class NotificationsController {
         ((HomeController)loader.getController()).setScene(scene);
     }
     
-    public void allNotifications() {
+    public void unreadNotifications() {
     	User currentuser = jellyFacade.getUser(emailUser);
     	try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/AllNotificationsUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
             Parent root;
             root = loader.load();
             this.scene.setRoot(root);
-			((AllNotificationsController)loader.getController()).emailUser = emailUser;
-			((AllNotificationsController)loader.getController()).currentUser = currentuser;
-            ((AllNotificationsController)loader.getController()).setScene(scene);
+			((NotificationsController)loader.getController()).emailUser = emailUser;
+			((NotificationsController)loader.getController()).currentUser = currentuser;
+            ((NotificationsController)loader.getController()).setScene(scene);
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -154,3 +153,4 @@ public class NotificationsController {
     }
 	
 }
+

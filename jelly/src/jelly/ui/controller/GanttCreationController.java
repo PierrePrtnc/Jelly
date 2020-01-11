@@ -67,7 +67,7 @@ public class GanttCreationController {
         else {
             Date startingDate = Date.from(ganttDiagramStartingDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
             Date endingDate = Date.from(ganttDiagramEndingDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-            if (jellyFacade.insertProject(projectNameInput.getText(), projectDescriptionInput.getText(), startingDate, endingDate, connectedUser)) {
+            if (jellyFacade.insertProject(projectNameInput.getText(), projectDescriptionInput.getText(), startingDate, endingDate, connectedUser) != null) {
                 Project project = new Project(projectNameInput.getText(), projectDescriptionInput.getText(), startingDate, endingDate);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/gantt/GanttEdit.fxml"));
                 Parent root;

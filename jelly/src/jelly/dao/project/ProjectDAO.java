@@ -12,7 +12,7 @@ import java.util.Date;
 
 public interface ProjectDAO {
 
-    public boolean insertProject(String name, String description, Date initialDate, Date finalDate, User creator);
+    public Project insertProject(String name, String description, Date initialDate, Date finalDate, User creator);
     public boolean updateProject(int idProject, String name, String description, Date initialDate, Date finalDate);
     public boolean deleteProject(int idProject);
     public Project readProject(int idProject);

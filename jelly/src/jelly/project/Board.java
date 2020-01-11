@@ -47,13 +47,11 @@ public class Board {
     public Collection<Step> steps;
 
     /**
-     * The state of the Board. The state can either be "to do", "in progress", "finished" or "re do".
+     * The description of the board
      *
-     * @see State
-     *
-     * @see Board#getState()
+     * @see Board#getDescriptionBoard()
      */
-    public State state;
+    public String descriptionBoard;
 
     /**
      * The project in which the Board was created.
@@ -65,6 +63,11 @@ public class Board {
     public Project project;
 
     /**
+     * Number ID for a board
+     */
+    private int idBoard = 0;
+
+    /**
      * Default constructor of Board.
      * <p>
      * At the construction of a Board object, the state of the board is set to "to do" and
@@ -73,15 +76,35 @@ public class Board {
      *
      * @param boardName
      *                  The name of the Board.
-     * @param project
-     *                  The project to which the Board is linked to
-     *
      * @see Board#nameBoard
-     * @see Board#state
      * @see Board#steps
      */
     public Board(String boardName) {
         this.nameBoard = boardName;
+    }
+
+    /**
+     * Default constructor of Board.
+     * <p>
+     * At the construction of a Board object, the state of the board is set to "to do" and
+     * an empty collection of Steps is created.
+     * </p>
+     *
+     * @param idBoard
+     *                  The id of the Board.
+     * @param boardName
+     *                  The name of the board
+     *
+     * @see Board#nameBoard
+     * @see Board#steps
+     */
+    public Board(int idBoard) {
+        this.idBoard = idBoard;
+    }
+
+    public Board(String nameBoard, String description) {
+        this.nameBoard = nameBoard;
+        this.descriptionBoard = description;
     }
 
     /**
@@ -96,7 +119,6 @@ public class Board {
      *                  The project to which the Board is linked to
      *
      * @see Board#nameBoard
-     * @see Board#state
      * @see Board#steps
      */
     public Board(String boardName, Project project) {
@@ -109,13 +131,12 @@ public class Board {
      *
      * At the construction of a Board object, the state of the board is set to "to do".
      *
-     * @param boardName
+     * @param nameBoard
      *                  The name of the Board.
      * @param steps
      *                  A collection of Step.
      *
      * @see Board#nameBoard
-     * @see Board#state
      * @see Board#steps
      */
     public Board(String nameBoard, Collection<Step> steps, Project project) {
@@ -176,7 +197,7 @@ public class Board {
     /**
      * Adds a Step to the Step collection of the Board.
      *
-     * @param Step
+     * @param step
      *              A Step
      *
      * @see Step
@@ -188,7 +209,7 @@ public class Board {
     /**
      * Removes a Step from the Step collection of the Board.
      *
-     * @param Step
+     * @param step
      *              A Step, stored in the Step collection of the Board.
      *
      * @see Step
@@ -209,14 +230,19 @@ public class Board {
     }
 
     /**
-     * Returns the current State of the Board.
      *
-     * @return The current State of the Board, as a State.
-     *
-     * @see State
+     * @return the description of the current board
      */
-    public State getState() {
-        return this.state;
+    public String getDescriptionBoard() {
+        return descriptionBoard;
+    }
+
+    /**
+     * sets the description of the current board with
+     * @param descriptionBoard
+     */
+    public void setDescriptionBoard(String descriptionBoard) {
+        this.descriptionBoard = descriptionBoard;
     }
 
     /**
@@ -238,6 +264,23 @@ public class Board {
     @Override
     public String toString() {
         return "";
+    }
+
+    /**
+     *
+     * @return the id of the last board created
+     */
+    public int getIdBoard() {
+        return idBoard;
+    }
+
+    /**
+     * sets the value for the id of the latest board
+     *
+     * @param idBoard
+     */
+    public  void setIdBoard(int idBoard) {
+        this.idBoard = idBoard;
     }
 
 }

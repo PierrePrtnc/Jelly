@@ -44,7 +44,7 @@ public class LoginController implements Initializable{
     @FXML
     private ResourceBundle resources;
 	
-	private JellyFacade jellyFacade = new JellyFacade();
+	protected JellyFacade jellyFacade = new JellyFacade();
 	private Scene scene;
 	
 	public LoginController() {

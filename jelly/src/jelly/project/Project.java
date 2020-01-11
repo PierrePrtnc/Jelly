@@ -54,6 +54,13 @@ public class Project {
      */
     private int idProject = 0;
 
+    /**
+     *
+     * @param idProject
+     */
+    public Project(int idProject) {
+        this.idProject = idProject;
+    }
 
     /**
      * Constructor.

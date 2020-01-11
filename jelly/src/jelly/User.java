@@ -1,5 +1,6 @@
 package jelly;
 
+import jelly.project.Project;
 
 /**
  * User management class
@@ -102,6 +103,12 @@ public class User {
      */
 	public void setPseudoUser(String pseudoUser) {
 		this.pseudoUser = pseudoUser;
+	}
+
+
+	public void joinProject(Project project) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

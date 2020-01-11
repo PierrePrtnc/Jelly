@@ -17,6 +17,8 @@ public class Collaborator {
      * @param User u
      */
     public Collaborator(Project p, User u) {
+    	this.project = p;
+    	this.user = u;
     }
 
     /**

@@ -25,22 +25,34 @@ public class MySqlDAOProject implements ProjectDAO {
 
     MySqlClient sql = MySqlDAOFactory.getConnection();
 
+    /**
+     *
+     * @param name
+     * @param description
+     * @param initialDate
+     * @param finalDate
+     * @param creator
+     * @return
+     */
     @Override
-    public boolean insertProject(String name, String description, Date initialDate, Date finalDate, User creator) {
+    public Project insertProject(String name, String description, Date initialDate, Date finalDate, User creator) {
         MySqlDAOUser user = new MySqlDAOUser();
         int id = user.getIdByMailUser(creator.getMailUser());
         String query = "insert into project (nameProject, descriptionProject, initialDateProject, finalDateProject, idCreator) values(?,?,?,?,?)";
         if(sql.connect()) {
             try {
-                PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
+                PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
                 pQuery.setString(1, name);
                 pQuery.setString(2, description);
                 pQuery.setDate(3, new java.sql.Date(initialDate.getTime()));
                 pQuery.setDate(4, new java.sql.Date(finalDate.getTime()));
                 pQuery.setInt(5, id);
                 pQuery.executeUpdate();
+                ResultSet res = pQuery.getGeneratedKeys();
+                if (res.next()) {
+                    return new Project(res.getInt(1));
+                }
                 pQuery.close();
-                return true;
             } catch (SQLException e) {
                 // TODO Auto-generated catch block
                 System.out.println("1");
@@ -48,9 +60,18 @@ public class MySqlDAOProject implements ProjectDAO {
             }
         }
         sql.close();
-        return false;
+        return null;
     }
 
+    /**
+     *
+     * @param idProject
+     * @param name
+     * @param description
+     * @param initialDate
+     * @param finalDate
+     * @return
+     */
     @Override
     public boolean updateProject(int idProject, String name, String description, Date initialDate, Date finalDate) {
         String query = "update project set nameProject = ?, descriptionProject = ?, initialDateProject = ?, finalDateProject = ? where idProject = ?";
@@ -74,6 +95,11 @@ public class MySqlDAOProject implements ProjectDAO {
         return false;
     }
 
+    /**
+     *
+     * @param idProject
+     * @return
+     */
     @Override
     public boolean deleteProject(int idProject) {
         String query = "delete from project where idProject = ?";
@@ -91,6 +117,11 @@ public class MySqlDAOProject implements ProjectDAO {
         return false;
     }
 
+    /**
+     *
+     * @param idProject
+     * @return
+     */
     @Override
     public Project readProject(int idProject) {
         String query = "select * from project where idProject = ?";
@@ -121,6 +152,10 @@ public class MySqlDAOProject implements ProjectDAO {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public ResultSet readAllProjects() {
         String query = "select * from project";
@@ -137,6 +172,12 @@ public class MySqlDAOProject implements ProjectDAO {
         return null;
     }
 
+    /**
+     *
+     * @param mailUser
+     * @return
+     */
+    @Override
     public ArrayList<Project> getAllProjectsByUser(String mailUser) {
         MySqlDAOUser user = new MySqlDAOUser();
         int id = user.getIdByMailUser(mailUser);

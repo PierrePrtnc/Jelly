@@ -40,7 +40,6 @@ public class Step {
      * The description of the Step. This description can be changed.
      *
      * @see Step#getStepDesc()
-     * @see Step#setStepDesc(String)
      */
     public String descStep;
 
@@ -74,14 +73,20 @@ public class Step {
     public Date finalDate;
 
     /**
-     * The state of the Board. The state can either be "to do", "in progress", "finished" or "re do".
-     *
-     * @see State
+     * The state of the Step. The state can either be  1 = "to do", 2 = "in progress", 3 = "finished" or 4 = "re do".
      *
      * @see Step#getStepState()
-     * @see Step#setStepState(State)
+     * @see Step#setStepState(int)
      */
-    public State state;
+    public int state;
+
+    /**
+     * The difficulty of the Step. The state can either be 1 = "Easy", 2 = "Medium" or 3 = "Hard".
+     *
+     * @see Step#getStepDifficulty()
+     * @see Step#setStepDifficulty(int)
+     */
+    public int difficulty;
 
     /**
      * The Board in which the Step was created.
@@ -91,6 +96,19 @@ public class Step {
      * @see Step#getBoard()
      */
     public Board board;
+
+    /**
+     * @see Step#getIdStep()
+     */
+    public int idStep;
+
+    /**
+     *
+     * @param idStep
+     */
+    public Step(int idStep) {
+        this.idStep = idStep;
+    }
 
     /**
      * Default constructor of Step.
@@ -147,6 +165,21 @@ public class Step {
     }
 
     /**
+     * Constructor.
+     *  @param nameStep name of the step
+     * @param initialDateStep date of the step beginning
+     * @param finalDateStep date of the step end
+     * @param stateStep state of the step
+     */
+    public Step(String nameStep, java.sql.Date initialDateStep, java.sql.Date finalDateStep, int stateStep, int difficultyStep) {
+        this.nameStep = nameStep;
+        this.state = stateStep;
+        this.initialDate = initialDateStep;
+        this.finalDate = finalDateStep;
+        this.difficulty = difficultyStep;
+    }
+
+    /**
      * Returns the name of the Step.
      *
      * @return the name of the Step, as a String.
@@ -163,6 +196,22 @@ public class Step {
      */
     public void setStepName(String name) {
         this.nameStep = name;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int getIdStep() {
+        return idStep;
+    }
+
+    /**
+     *
+     * @param idStep
+     */
+    public void setIdStep(int idStep) {
+        this.idStep = idStep;
     }
 
     /**
@@ -225,20 +274,39 @@ public class Step {
     /**
      * Returns the state of the Step.
      *
-     * @return the state of the Step, as a State.
+     * @return the state of the Step, as a int.
      */
-    public State getStepState() {
+    public int getStepState() {
         return this.state;
     }
 
     /**
      * Replaces the current state of the Step with the new state specified as argument.
      *
-     * @param State
+     * @param state
      *              A State.
      */
-    public void setStepState(State state) {
+    public void setStepState(int state) {
         this.state = state;
+    }
+
+    /**
+     * Returns the difficulty of the Step.
+     *
+     * @return the difficulty of the Step, as a int.
+     */
+    public int getStepDifficulty() {
+        return this.difficulty;
+    }
+
+    /**
+     * Replaces the current difficulty of the Step with the new difficulty specified as argument.
+     *
+     * @param difficulty
+     *              A difficulty.
+     */
+    public void setStepDifficulty(int difficulty) {
+        this.difficulty = difficulty;
     }
 
     /**

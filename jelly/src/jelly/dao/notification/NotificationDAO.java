@@ -12,7 +12,7 @@ public interface NotificationDAO {
 
     public boolean insertNotification(Collaborator sender, Collection<User> users, String message, String action);
     public boolean deleteNotification(int idNotification, User user);
-    public boolean updateNotification(int idNotification);
+    public boolean updateNotification(int idNotification, User user);
     public Notification readNotification(int idNotification);
     public ArrayList<Notification> readAllNotifications(User user);
     public ArrayList<Notification> unreadNotifications(User user);

@@ -70,8 +70,8 @@ public class ProjectCreationController {
         ((GanttCreationController)loader.getController()).setScene(scene);
     }
 
-    //TODO Améliorer la sécurité : restreindre le nombre de caractères pour le nom / description
-    // Check si les dates sont cohérentes
+    //TODO Amï¿½liorer la sï¿½curitï¿½ : restreindre le nombre de caractï¿½res pour le nom / description
+    // Check si les dates sont cohï¿½rentes
     public void createProject() throws IOException {
         if (this.projectNameInput.getText().isEmpty())
             showAlert(Alert.AlertType.ERROR, projectNameInput.getScene().getWindow(), "Error", "Please enter the name of the project");
@@ -84,8 +84,8 @@ public class ProjectCreationController {
         else {
             Date startingDate = Date.from(projectStartingDateDP.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
             Date endingDate = Date.from(projectEndingDateDP.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-            if (jellyFacade.insertProject(projectNameInput.getText(), projectDescriptionInput.getText(), startingDate, endingDate, connectedUser)) {
-                showAlert(Alert.AlertType.INFORMATION, projectNameInput.getScene().getWindow(), "Success", "Insertion effectuée !");
+            if (jellyFacade.insertProject(projectNameInput.getText(), projectDescriptionInput.getText(), startingDate, endingDate, connectedUser) != null) {
+                showAlert(Alert.AlertType.INFORMATION, projectNameInput.getScene().getWindow(), "Success", "Insertion effectuÃ©e !");
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
                 Parent root;
                 root = loader.load();
