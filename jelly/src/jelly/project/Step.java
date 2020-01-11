@@ -93,6 +93,19 @@ public class Step {
     public Board board;
 
     /**
+     * @see Step#getIdStep()
+     */
+    public int idStep;
+
+    /**
+     *
+     * @param idStep
+     */
+    public Step(int idStep) {
+        this.idStep = idStep;
+    }
+
+    /**
      * Default constructor of Step.
      *
      * <p>
@@ -163,6 +176,22 @@ public class Step {
      */
     public void setStepName(String name) {
         this.nameStep = name;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int getIdStep() {
+        return idStep;
+    }
+
+    /**
+     *
+     * @param idStep
+     */
+    public void setIdStep(int idStep) {
+        this.idStep = idStep;
     }
 
     /**

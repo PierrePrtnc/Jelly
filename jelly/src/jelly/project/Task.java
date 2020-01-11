@@ -48,6 +48,19 @@ public class Task {
     public Step step;
 
     /**
+     * @see Task#getIdTask()
+     */
+    public int idTask;
+
+    /**
+     *
+     * @param idTask
+     */
+    public Task(int idTask) {
+        this.idTask = idTask;
+    }
+
+    /**
      * Default constructor of Task.
      *
      * At the construction of a Task object, the state is set to "to do". 
@@ -98,6 +111,22 @@ public class Task {
      */
     public void setTaskState(State state) {
         this.state = state;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int getIdTask() {
+        return idTask;
+    }
+
+    /**
+     *
+     * @param idTask
+     */
+    public void setIdTask(int idTask) {
+        this.idTask = idTask;
     }
 
     /**

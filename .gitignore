@@ -4,3 +4,5 @@ jelly/bin/production/
 jelly/\.idea/
 
 jelly/jelly\.iml
+
+jelly/out/

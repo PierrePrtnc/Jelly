@@ -7,14 +7,16 @@ import jelly.project.State;
 import jelly.project.Step;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Collection;
 
 public interface BoardDAO {
 
-    public boolean insertBoard(int idBoard, String nameBoard, State state, int idProject);
-    public boolean updateBoard(int idBoard, String nameBoard, State state);
+    public Board insertBoard(String nameBoard, String descriptionBoard, int idProject);
+    public boolean updateBoard(int idBoard, String nameBoard, String descriptionBoard);
     public boolean deleteBoard(int idBoard);
     public Board readBoard(int idBoard);
     public ResultSet readAllBoards();
+    public ArrayList<Board> getAllBoardsByProject(int idProject);
 
 }

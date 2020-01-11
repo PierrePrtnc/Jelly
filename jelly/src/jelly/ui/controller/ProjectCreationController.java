@@ -79,7 +79,7 @@ public class ProjectCreationController {
         else {
             Date startingDate = Date.from(projectStartingDateDP.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
             Date endingDate = Date.from(projectEndingDateDP.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-            if (jellyFacade.insertProject(projectNameInput.getText(), projectDescriptionInput.getText(), startingDate, endingDate, connectedUser)) {
+            if (jellyFacade.insertProject(projectNameInput.getText(), projectDescriptionInput.getText(), startingDate, endingDate, connectedUser) != null) {
                 showAlert(Alert.AlertType.INFORMATION, projectNameInput.getScene().getWindow(), "Success", "Insertion effectuée !");
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
                 Parent root;
