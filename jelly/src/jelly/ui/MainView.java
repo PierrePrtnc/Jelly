@@ -5,6 +5,7 @@ import javafx.fxml.*;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import jelly.ui.controller.BoardPageController;
 import jelly.ui.controller.LoginController;
 
 /**
@@ -17,10 +18,10 @@ public class MainView extends Application {
 	@Override
 	public void start(Stage stage){
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("view/user/loginUI.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("view/project/boardPage.fxml"));
 			Parent root = loader.load();	
 			Scene scene = new Scene(root, 800, 500);
-			((LoginController)loader.getController()).setScene(scene);
+			((BoardPageController)loader.getController()).setScene(scene);
 			stage.setTitle("Jelly - Login");
 			stage.setScene(scene);
 			stage.show();

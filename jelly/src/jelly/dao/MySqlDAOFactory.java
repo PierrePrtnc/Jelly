@@ -2,9 +2,9 @@ package jelly.dao;
 
 import jelly.dao.notification.MySqlDAONotification;
 import jelly.dao.notification.NotificationDAO;
-import jelly.dao.project.MySqlDAOProject;
-import jelly.dao.project.ProjectDAO;
+import jelly.dao.project.*;
 import jelly.database.MySqlClient;
+import jelly.project.Board;
 
 /**
  * Class MySqlDAOFactory
@@ -25,7 +25,17 @@ public class MySqlDAOFactory extends DAOFactory {
 	public ProjectDAO getProjectDAO() {
 		return new MySqlDAOProject();
 	}
-	
+
+	public BoardDAO getBoardDAO() {
+		return new MySqlDAOBoard();
+	}
+
+	public StepDAO getStepDAO() {
+		return new MySqlDAOStep();
+	}
+
+	public TaskDAO getTaskDAO() { return new MySqlDAOTask(); }
+
 	@Override
 	public NotificationDAO getNotificationDAO() {
 		// TODO Auto-generated method stub

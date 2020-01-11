@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
+import java.util.List;
 
 public class MySqlDAOTask implements TaskDAO {
 
@@ -141,6 +142,11 @@ public class MySqlDAOTask implements TaskDAO {
             }
         }
         sql.close();
+        return null;
+    }
+
+    @Override
+    public List<Task> getAllTasksByStep(int stepID) {
         return null;
     }
 }

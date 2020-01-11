@@ -2,6 +2,7 @@ package jelly.dao.project;
 
 import jelly.User;
 import jelly.dao.MySqlDAOFactory;
+import jelly.dao.MySqlDAOUser;
 import jelly.database.MySqlClient;
 import jelly.project.Board;
 import jelly.project.Project;
@@ -12,8 +13,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 public class MySqlDAOBoard implements BoardDAO {
 

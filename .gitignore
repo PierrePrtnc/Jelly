@@ -3,4 +3,8 @@ jelly/bin/production/
 
 jelly/\.idea/
 
+\.idea/
+
+classes/
+
 jelly/jelly\.iml

@@ -1,7 +1,10 @@
 package jelly.dao;
 
 import jelly.dao.notification.NotificationDAO;
+import jelly.dao.project.BoardDAO;
 import jelly.dao.project.ProjectDAO;
+import jelly.dao.project.StepDAO;
+import jelly.dao.project.TaskDAO;
 
 /**
  * Abstract class DAOFactory
@@ -17,6 +20,10 @@ public abstract class DAOFactory {
 	public abstract UserDAO getUserDAO();
 
 	public abstract ProjectDAO getProjectDAO();
+
+	public abstract StepDAO getStepDAO();
+
+	public abstract TaskDAO getTaskDAO();
 	
 	public abstract NotificationDAO getNotificationDAO();
 	
@@ -29,5 +36,5 @@ public abstract class DAOFactory {
 	public static DAOFactory getDAOFactory() {
 		return MySqlDAOFactory.getInstance();
 	}
-	
+
 }
