@@ -26,25 +26,25 @@ public class MySqlDAOProject implements ProjectDAO {
     MySqlClient sql = MySqlDAOFactory.getConnection();
 
     @Override
-    public boolean insertProject(int idProject, String name, String description, Date initialDate, Date finalDate, int idCreator) {
+    public boolean insertProject(String name, String description, Date initialDate, Date finalDate, User creator) {
+        MySqlDAOUser user = new MySqlDAOUser();
+        int id = user.getIdByMailUser(creator.getMailUser());
         String query = "insert into project (nameProject, descriptionProject, initialDateProject, finalDateProject, idCreator) values(?,?,?,?,?)";
         if(sql.connect()) {
-            if(readProject(idProject) == null) {
-                try {
-                    PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
-                    pQuery.setString(1, name);
-                    pQuery.setString(2, description);
-                    pQuery.setDate(3, new java.sql.Date(initialDate.getTime()));
-                    pQuery.setDate(4, new java.sql.Date(finalDate.getTime()));
-                    pQuery.setInt(5, idCreator);
-                    pQuery.executeUpdate();
-                    pQuery.close();
-                    return true;
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    System.out.println("1");
-                    e.printStackTrace();
-                }
+            try {
+                PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
+                pQuery.setString(1, name);
+                pQuery.setString(2, description);
+                pQuery.setDate(3, new java.sql.Date(initialDate.getTime()));
+                pQuery.setDate(4, new java.sql.Date(finalDate.getTime()));
+                pQuery.setInt(5, id);
+                pQuery.executeUpdate();
+                pQuery.close();
+                return true;
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                System.out.println("1");
+                e.printStackTrace();
             }
         }
         sql.close();

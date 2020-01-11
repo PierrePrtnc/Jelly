@@ -19,5 +19,6 @@ public interface UserDAO {
 	public User readUser(String mailUser);
 	public ResultSet readAllUsers();
 	public boolean checkUserInfo(String mailUser, String password);
+	public int getIdByMailUser(String mailUser);
 	
 }

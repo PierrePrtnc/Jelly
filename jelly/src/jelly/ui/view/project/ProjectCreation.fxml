@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="327.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jelly.ui.controller.ProjectCreationController">
+
+   <children>
+      <HBox alignment="CENTER" prefHeight="14.0" prefWidth="616.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="216.0" text="Create a Project" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <BorderPane prefHeight="300.0" prefWidth="616.0">
+         <center>
+            <GridPane prefHeight="253.0" prefWidth="536.0" BorderPane.alignment="CENTER">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="41.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="112.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="41.60000000000002" minHeight="10.0" prefHeight="41.60000000000002" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="62.600012207031256" minHeight="10.0" prefHeight="34.40001831054687" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <TextArea fx:id="projectDescriptionInput" prefHeight="72.0" prefWidth="268.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="projectNameInput" GridPane.columnIndex="1" />
+                  <DatePicker fx:id="projectStartingDateDP" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <DatePicker fx:id="projectEndingDateDP" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label text="Name of the project">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Description" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Gantt Diagram (Optional)" GridPane.rowIndex="4">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Planned ending date (if no Gantt)" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Starting date (if no Gantt)" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Hyperlink fx:id="projectGanttHyperLink" onAction="#createGanttDiagram" text="Create a Project from a Gantt Diagram instead" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+               </children>
+            </GridPane>
+         </center>
+         <padding>
+            <Insets bottom="10.0" left="40.0" right="40.0" top="10.0" />
+         </padding>
+         <bottom>
+            <Button fx:id="createProjectButton" mnemonicParsing="false" onAction="#createProject" text="Create" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets top="15.0" />
+               </BorderPane.margin>
+            </Button>
+         </bottom>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <top>
+            <Hyperlink fx:id="homeHyperLink" onAction="#showHome" text="&lt;&lt; Return To Home" BorderPane.alignment="TOP_LEFT" />
+         </top>
+      </BorderPane>
+   </children>
+</VBox>

@@ -6,6 +6,7 @@ import jelly.dao.project.ProjectDAO;
 import jelly.project.Project;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Class JellyFacade.
@@ -22,6 +23,9 @@ public class JellyFacade {
 	public JellyFacade() {
 		this.fact = DAOFactory.getDAOFactory();
 	}
+
+
+	/************************************ USER METHODS **********************************/
 	
 	/**
 	 * Logs the user into the database. 
@@ -61,9 +65,19 @@ public class JellyFacade {
 		return user.deleteUser(mailUser);
 	}
 
+	/************************** PROJECT METHODS ********************************/
+
 	public ArrayList<Project> getAllProjectsByUser(String mailUser) {
 		ProjectDAO project = fact.getProjectDAO();
 		return project.getAllProjectsByUser(mailUser);
 	}
+
+	public boolean insertProject(String name, String description, Date initialDate, Date finalDate, User creator) {
+		ProjectDAO project = fact.getProjectDAO();
+		UserDAO user = fact.getUserDAO();
+		return project.insertProject(name, description, initialDate, finalDate, creator);
+	}
+
+
 
 }

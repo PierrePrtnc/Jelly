@@ -17,7 +17,6 @@ public class MainView extends Application {
 	@Override
 	public void start(Stage stage){
 		try {
-			System.out.println("yes");
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("view/user/loginUI.fxml"));
 			Parent root = loader.load();	
 			Scene scene = new Scene(root, 800, 500);

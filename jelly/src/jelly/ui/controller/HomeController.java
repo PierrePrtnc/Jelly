@@ -51,7 +51,7 @@ public class HomeController {
                 root = loader.load();
                 Stage stage = new Stage();
                 stage.setTitle("Jelly - My information");
-                stage.setScene(new Scene(root));
+                stage.setScene(new Scene(root, 800, 500));
                 ((UpdateAccountInformationController)loader.getController()).setScene(scene);
                 ((UpdateAccountInformationController)loader.getController()).firstNameField.setText(connectedUser.getFirstNameUser());
                 ((UpdateAccountInformationController)loader.getController()).lastNameField.setText(connectedUser.getLastNameUser());
@@ -66,7 +66,7 @@ public class HomeController {
 
     public void showCreateProject(ActionEvent actionEvent) {
         if(!(connectedUser.equals(null)||connectedUser.getFirstNameUser().contentEquals(""))) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/ProjectCreation.fxml"));
             Parent root;
             try {
                 root = loader.load();
@@ -75,9 +75,9 @@ public class HomeController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            ((HomeController)loader.getController()).connectedUser = connectedUser;
-            ((HomeController)loader.getController()).jellyFacade = jellyFacade;
-            ((HomeController)loader.getController()).setScene(scene);
+            ((ProjectCreationController)loader.getController()).connectedUser = connectedUser;
+            ((ProjectCreationController)loader.getController()).jellyFacade = jellyFacade;
+            ((ProjectCreationController)loader.getController()).setScene(scene);
         }
 
     }
