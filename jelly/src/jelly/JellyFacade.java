@@ -221,15 +221,17 @@ public class JellyFacade {
 	/**
 	 *
 	 * @param idStep		the ID of the step to update
-	 * @param name			the name of the step to update
-	 * @param initialDate	the initial date of the step to update
-	 * @param finalDate 	the final date of the step to update
+	 * @param stepName		the name of the step to update
+	 * @param startingDate	the initial date of the step to update
+	 * @param endingDate 	the final date of the step to update
 	 * @param state			the state of the step to update
+	 * @param difficulty	the difficulty of the step to update
+	 * @param description	the description of the step to update
 	 * @return	true if the step was successfully updated
 	 */
-	public boolean updateStep(int idStep, String name, Date initialDate, Date finalDate, State state) {
+	public boolean updateStep(int idStep, String stepName, Date startingDate, Date endingDate, int idBoard, int state, int difficulty, String description) {
 		StepDAO step = fact.getStepDAO();
-		return step.updateStep(idStep, name, initialDate, finalDate, state);
+		return step.updateStep(idStep, stepName, startingDate, endingDate, idBoard, state, difficulty, description);
 	}
 
 	/**

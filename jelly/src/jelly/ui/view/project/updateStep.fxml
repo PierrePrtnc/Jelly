@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="548.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="window" prefHeight="548.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jelly.ui.controller.UpdateStepController">
    <children>
       <MenuBar>
         <menus>
@@ -106,7 +106,7 @@
                         <Font size="20.0" />
                      </font>
                   </Text>
-                  <Button fx:id="cancelButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #ACD6FA;" text="Cancel" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                  <Button fx:id="cancelButton" onAction="#returnToStepPage" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #ACD6FA;" text="Cancel" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -119,12 +119,12 @@
                         <Font size="20.0" />
                      </font>
                   </Text>
-                  <TextArea fx:id="descriptionField" prefHeight="62.0" prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <TextArea fx:id="descriptionArea" prefHeight="62.0" prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <GridPane.margin>
                         <Insets bottom="5.0" left="15.0" right="150.0" top="5.0" />
                      </GridPane.margin>
                   </TextArea>
-                  <Button fx:id="updateButton" layoutX="300.0" layoutY="185.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #ACD6FA;" text="Update" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
+                  <Button fx:id="updateButton" onAction="#updateStep" layoutX="300.0" layoutY="185.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #ACD6FA;" text="Update" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -132,19 +132,22 @@
                         <Insets right="50.0" />
                      </GridPane.margin>
                   </Button>
-                  <MenuButton fx:id="stateMenuButton" mnemonicParsing="false" prefWidth="165.0" text="In progress" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <MenuButton fx:id="stateMenuButton" mnemonicParsing="false" prefWidth="165.0" text="Choose state" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                        <MenuItem mnemonicParsing="false" onAction="#toDoMenu" text="To do" />
+                        <MenuItem mnemonicParsing="false" onAction="#inProgressMenu" text="In progress" />
+                        <MenuItem mnemonicParsing="false" onAction="#finishedMenu" text="Finished" />
+                        <MenuItem mnemonicParsing="false" onAction="#reDoMenu" text="Re do" />
                     </items>
                      <GridPane.margin>
                         <Insets left="15.0" />
                      </GridPane.margin>
                   </MenuButton>
-                  <MenuButton fx:id="difficultyMenuButton" mnemonicParsing="false" prefWidth="165.0" text="Easy" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <MenuButton fx:id="difficultyMenuButton" mnemonicParsing="false" prefWidth="165.0" text="Choose difficulty" GridPane.columnIndex="1" GridPane.rowIndex="2">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                        <MenuItem mnemonicParsing="false" onAction="#easyMenu" text="Easy" />
+                        <MenuItem mnemonicParsing="false" onAction="#mediumMenu" text="Medium" />
+                        <MenuItem mnemonicParsing="false" onAction="#hardMenu" text="Hard" />
                     </items>
                      <GridPane.margin>
                         <Insets left="15.0" />

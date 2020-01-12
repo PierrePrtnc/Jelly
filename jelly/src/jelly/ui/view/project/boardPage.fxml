@@ -52,7 +52,7 @@
                         <Label fx:id="boardLabel" text="Board" BorderPane.alignment="CENTER" />
                      </center>
                      <bottom>
-                        <VBox fx:id="boardDescriptionVBox" prefHeight="61.0" prefWidth="626.0" BorderPane.alignment="CENTER" />
+                        <VBox fx:id="boardDescriptionVBox" prefHeight="30.0" prefWidth="626.0" BorderPane.alignment="CENTER" />
                      </bottom>
                   </BorderPane>
                </center>

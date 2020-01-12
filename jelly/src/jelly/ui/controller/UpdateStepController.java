@@ -1,10 +1,12 @@
 package jelly.ui.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Window;
 import jelly.JellyFacade;
@@ -12,64 +14,51 @@ import jelly.User;
 import jelly.project.Board;
 import jelly.project.Project;
 import jelly.project.Step;
+import jelly.project.Task;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 
-public class NewStepController {
+public class UpdateStepController {
 
     protected JellyFacade jellyFacade;
-    protected Project project;
     protected User connectedUser;
-
-    protected Board board;
     protected Step step;
+    protected Board board;
+    protected Project project;
     private Scene scene;
 
     @FXML
     private VBox window;
 
     @FXML
-    private TextField stepNameField;
+    protected Label stepNameLabel;
+
+    @FXML
+    protected TextField stepNameField;
 
     @FXML
     private Button cancelButton;
 
     @FXML
-    private TextArea descriptionField;
+    protected TextArea descriptionArea;
 
     @FXML
-    private Button createButton;
+    private Button updateButton;
 
     @FXML
-    private MenuButton stateMenuButton;
+    protected MenuButton stateMenuButton;
 
     @FXML
-    private MenuButton difficultyMenuButton;
+    protected MenuButton difficultyMenuButton;
 
     @FXML
-    private DatePicker startingDatePicker;
+    protected DatePicker startingDatePicker;
 
     @FXML
-    private DatePicker endingDatePicker;
-    
-    public void showUnreadNotifications() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
-            Parent root;
-            root = loader.load();
-            this.scene.setRoot(root);
-			((NotificationsController)loader.getController()).emailUser = connectedUser.getMailUser();
-			((NotificationsController)loader.getController()).currentUser = connectedUser;
-
-            ((NotificationsController)loader.getController()).setScene(scene);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    protected DatePicker endingDatePicker;
 
     public void toDoMenu(javafx.event.ActionEvent actionEvent) {
         stateMenuButton.setText("To do");
@@ -99,8 +88,25 @@ public class NewStepController {
         difficultyMenuButton.setText("Hard");
     }
 
-    public void createStep() {
-        if(stepNameField.getText().isEmpty() ||  stateMenuButton.getText().equals("Choose state") || difficultyMenuButton.getText().equals("Choose difficulty") || startingDatePicker.getValue() == null || endingDatePicker.getValue() == null || descriptionField.getText().isEmpty()) {
+    public void returnToStepPage() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/stepPage.fxml"));
+        Parent root;
+        try {
+            root = loader.load();
+            this.scene.setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ((StepPageController)loader.getController()).project = project;
+        ((StepPageController)loader.getController()).step = step;
+        ((StepPageController)loader.getController()).connectedUser = connectedUser;
+        ((StepPageController)loader.getController()).board = board;
+        ((StepPageController)loader.getController()).jellyFacade = jellyFacade;
+        ((StepPageController)loader.getController()).setScene(scene);
+    }
+
+    public void updateStep() {
+        if(stepNameField.getText().isEmpty() ||  stateMenuButton.getText().equals("Choose state") || difficultyMenuButton.getText().equals("Choose difficulty") || startingDatePicker.getValue() == null || endingDatePicker.getValue() == null || descriptionArea.getText().isEmpty()) {
             String emptyFields = "Please enter :\n";
             if(stepNameField.getText().isEmpty()) {
                 emptyFields += "step name\n";
@@ -117,7 +123,7 @@ public class NewStepController {
             if(endingDatePicker.getValue() == null) {
                 emptyFields += "ending date\n";
             }
-            if(descriptionField.getText().isEmpty()) {
+            if(descriptionArea.getText().isEmpty()) {
                 emptyFields += "step description\n";
             }
             showAlert(Alert.AlertType.ERROR, window.getScene().getWindow(), "Error", emptyFields);
@@ -126,8 +132,8 @@ public class NewStepController {
             Date startingDate = Date.from(startingDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
             Date endingDate = Date.from(endingDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
             int state = 0;
-            int difficulty =0;
-            switch(stateMenuButton.getText()) {
+            int difficulty = 0;
+            switch (stateMenuButton.getText()) {
                 case "To do":
                     state = 1;
                     break;
@@ -141,7 +147,7 @@ public class NewStepController {
                     state = 4;
                     break;
             }
-            switch(difficultyMenuButton.getText()) {
+            switch (difficultyMenuButton.getText()) {
                 case "Easy":
                     difficulty = 1;
                     break;
@@ -152,34 +158,48 @@ public class NewStepController {
                     difficulty = 3;
                     break;
             }
-            if(jellyFacade.insertStep(stepNameField.getText(), startingDate, endingDate, board.getIdBoard(), state, difficulty, descriptionField.getText()) != null){
-                showAlert(Alert.AlertType.INFORMATION, window.getScene().getWindow(), "Success", "Your step has been created");
-                returnToBoardPage();
+            if(jellyFacade.updateStep(step.getIdStep(), stepNameField.getText(), startingDate, endingDate, board.getIdBoard(), state, difficulty, descriptionArea.getText())){
+                showAlert(Alert.AlertType.INFORMATION, window.getScene().getWindow(), "Success", "Your step has been updated");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/boardPage.fxml"));
+                Parent root;
+                try {
+                    root = loader.load();
+                    this.scene.setRoot(root);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ((BoardPageController)loader.getController()).project = project;
+                ((BoardPageController)loader.getController()).connectedUser = connectedUser;
+                ((BoardPageController)loader.getController()).board = board;
+                ((BoardPageController)loader.getController()).jellyFacade = jellyFacade;
+                ((BoardPageController)loader.getController()).setScene(scene);
             }
             else {
-                showAlert(Alert.AlertType.ERROR, window.getScene().getWindow(), "Error", "The creation has failed, please try again");
+                showAlert(Alert.AlertType.ERROR, window.getScene().getWindow(), "Error", "The update has failed, please try again");
 
             }
         }
     }
 
-    public void returnToBoardPage() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/boardPage.fxml"));
-        Parent root;
+    public void showUnreadNotifications() {
         try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+            Parent root;
             root = loader.load();
             this.scene.setRoot(root);
+            ((NotificationsController)loader.getController()).emailUser = connectedUser.getMailUser();
+            ((NotificationsController)loader.getController()).currentUser = connectedUser;
+
+            ((NotificationsController)loader.getController()).setScene(scene);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ((BoardPageController)loader.getController()).jellyFacade = jellyFacade;
-        ((BoardPageController)loader.getController()).project = project;
-        ((BoardPageController)loader.getController()).connectedUser = connectedUser;
-        ((BoardPageController)loader.getController()).board = board;
-        ((BoardPageController)loader.getController()).setScene(scene);
     }
 
-    public void setScene(Scene scene) { this.scene = scene; }
+    public void setScene(Scene scene) {
+        this.scene = scene;
+    }
 
     public void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
         Alert alert = new Alert(alertType);

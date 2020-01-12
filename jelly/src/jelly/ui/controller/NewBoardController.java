@@ -22,7 +22,6 @@ public class NewBoardController {
     protected JellyFacade jellyFacade;
     protected Project project;
     protected User connectedUser;
-
     protected Board board;
     private Scene scene;
 
@@ -61,6 +60,7 @@ public class NewBoardController {
         else {
             if(jellyFacade.insertBoard(boardNameField.getText(), subjectField.getText(), descriptionArea.getText(), project.getIdProject()) != null){
                 showAlert(Alert.AlertType.INFORMATION, window.getScene().getWindow(), "Success", "Your board has been created");
+                returnToProjectPage();
             }
             else {
                 showAlert(Alert.AlertType.ERROR, window.getScene().getWindow(), "Error", "The creation has failed, please try again");
@@ -96,7 +96,6 @@ public class NewBoardController {
         }
         ((ProjectPageController)loader.getController()).jellyFacade = jellyFacade;
         ((ProjectPageController)loader.getController()).connectedUser = connectedUser;
-
         ((ProjectPageController)loader.getController()).project = project;
         ((ProjectPageController)loader.getController()).setScene(scene);
     }

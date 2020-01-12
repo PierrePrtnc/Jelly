@@ -163,11 +163,9 @@ public class BoardPageController {
         }
         ((NewStepController)loader.getController()).step = new Step();
         ((NewStepController)loader.getController()).connectedUser = connectedUser;
-
         ((NewStepController)loader.getController()).project = project;
         ((NewStepController)loader.getController()).board = board;
         ((NewStepController)loader.getController()).jellyFacade = jellyFacade;
-
         ((NewStepController)loader.getController()).setScene(scene);
     }
 

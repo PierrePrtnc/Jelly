@@ -32,7 +32,6 @@ public class UpdateBoardController {
 
     protected JellyFacade jellyFacade;
     protected User connectedUser;
-
     protected Board board;
     protected Project project;
     private Scene scene;
@@ -74,7 +73,7 @@ public class UpdateBoardController {
         ((BoardPageController)loader.getController()).setScene(scene);
     }
 
-    public void updateBoard() {
+    public void updateBoard() throws IOException {
         if(boardNameField.getText().isEmpty() || subjectField.getText().isEmpty() || descriptionArea.getText().isEmpty()) {
             String emptyFields = "Please enter :\n";
             if(boardNameField.getText().isEmpty()) {
@@ -90,7 +89,16 @@ public class UpdateBoardController {
         }
         else {
             if(jellyFacade.updateBoard(board.getIdBoard(), board.getIdProjectOfBoard(), boardNameField.getText(), subjectField.getText(), descriptionArea.getText())){
-                showAlert(Alert.AlertType.INFORMATION, window.getScene().getWindow(), "Success", "Your information have been updated");
+                showAlert(Alert.AlertType.INFORMATION, window.getScene().getWindow(), "Success", "Your board has been updated");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/projectPage.fxml"));
+                Parent root;
+                root = loader.load();
+                this.scene.setRoot(root);
+                ((ProjectPageController)loader.getController()).project = project;
+                ((ProjectPageController)loader.getController()).connectedUser = connectedUser;
+                ((ProjectPageController)loader.getController()).jellyFacade = jellyFacade;
+                //((ProjectPageController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
+                ((ProjectPageController)loader.getController()).setScene(scene);
             }
             else {
                 showAlert(Alert.AlertType.ERROR, window.getScene().getWindow(), "Error", "The update has failed, please try again");
@@ -107,9 +115,7 @@ public class UpdateBoardController {
             this.scene.setRoot(root);
 			((NotificationsController)loader.getController()).emailUser = connectedUser.getMailUser();
 			((NotificationsController)loader.getController()).currentUser = connectedUser;
-
             ((NotificationsController)loader.getController()).setScene(scene);
-
         } catch (IOException e) {
             e.printStackTrace();
         }

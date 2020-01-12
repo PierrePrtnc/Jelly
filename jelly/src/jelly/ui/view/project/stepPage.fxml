@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="546.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jelly.ui.controller.StepPageController">
+<VBox fx:id="window" prefHeight="546.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jelly.ui.controller.StepPageController">
    <children>
       <MenuBar>
         <menus>
@@ -40,8 +40,8 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button fx:id="editButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="47.0" text="Edit" />
-                              <Button fx:id="deleteButton" mnemonicParsing="false" text="Delete" GridPane.columnIndex="1" />
+                              <Button fx:id="editButton" onAction="#editStep" mnemonicParsing="false" prefHeight="25.0" prefWidth="47.0" text="Edit" />
+                              <Button fx:id="deleteButton" onAction="#deleteStep" mnemonicParsing="false" text="Delete" GridPane.columnIndex="1" />
                            </children>
                            <BorderPane.margin>
                               <Insets />
@@ -51,9 +51,6 @@
                      <center>
                         <Label fx:id="stepLabel" text="Step" BorderPane.alignment="CENTER" />
                      </center>
-                     <bottom>
-                        <VBox fx:id="stepDescriptionVBox" prefHeight="73.0" prefWidth="626.0" BorderPane.alignment="CENTER" />
-                     </bottom>
                   </BorderPane>
                </center>
                <bottom>

@@ -62,42 +62,37 @@ public class MySqlDAOStep implements StepDAO {
     /**
      *
      * @param idStep
-     * @param name
+     * @param nameStep
      * @param initialDate
      * @param finalDate
-     * @param state
+     * @param idBoard
+     * @param stateStep
+     * @param difficultyStep
+     * @param description
      * @return
      */
     @Override
-    public boolean updateStep(int idStep, String name, Date initialDate, Date finalDate, State state) {
-        String query = "update step set nameStep = ?, initialDateStep = ?, finalDateStep = ?, stateStep = ? where idStep = ?";
+    public boolean updateStep(int idStep, String nameStep, Date initialDate, Date finalDate, int idBoard, int stateStep, int difficultyStep, String description) {
+        String query = "update step set idStep = ?, nameStep = ?, initialDateStep = ?, finalDateStep = ?, idBoard =?, stateStep = ?, difficultyStep = ?, descriptionStep = ? where idStep = ?";
         if(sql.connect()) {
-            if(readStep(idStep) == null) {
-                try {
-                    int stateId;
-                    if (state.equals(State.ToDo)) {
-                        stateId = 0;
-                    } else if (state.equals(State.InProgress)) {
-                        stateId = 1;
-                    } else if (state.equals(State.Finished)) {
-                        stateId = 2;
-                    } else {
-                        stateId = 3;
-                    }
-                    PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
-                    pQuery.setString(1, name);
-                    pQuery.setDate(2, new java.sql.Date(initialDate.getTime()));
-                    pQuery.setDate(3, new java.sql.Date(finalDate.getTime()));
-                    pQuery.setInt(4, stateId);
-                    pQuery.setInt(5, idStep);
-                    pQuery.executeUpdate();
-                    pQuery.close();
-                    return true;
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    System.out.println("1");
-                    e.printStackTrace();
-                }
+            try {
+                PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
+                pQuery.setInt(1, idStep);
+                pQuery.setString(2, nameStep);
+                pQuery.setDate(3, new java.sql.Date(initialDate.getTime()));
+                pQuery.setDate(4, new java.sql.Date(finalDate.getTime()));
+                pQuery.setInt(5, idBoard);
+                pQuery.setInt(6, stateStep);
+                pQuery.setInt(7, difficultyStep);
+                pQuery.setString(8, description);
+                pQuery.setInt(9, idStep);
+                pQuery.executeUpdate();
+                pQuery.close();
+                return true;
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                System.out.println("1");
+                e.printStackTrace();
             }
         }
         sql.close();
