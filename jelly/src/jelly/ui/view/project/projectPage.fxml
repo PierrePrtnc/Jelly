@@ -51,8 +51,9 @@
                      <bottom>
                         <GridPane BorderPane.alignment="CENTER">
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="552.0" minWidth="10.0" prefWidth="475.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.0" minWidth="10.0" prefWidth="115.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="552.0" minWidth="10.0" prefWidth="396.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.0" minWidth="10.0" prefWidth="83.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="94.0" minWidth="10.0" prefWidth="85.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                            </columnConstraints>
                            <rowConstraints>
@@ -60,8 +61,9 @@
                            </rowConstraints>
                            <children>
                               <VBox fx:id="boardDescriptionVBox" prefHeight="61.0" prefWidth="626.0" />
-                              <Button fx:id="projectEdition" mnemonicParsing="false" onAction="#editProject" text="Edit" GridPane.columnIndex="1" />
+                              <Button fx:id="projectEdition" mnemonicParsing="false" onAction="#editProject" prefHeight="26.0" prefWidth="62.0" text="Edit" GridPane.columnIndex="1" />
                               <Button fx:id="projectDeletion" mnemonicParsing="false" onAction="#deleteProject" text="Delete" GridPane.columnIndex="2" />
+                              <Button fx:id="inviteUserButton" mnemonicParsing="false" onAction="#handleInvite" text="Invite" GridPane.columnIndex="3" />
                            </children>
                         </GridPane>
                      </bottom>

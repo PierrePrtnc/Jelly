@@ -1,6 +1,7 @@
 package jelly.dao.collaboration;
 
 import jelly.User;
+import jelly.collaboration.Collaborator;
 import jelly.project.Project;
 
 import java.sql.ResultSet;
@@ -18,8 +19,8 @@ public class MySqlDAOCreator implements CreatorDAO {
     }
 
     @Override
-    public boolean insertCollaborator(Project p, User user) {
-        return false;
+    public Collaborator insertCollaborator(Project p, User user) {
+        return null;
     }
 
     @Override
@@ -33,7 +34,7 @@ public class MySqlDAOCreator implements CreatorDAO {
     }
 
     @Override
-    public User readCollaborator(int idCollaborator) {
+    public Collaborator readCollaborator(int idCollaborator) {
         return null;
     }
 

@@ -4,9 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Window;
@@ -18,15 +20,17 @@ import jelly.project.Board;
 import jelly.project.Project;
 import jelly.project.Step;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 public class ProjectPageController {
@@ -59,6 +63,27 @@ public class ProjectPageController {
 
     @FXML
     private GridPane boardGripPane;
+
+    @FXML
+    private Button projectDeletion;
+
+    @FXML
+    private Button editProjectButton;
+
+    @FXML
+    private TextField projectNameField;
+
+    @FXML
+    private TextArea projectDescriptionText;
+
+    @FXML
+    private DatePicker initialDatePicker;
+
+    @FXML
+    private DatePicker finalDatePicker;
+
+    @FXML
+    private TextField userMailField;
 
     public void showMembers(ActionEvent actionEvent){
 
@@ -250,25 +275,57 @@ public class ProjectPageController {
         return bd.doubleValue();
     }
 
-    public void editProject(ActionEvent actionEvent) {
-        
+    public void editProject() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/editProjectPage.fxml"));
+            Parent root;
+            root = loader.load();
+            this.scene.setRoot(root);
+            ((UpdateProjectController) loader.getController()).project = project;
+            ((UpdateProjectController) loader.getController()).jellyFacade = jellyFacade;
+            ((UpdateProjectController) loader.getController()).projectNameField = projectNameField;
+            ((UpdateProjectController) loader.getController()).projectDescriptionText = projectDescriptionText;
+            ((UpdateProjectController) loader.getController()).initialDatePicker = initialDatePicker;
+            ((UpdateProjectController) loader.getController()).finalDatePicker = finalDatePicker;
+            ((UpdateProjectController) loader.getController()).setScene(scene);
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void deleteProject(ActionEvent actionEvent) {
+    public void handleEdition() {
+        java.util.Date startingDate = java.util.Date.from(initialDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        java.util.Date endingDate = Date.from(finalDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        if (jellyFacade.updateProject(project.getIdProject(), projectNameField.getText(), projectDescriptionText.getText(), startingDate, endingDate)) {
+            try {
+                showAlert(Alert.AlertType.INFORMATION, projectDeletion.getScene().getWindow(), "Success", "Project updated.");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/projectPage.fxml"));
+                Parent root;
+                root = loader.load();
+                this.scene.setRoot(root);
+                ((ProjectPageController) loader.getController()).connectedUser = connectedUser;
+                ((ProjectPageController) loader.getController()).jellyFacade = jellyFacade;
+                ((ProjectPageController) loader.getController()).setScene(scene);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void deleteProject() {
         if (jellyFacade.deleteProject(project.getIdProject())) {
             try {
-                //showAlert(Alert.AlertType.INFORMATION, projectNameInput.getScene().getWindow(), "Success", "Project deleted.");
+                showAlert(Alert.AlertType.INFORMATION, projectDeletion.getScene().getWindow(), "Success", "Project deleted.");
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
                 Parent root;
                 root = loader.load();
                 this.scene.setRoot(root);
-                ((HomeController) loader.getController()).connectedUser = connectedUser;
-                ((HomeController) loader.getController()).jellyFacade = jellyFacade;
-                ((HomeController) loader.getController()).setScene(scene);
+                ((ProjectPageController) loader.getController()).connectedUser = connectedUser;
+                ((ProjectPageController) loader.getController()).jellyFacade = jellyFacade;
+                ((ProjectPageController) loader.getController()).setScene(scene);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
     }
 
@@ -279,5 +336,32 @@ public class ProjectPageController {
         alert.setContentText(message);
         alert.initOwner(owner);
         alert.show();
+    }
+
+    public void handleMouseEntered() {
+        this.scene.setCursor(Cursor.HAND);
+        editProjectButton.setStyle("#ACD6FX");
+
+    }
+
+    public void handleMouseExited() {
+        this.scene.setCursor(Cursor.DEFAULT);
+        editProjectButton.setStyle("#ACD6FA");
+    }
+
+    public void handleInvite() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/inviteUserPage.fxml"));
+            Parent root;
+            root = loader.load();
+            this.scene.setRoot(root);
+            ((InvitationsController) loader.getController()).connectedUser = connectedUser;
+            ((InvitationsController) loader.getController()).jellyFacade = jellyFacade;
+            ((InvitationsController) loader.getController()).project = project;
+            ((InvitationsController) loader.getController()).userMailField = userMailField;
+            ((InvitationsController) loader.getController()).setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
