@@ -11,6 +11,11 @@ import java.util.*;
 public class Collaborator {
 
     /**
+     * The collaborator ID (Database management)
+     */
+    private int idCollaborator;
+
+    /**
      * Builds a Collaborator with a given project and user
      * Pre : Project and User must exist before calling the constructor
      * @param Project p
@@ -19,6 +24,18 @@ public class Collaborator {
     public Collaborator(Project p, User u) {
     	this.project = p;
     	this.user = u;
+    }
+
+    /**
+     *
+     * @param idCollaborator
+     * @param p
+     * @param u
+     */
+    public Collaborator(int idCollaborator, Project p, User u) {
+        this.idCollaborator = idCollaborator;
+        this.project = p;
+        this.user = user;
     }
 
     /**

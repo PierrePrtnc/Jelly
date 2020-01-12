@@ -152,6 +152,54 @@ public class MySqlDAOUser implements UserDAO {
 	}
 
 	/**
+	 *
+	 * @param idUser
+	 * @return
+	 */
+	public String getEmailUser(int idUser) {
+		String query = "select * from user where idUser = ?";
+		if(sql.connect()) {
+			try {
+				PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
+				pQuery.setInt(1, idUser);
+				ResultSet res = pQuery.executeQuery();
+				if (res.next()) {
+					return res.getString(4);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		sql.close();
+		return "";
+	}
+
+	/**
+	 *
+	 * @param mailUser
+	 * @return
+	 */
+	public int getIdUser(String mailUser) {
+		String query = "select * from user where mailUser = ?";
+		if(sql.connect()) {
+			try {
+				PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
+				pQuery.setString(1, mailUser);
+				ResultSet res = pQuery.executeQuery();
+				if (res.next()) {
+					return res.getInt(1);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		sql.close();
+		return -1;
+	}
+
+	/**
 	 * reads several rows from the database with a statement like
 	 *
 	 * 		select * from user
