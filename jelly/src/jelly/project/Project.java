@@ -93,6 +93,7 @@ public class Project {
         this.descriptionProject = description;
         this.initialDateProject = initialDate;
         this.finalDateProject = finalDate;
+        this.boards = new ArrayList<>();
     }
 
     public Project() {
@@ -106,6 +107,7 @@ public class Project {
         this.descriptionProject = descriptionProject;
         this.initialDateProject = initialDateProject;
         this.finalDateProject = finalDateProject;
+        this.boards = new ArrayList<>();
     }
 
     /**
@@ -118,7 +120,7 @@ public class Project {
     /***
      * Change the name of the project.
      *
-     * @param String name to be set
+     * @param name name to be set
      */
     public void setProjectName(String name) {
         this.nameProject = name;
@@ -239,7 +241,7 @@ public class Project {
      * @param board board to be added to the project
      */
     public void addBoard(Board board) {
-        this.boards.add(board);
+        ((ArrayList)this.boards).add(board);
     }
 
     /**

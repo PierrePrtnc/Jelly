@@ -121,6 +121,8 @@ public class HomeController {
     }
 
     public void setScene(Scene scene) {
+        welcomeLabel.getScene().getWindow().setHeight(850);
+        welcomeLabel.getScene().getWindow().setHeight(540);
         List<Project> projects = jellyFacade.getAllProjectsByUser(connectedUser.getMailUser());
         welcomeLabel.setText("Welcome " + connectedUser.getFirstNameUser());
         projectsGridPane.setPrefHeight(460);

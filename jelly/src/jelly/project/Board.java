@@ -93,6 +93,29 @@ public class Board {
      */
     public Board(String boardName) {
         this.nameBoard = boardName;
+        this.steps = new ArrayList<>();
+    }
+    /**
+     * Default constructor of Board.
+     * <p>
+     * At the construction of a Board object, the state of the board is set to "to do" and
+     * an empty collection of Steps is created.
+     * </p>
+     *
+     * @param boardName
+     *                  The name of the Board.
+     * @param subjectBoard
+     *                  The subject of the Board.
+     * @param descriptionBoard
+     *                  The description of the Board.
+     * @see Board#nameBoard
+     * @see Board#steps
+     */
+    public Board(String boardName, String subjectBoard, String descriptionBoard) {
+        this.nameBoard = boardName;
+        this.subjectBoard = subjectBoard;
+        this.descriptionBoard =descriptionBoard;
+        this.steps = new ArrayList<>();
     }
 
     /**
@@ -243,7 +266,7 @@ public class Board {
      * @see Step
      */
     public void addStep(Step step) {
-        this.steps.add(step);
+        ((ArrayList) this.steps).add(step);
     }
 
     /**

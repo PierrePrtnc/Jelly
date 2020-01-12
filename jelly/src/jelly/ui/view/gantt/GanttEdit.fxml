@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="593.0" prefWidth="1196.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jelly.ui.controller.GanttEditController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="739.0" prefWidth="1206.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jelly.ui.controller.GanttEditController">
    <children>
-   
+
  <MenuBar>
         <menus>
           <Menu mnemonicParsing="false" text="Home">
@@ -50,8 +51,11 @@
          <center>
             <ImageView fitHeight="73.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
-                  <Image url="@../../lib/jellyLogo.png" />
-               </image></ImageView>
+                  <Image url="@../../../../../lib/jellyLogo.png" />
+               </image>
+               <BorderPane.margin>
+                  <Insets bottom="10.0" right="60.0" />
+               </BorderPane.margin></ImageView>
          </center>
          <right>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="29.0" BorderPane.alignment="CENTER">
@@ -77,7 +81,7 @@
                         </RadialGradient>
                      </fill>
                   </Circle>
-                  <Label text="5" />
+                   <Label fx:id="notificationNumber" text="5" />
                </children>
             </StackPane>
          </children>
@@ -86,15 +90,40 @@
                </BorderPane.margin>
       </AnchorPane>
          </right>
+         <left>
+            <Hyperlink onAction="#showHome" text="&lt;&lt; Return Home" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets left="15.0" />
+               </BorderPane.margin>
+            </Hyperlink>
+         </left>
+         <bottom>
+             <VBox alignment="CENTER" prefHeight="11.0" prefWidth="1206.0">
+                 <children>
+                     <Line endX="200.0" startX="-100.0" />
+                     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="9.0" prefWidth="409.0" text="Create a Project with a Gantt Diagram (2/2)" textAlignment="CENTER">
+                         <VBox.margin>
+                             <Insets top="10.0" />
+                         </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                     </Label>
+                 </children>
+             </VBox>
+         </bottom>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
       </BorderPane>
    
-      <AnchorPane prefHeight="571.0" prefWidth="1223.0">
+      <AnchorPane prefHeight="600.0" prefWidth="1216.0">
          <children>
-            <TitledPane animated="false" layoutX="793.0" layoutY="77.0" prefHeight="418.0" prefWidth="373.0" text="Add a GanttStep">
+            <TitledPane animated="false" layoutX="795.0" layoutY="41.0" prefHeight="460.0" prefWidth="373.0" text="Add a GanttStep">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="392.0" prefWidth="359.0">
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="430.0" prefWidth="371.0">
                      <children>
-                        <Button fx:id="ganttStepAddingButton" layoutX="153.0" layoutY="324.0" mnemonicParsing="false" onAction="#handle" text="Add Step" />
+                        <Button fx:id="ganttStepAddingButton" layoutX="153.0" layoutY="379.0" mnemonicParsing="false" onAction="#addStep" text="Add Step" />
                         <DatePicker fx:id="ganttStepStartingDateField" layoutX="161.0" layoutY="198.0" />
                         <DatePicker fx:id="ganttStepEndingDateField" layoutX="161.0" layoutY="255.0" />
                         <Label layoutX="56.0" layoutY="202.0" text="Starting date" />
@@ -103,11 +132,15 @@
                         <TextArea fx:id="ganttStepDescField" layoutX="161.0" layoutY="89.0" prefHeight="77.0" prefWidth="150.0" />
                         <TextField fx:id="ganttStepNameField" layoutX="162.0" layoutY="30.0" />
                         <Label layoutX="65.0" layoutY="34.0" text="GanttStep name" />
+                        <Label layoutX="54.0" layoutY="317.0" text="Step Difficulty" />
+                        <ComboBox fx:id="difficultiesComboBox" layoutX="161.0" layoutY="313.0" prefWidth="150.0" promptText="Select a difficulty" />
                      </children>
                   </AnchorPane>
                </content>
             </TitledPane>
             <ScrollPane fx:id="scrollPaneGantt" layoutX="31.0" layoutY="41.0" prefHeight="490.0" prefWidth="738.0" />
+            <Button fx:id="ganttSaveButton" layoutX="865.0" layoutY="531.0" mnemonicParsing="false" onAction="#saveGantt" prefHeight="25.0" prefWidth="89.0" text="Save Gantt" />
+            <Button fx:id="cancelButton" layoutX="982.0" layoutY="531.0" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="162.0" text="Return to project Creation" />
          </children>
       </AnchorPane>
    </children>

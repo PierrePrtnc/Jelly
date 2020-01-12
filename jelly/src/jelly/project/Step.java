@@ -168,6 +168,21 @@ public class Step {
         this.initialDate = initialDate;
         this.finalDate = finalDate;
     }
+    /**
+     * Constructor.
+     * @param nameStep name of the step
+     * @param descStep description of the step
+     * @param initialDateStep date of the step beginning
+     * @param finalDateStep date of the step end
+     * @param difficulty difficulty of the step
+     */
+    public Step(String nameStep, String descStep, Date initialDateStep, Date finalDateStep, int difficultyStep) {
+        this.nameStep = nameStep;
+        this.descStep = descStep;
+        this.initialDate = initialDateStep;
+        this.finalDate = finalDateStep;
+        this.difficulty = difficultyStep;
+    }
 
     /**
      * Constructor.

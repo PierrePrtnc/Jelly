@@ -1,113 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.paint.RadialGradient?>
-<?import javafx.scene.paint.Stop?>
-<?import javafx.scene.shape.Circle?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<VBox prefHeight="306.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jelly.ui.controller.GanttCreationController">
+<VBox prefHeight="458.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jelly.ui.controller.GanttCreationController">
   <children>
-   <MenuBar>
+     <MenuBar>
         <menus>
-          <Menu mnemonicParsing="false" text="Home">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Sign in">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
+           <Menu mnemonicParsing="false" text="Home">
+              <items>
+                 <MenuItem mnemonicParsing="false" text="Close" />
+              </items>
+           </Menu>
+           <Menu mnemonicParsing="false" text="Sign in">
+              <items>
+                 <MenuItem mnemonicParsing="false" text="Delete" />
+              </items>
+           </Menu>
+           <Menu mnemonicParsing="false" text="Help">
+              <items>
+                 <MenuItem mnemonicParsing="false" text="About" />
+              </items>
+           </Menu>
         </menus>
-      </MenuBar>
-      <BorderPane prefHeight="100.0" prefWidth="600.0">
+     </MenuBar>
+     <BorderPane prefHeight="100.0" prefWidth="600.0">
+        <center>
+           <ImageView fitHeight="73.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+              <image>
+                 <Image url="@../../../../../lib/jellyLogo.png" />
+              </image>
+              <BorderPane.margin>
+                 <Insets left="40.0" top="10.0" />
+              </BorderPane.margin></ImageView>
+        </center>
+        <right>
+           <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="29.0" BorderPane.alignment="CENTER">
+              <children>
+                 <Button fx:id="button" layoutY="8.0" mnemonicParsing="false" prefHeight="8.0" prefWidth="70.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <graphic>
+                       <ImageView fitHeight="32.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                             <Image url="https://previews.123rf.com/images/martialred/martialred1507/martialred150700877/42615148-notification-de-message-cloche-esquisser-ic%C3%B4ne-plat-pour-les-applications.jpg" />
+                          </image>
+                       </ImageView>
+                    </graphic>
+                 </Button>
+                 <StackPane layoutX="57.0" layoutY="-13.0" AnchorPane.rightAnchor="-10" AnchorPane.topAnchor="-10">
+                    <children>
+                       <Circle radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                          <fill>
+                             <RadialGradient centerX="0.5" centerY="0.5" radius="0.8164556962025317">
+                                <stops>
+                                   <Stop color="#ff361beb" />
+                                   <Stop color="WHITE" offset="1.0" />
+                                </stops>
+                             </RadialGradient>
+                          </fill>
+                       </Circle>
+                       <Label fx:id="notificationNumber" text="5" />
+                    </children>
+                 </StackPane>
+              </children>
+              <BorderPane.margin>
+                 <Insets right="15.0" />
+              </BorderPane.margin>
+           </AnchorPane>
+        </right>
+     </BorderPane>
+     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+        <children>
+           <Line endX="200.0" startX="-100.0" />
+           <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="475.0" text="Create a Project with a Gantt Diagram (1/2)" textAlignment="CENTER">
+              <font>
+                 <Font name="System Bold" size="20.0" />
+              </font>
+              <VBox.margin>
+                 <Insets top="10.0" />
+              </VBox.margin>
+           </Label>
+        </children>
+     </VBox>
+      <BorderPane prefHeight="415.0" prefWidth="616.0">
          <center>
-            <ImageView fitHeight="73.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-               <image>
-                  <Image url="@../../lib/jellyLogo.png" />
-               </image></ImageView>
-         </center>
-         <right>
-            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="29.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="button" layoutY="8.0" mnemonicParsing="false" prefHeight="8.0" prefWidth="70.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      		<graphic>
-              <ImageView fitHeight="32.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                <image>
-                  <Image url="https://previews.123rf.com/images/martialred/martialred1507/martialred150700877/42615148-notification-de-message-cloche-esquisser-ic%C3%B4ne-plat-pour-les-applications.jpg" />
-                </image>
-              </ImageView>
-            </graphic>
-      	  </Button>
-            <StackPane layoutX="57.0" layoutY="-13.0" AnchorPane.rightAnchor="-10" AnchorPane.topAnchor="-10">
-               <children>
-                  <Circle radius="10.0" stroke="BLACK" strokeType="INSIDE">
-                     <fill>
-                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.8164556962025317">
-                           <stops>
-                              <Stop color="#ff361beb" />
-                              <Stop color="WHITE" offset="1.0" />
-                           </stops>
-                        </RadialGradient>
-                     </fill>
-                  </Circle>
-                  <Label text="5" />
-               </children>
-            </StackPane>
-         </children>
-               <BorderPane.margin>
-                  <Insets right="15.0" />
-               </BorderPane.margin>
-      </AnchorPane>
-         </right>
-      </BorderPane>
-      <HBox alignment="CENTER" prefHeight="14.0" prefWidth="616.0">
-         <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="475.0" text="Create a Project with a Gantt Diagram (1/2)" textAlignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-               <HBox.margin>
-                  <Insets top="10.0" />
-               </HBox.margin>
-            </Label>
-         </children>
-      </HBox>
-      <BorderPane prefHeight="257.0" prefWidth="616.0">
-         <center>
-            <GridPane prefHeight="151.0" prefWidth="536.0" BorderPane.alignment="CENTER">
+            <GridPane prefHeight="120.0" prefWidth="536.0" BorderPane.alignment="CENTER">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints maxHeight="62.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="87.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="87.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="87.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="73.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
@@ -116,8 +104,8 @@
                <children>
                   <TextField fx:id="projectNameInput" GridPane.columnIndex="1" />
                   <TextField fx:id="ganttNameInput" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <DatePicker fx:id="ganttDiagramStartingDate" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <DatePicker fx:id="ganttDiagramEndingDate" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <DatePicker fx:id="ganttDiagramStartingDate" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <DatePicker fx:id="ganttDiagramEndingDate" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <Label text="Project name">
                      <GridPane.margin>
                         <Insets left="30.0" />
@@ -128,27 +116,33 @@
                         <Insets left="30.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Starting date" GridPane.rowIndex="3">
+                  <Label text="Starting date" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets left="30.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Planned ending date" GridPane.rowIndex="4">
+                  <Label text="Planned ending date" GridPane.rowIndex="5">
                      <GridPane.margin>
                         <Insets left="30.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Project Description" GridPane.rowIndex="2">
+                  <Label text="Project Description" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets left="30.0" />
                      </GridPane.margin>
                   </Label>
-                  <TextArea fx:id="projectDescriptionInput" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextArea fx:id="projectDescriptionInput" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label text="Board subject" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets left="30.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <TextField fx:id="subjectGantt" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </center>
          <padding>
-            <Insets bottom="10.0" left="40.0" right="40.0" top="10.0" />
+            <Insets bottom="10.0" left="40.0" right="40.0" />
          </padding>
          <VBox.margin>
             <Insets top="10.0" />
@@ -164,7 +158,7 @@
                   </Button>
                </children>
                <padding>
-                  <Insets top="5.0" />
+                  <Insets top="10.0" />
                </padding>
             </HBox>
          </bottom>

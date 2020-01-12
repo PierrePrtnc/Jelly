@@ -13,6 +13,7 @@ import jelly.User;
 import java.io.IOException;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class ProjectCreationController {
 
@@ -64,19 +65,17 @@ public class ProjectCreationController {
         Parent root;
         root = loader.load();
         this.scene.setRoot(root);
+        ((GanttCreationController)loader.getController()).setScene(scene);
         ((GanttCreationController)loader.getController()).connectedUser = connectedUser;
         ((GanttCreationController)loader.getController()).jellyFacade = jellyFacade;
 		((GanttCreationController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
-        ((GanttCreationController)loader.getController()).setScene(scene);
     }
 
-    //TODO Am�liorer la s�curit� : restreindre le nombre de caract�res pour le nom / description
-    // Check si les dates sont coh�rentes
     public void createProject() throws IOException {
-        if (this.projectNameInput.getText().isEmpty())
-            showAlert(Alert.AlertType.ERROR, projectNameInput.getScene().getWindow(), "Error", "Please enter the name of the project");
+        if (this.projectNameInput.getText().isEmpty() || this.projectNameInput.getText().length() > 55)
+            showAlert(Alert.AlertType.ERROR, projectNameInput.getScene().getWindow(), "Error", "Please enter the name of the project (length < 55 characters)");
         else if(this.projectDescriptionInput.getText().isEmpty())
-            showAlert(Alert.AlertType.ERROR, projectNameInput.getScene().getWindow(), "Error", "Please enter the description of the project");
+            showAlert(Alert.AlertType.ERROR, projectNameInput.getScene().getWindow(), "Error", "Please enter the description of the project (length < 55 characters)");
         else if(this.projectStartingDateDP.getValue() == null)
             showAlert(Alert.AlertType.ERROR, projectNameInput.getScene().getWindow(), "Error", "Please choose a starting date");
         else if(this.projectEndingDateDP.getValue() == null)
@@ -84,18 +83,22 @@ public class ProjectCreationController {
         else {
             Date startingDate = Date.from(projectStartingDateDP.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
             Date endingDate = Date.from(projectEndingDateDP.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-            if (jellyFacade.insertProject(projectNameInput.getText(), projectDescriptionInput.getText(), startingDate, endingDate, connectedUser) != null) {
-                showAlert(Alert.AlertType.INFORMATION, projectNameInput.getScene().getWindow(), "Success", "Insertion effectuée !");
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
-                Parent root;
-                root = loader.load();
-                this.scene.setRoot(root);
-                ((HomeController)loader.getController()).connectedUser = connectedUser;
-                ((HomeController)loader.getController()).jellyFacade = jellyFacade;
-                ((HomeController)loader.getController()).setScene(scene);
+            long dateDiff = endingDate.getTime() - startingDate.getTime();
+            if (dateDiff < 0)
+                showAlert(Alert.AlertType.ERROR, projectNameInput.getScene().getWindow(), "Error", "Please select appropriate dates.");
+            else {
+                if (jellyFacade.insertProject(projectNameInput.getText(), projectDescriptionInput.getText(), startingDate, endingDate, connectedUser) != null) {
+                    showAlert(Alert.AlertType.INFORMATION, projectNameInput.getScene().getWindow(), "Success", "Project created !");
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
+                    Parent root;
+                    root = loader.load();
+                    this.scene.setRoot(root);
+                    ((HomeController) loader.getController()).connectedUser = connectedUser;
+                    ((HomeController) loader.getController()).jellyFacade = jellyFacade;
+                    ((HomeController) loader.getController()).setScene(scene);
+                } else
+                    showAlert(Alert.AlertType.ERROR, projectNameInput.getScene().getWindow(), "Error", "An error occured, please try again.");
             }
-            else
-                showAlert(Alert.AlertType.ERROR, projectNameInput.getScene().getWindow(), "Error", "An error occured, please try again.");
         }
 
     }

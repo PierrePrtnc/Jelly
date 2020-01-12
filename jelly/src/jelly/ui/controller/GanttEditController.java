@@ -1,14 +1,30 @@
 package jelly.ui.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.stage.Window;
+import javafx.util.Callback;
 import jelly.JellyFacade;
 import jelly.User;
+import jelly.project.Board;
 import jelly.project.Project;
+import jelly.project.State;
+import jelly.project.Step;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -17,6 +33,7 @@ import java.util.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class GanttEditController {
 
@@ -24,17 +41,12 @@ public class GanttEditController {
     protected User connectedUser;
     protected Project project;
     private Scene scene;
-    private Date startingDateGantt;
-    private Date endingDateGantt;
 
     @FXML
-    private Button ganttStepAddingButton;
+    protected DatePicker ganttStepStartingDateField;
 
     @FXML
-    private DatePicker ganttStepstartingDateField;
-
-    @FXML
-    private DatePicker ganttStepEndingDateField;
+    protected DatePicker ganttStepEndingDateField;
 
     @FXML
     private TextArea ganttStepDescField;
@@ -44,24 +56,62 @@ public class GanttEditController {
 
     @FXML
     private ScrollPane scrollPaneGantt;
-    
+
     @FXML
     protected Label notificationNumber;
 
+    @FXML
+    private ComboBox<String> difficultiesComboBox;
+
+    private GridPane gridPane;
+    private List<LocalDate> dates;
+    private Board board;
+
+
     public void setScene(Scene scene) throws ParseException {
         this.scene = scene;
-        GridPane gridPane = new GridPane();
+        scrollPaneGantt.getScene().getWindow().setHeight(770);
+        scrollPaneGantt.getScene().getWindow().setWidth(1200);
+        this.gridPane = new GridPane();
         gridPane.setGridLinesVisible(true);
         String date1 = "31/12/2019";
         Date date = new SimpleDateFormat("dd/MM/yyyy").parse(date1);
-        List<LocalDate> dates = getDates(date, new Date());
-        System.out.println(dates.size());
+        dates = getDates(project.getInitialDate(), project.getFinalDate());
         for (int i = 0; i < dates.size(); i++) {
-            gridPane.add(new Label(dates.get(i).toString()),i+1, 0);
-            gridPane.add(new Label(dates.get(i).toString()),0, i+1);
+            Label dateGantt = new Label(dates.get(i).toString());
+            dateGantt.setPadding(new Insets(0,2,0,2));
+            gridPane.add(dateGantt,i+1, 0);
         }
         scrollPaneGantt.setContent(gridPane);
+        restrictDatePicker(ganttStepStartingDateField, dates.get(0), dates.get(dates.size()-1));
+        restrictDatePicker(ganttStepEndingDateField, dates.get(0), dates.get(dates.size()-1));
+        String difficulties[] = {"Easy", "Medium", "Hard"};
+        difficultiesComboBox.getItems().addAll(difficulties);
+        List<Board> boards = new ArrayList<>(project.getBoards());
+        board = boards.get(0);
 
+    }
+
+    public void restrictDatePicker(DatePicker datePicker, LocalDate minDate, LocalDate maxDate) {
+        final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
+            @Override
+            public DateCell call(final DatePicker datePicker) {
+                return new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item.isBefore(minDate)) {
+                            setDisable(true);
+                            setStyle("-fx-background-color: #ffc0cb;");
+                        }else if (item.isAfter(maxDate)) {
+                            setDisable(true);
+                            setStyle("-fx-background-color: #ffc0cb;");
+                        }
+                    }
+                };
+            }
+        };
+        datePicker.setDayCellFactory(dayCellFactory);
     }
 
     private ArrayList<LocalDate> getDates(Date start, Date end) {
@@ -81,8 +131,120 @@ public class GanttEditController {
         return (ArrayList) totalDates;
     }
 
-    public void handle() {
+    public void addStep() {
+        if (ganttStepNameField.getText().isEmpty() || this.ganttStepNameField.getText().length() > 20)
+            showAlert(Alert.AlertType.ERROR, ganttStepNameField.getScene().getWindow(), "Error", "Please enter the name of the Step (length < 20 characters)");
+        else if (ganttStepDescField.getText().isEmpty() || this.ganttStepNameField.getText().length() > 55)
+            showAlert(Alert.AlertType.ERROR, ganttStepNameField.getScene().getWindow(), "Error", "Please enter the description of the Step (length < 55 characters)");
+        else if(ganttStepStartingDateField.getValue() == null)
+            showAlert(Alert.AlertType.ERROR, ganttStepNameField.getScene().getWindow(), "Error", "Please choose a starting date");
+        else if(ganttStepEndingDateField.getValue() == null)
+            showAlert(Alert.AlertType.ERROR, ganttStepNameField.getScene().getWindow(), "Error", "Please choose an ending date");
+        else {
+            int difficulty = 1;
+            Pane p = new Pane();
+            switch (difficultiesComboBox.getValue()) {
+                case "Easy":
+                    difficulty = 1;
+                    p.setStyle("-fx-background-color: #78ff72");
+                    break;
+                case "Medium":
+                    difficulty = 2;
+                    p.setStyle("-fx-background-color: #ffda87");
+                    break;
+                case "Hard":
+                    difficulty = 3;
+                    p.setStyle("-fx-background-color: #ff1955");
+                    break;
+                case "Select a difficulty":
+                    showAlert(Alert.AlertType.ERROR, ganttStepNameField.getScene().getWindow(), "Error", "Please choose a difficulty");
+                    break;
+                default:
+                    difficulty = 1;
+            }
 
+            Date startingDateStep = Date.from(ganttStepStartingDateField.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            Date endingDateStep = Date.from(ganttStepEndingDateField.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            long dateDiff = endingDateStep.getTime() - startingDateStep.getTime();
+            long daysCount = TimeUnit.DAYS.convert(dateDiff, TimeUnit.MILLISECONDS);
+            if (dateDiff < 0)
+                showAlert(Alert.AlertType.ERROR, ganttStepEndingDateField.getScene().getWindow(), "Error", "Please select appropriate dates.");
+            else {
+                Step step = new Step(ganttStepNameField.getText(), ganttStepDescField.getText(), startingDateStep, endingDateStep, difficulty);
+                board.addStep(step);
+                Label stepName = new Label(step.getStepName());
+                stepName.setPadding(new Insets(0,2,0,2));
+                gridPane.add(stepName, 0, gridPane.getRowCount());
+                int index = dates.indexOf(ganttStepStartingDateField.getValue());
+                int j = gridPane.getRowCount();
+
+                for (int i = index+1; i <= daysCount+(index+1); i++) {
+                    Pane newP = new Pane();
+                    newP.setStyle(p.getStyle());
+                    gridPane.add(newP, i, j-1);
+                }
+            }
+
+        }
+    }
+
+    public void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.initOwner(owner);
+        alert.show();
+    }
+
+    public void cancel() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/ProjectCreation.fxml"));
+        Parent root;
+        root = loader.load();
+        this.scene.setRoot(root);
+        ((ProjectCreationController)loader.getController()).connectedUser = connectedUser;
+        ((ProjectCreationController)loader.getController()).jellyFacade = jellyFacade;
+        ((ProjectCreationController)loader.getController()).setScene(scene);
+        ((ProjectCreationController)loader.getController()).notificationNumber.getScene().getWindow().setWidth(800);
+        ((ProjectCreationController)loader.getController()).notificationNumber.getScene().getWindow().setHeight(500);
+        ((ProjectCreationController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
+    }
+
+    public void saveGantt() throws IOException {
+        boolean success = true;
+        if (board.getSteps().size() == 0)
+            showAlert(Alert.AlertType.ERROR, ganttStepNameField.getScene().getWindow(), "Error", "Please add at least one step to save the diagram.");
+        else {
+            Project temp = jellyFacade.insertProject(project.getProjectName(), project.getProjectDescription(), project.getInitialDate(), project.getFinalDate(), connectedUser);
+            if (temp == null) {
+                showAlert(Alert.AlertType.ERROR, ganttStepNameField.getScene().getWindow(), "Error", "Project insert failed. Please try again");
+                success = false;
+            }
+            Board temp2 = jellyFacade.insertBoard(board.getBoardName(), board.getSubjectBoard(), board.getDescriptionBoard(), temp.getIdProject());
+            if (temp2 == null)
+                showAlert(Alert.AlertType.ERROR, ganttStepNameField.getScene().getWindow(), "Error", "Board insert failed. Please try again");
+            for (Step step : board.getSteps()) {
+                if (jellyFacade.insertStep(step.getStepName(), step.getInitialDate(), step.getFinalDate(), temp2.getIdBoard(), 1, step.getStepDifficulty(), step.getStepDesc()) == null)
+                    showAlert(Alert.AlertType.ERROR, ganttStepNameField.getScene().getWindow(), "Error", "Step insert failed. Please try again");
+            }
+            if (success) {
+                showAlert(Alert.AlertType.INFORMATION, ganttStepNameField.getScene().getWindow(), "Success", "Project created ! Home redirection...");
+                showHome();
+            }
+        }
+    }
+
+    public void showHome() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
+        Parent root;
+        root = loader.load();
+        this.scene.setRoot(root);
+        ((HomeController)loader.getController()).connectedUser = connectedUser;
+        ((HomeController)loader.getController()).jellyFacade = jellyFacade;
+        ((HomeController)loader.getController()).setScene(scene);
+        ((HomeController)loader.getController()).notificationNumber.getScene().getWindow().setWidth(800);
+        ((HomeController)loader.getController()).notificationNumber.getScene().getWindow().setHeight(500);
+        ((HomeController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
     }
 
 }
