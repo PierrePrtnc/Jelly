@@ -1,5 +1,9 @@
 package jelly;
 
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import jelly.dao.DAOFactory;
 import jelly.dao.UserDAO;
 import jelly.dao.notification.NotificationDAO;
@@ -94,7 +98,6 @@ public class JellyFacade {
 	 */
 	public Project insertProject(String name, String description, Date initialDate, Date finalDate, User creator) {
 		ProjectDAO project = fact.getProjectDAO();
-		UserDAO user = fact.getUserDAO();
 		return project.insertProject(name, description, initialDate, finalDate, creator);
 	}
 
@@ -151,21 +154,22 @@ public class JellyFacade {
 	 * @param idProject		the ID of the project which to board is associated to
 	 * @return the created board
 	 */
-	public Board insertBoard(String nameBoard, String descriptionBoard, int idProject) {
+	public Board insertBoard(String nameBoard, String subjectBoard, String descriptionBoard, int idProject) {
 		BoardDAO board = fact.getBoardDAO();
-		return board.insertBoard(nameBoard, descriptionBoard, idProject);
+		return board.insertBoard(nameBoard, subjectBoard, descriptionBoard, idProject);
 	}
 
 	/**
 	 *
 	 * @param idBoard		the ID of the board to update
 	 * @param nameBoard		the name of the board to update
+	 * @param subjectBoard		the subject of the board to update
 	 * @param descriptionBoard	the description of the board to update
 	 * @return true if the board was successfully updated
 	 */
-	public boolean updateBoard(int idBoard, String nameBoard, String descriptionBoard) {
+	public boolean updateBoard(int idBoard, int idProject, String nameBoard, String subjectBoard, String descriptionBoard) {
 		BoardDAO board = fact.getBoardDAO();
-		return board.updateBoard(idBoard, nameBoard, descriptionBoard);
+		return board.updateBoard(idBoard, idProject, nameBoard, subjectBoard, descriptionBoard);
 	}
 
 	/**
@@ -209,9 +213,9 @@ public class JellyFacade {
 	 * @param idBoard		the ID of the board of which the step belongs to
 	 * @return the step created
 	 */
-	public Step insertStep(String name, Date initialDate, Date finalDate, State state, int idBoard) {
+	public Step insertStep(String name, Date initialDate, Date finalDate, int idBoard, int state, int difficulty, String description) {
 		StepDAO step = fact.getStepDAO();
-		return step.insertStep(name, initialDate, finalDate, state, idBoard);
+		return step.insertStep(name, initialDate, finalDate, idBoard, state, difficulty, description);
 	}
 
 	/**

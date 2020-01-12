@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="window" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jelly.ui.controller.NewBoardController">
    <children>
       <MenuBar>
         <menus>
@@ -84,7 +84,7 @@
                         <Insets left="15.0" right="150.0" />
                      </GridPane.margin>
                   </TextField>
-                  <Button fx:id="cancelButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #ACD6FA;" text="Cancel" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <Button fx:id="cancelButton" onAction="#returnToProjectPage" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #ACD6FA;" text="Cancel" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -97,12 +97,12 @@
                         <Font size="20.0" />
                      </font>
                   </Text>
-                  <TextArea fx:id="descriptionField" prefHeight="62.0" prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <TextArea fx:id="descriptionArea" prefHeight="62.0" prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="15.0" right="150.0" />
                      </GridPane.margin>
                   </TextArea>
-                  <Button fx:id="createButton" layoutX="300.0" layoutY="185.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #ACD6FA;" text="Create" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                  <Button fx:id="createButton" onAction="#createBoard" layoutX="300.0" layoutY="185.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #ACD6FA;" text="Create" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>

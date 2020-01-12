@@ -18,7 +18,7 @@ public class MainView extends Application {
 	public void start(Stage stage){
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("view/user/loginUI.fxml"));
-			Parent root = loader.load();	
+			Parent root = loader.load();
 			Scene scene = new Scene(root, 800, 500);
 			((LoginController)loader.getController()).setScene(scene);
 			stage.setTitle("Jelly - Login");
@@ -27,11 +27,11 @@ public class MainView extends Application {
 		}
 		catch(Exception e) {
 			e.printStackTrace();
-		}		       
+		}
 	}
 
-	
-    public static void main(String[] args) {
-        launch(args);
-    }
+
+	public static void main(String[] args) {
+		launch(args);
+	}
 }

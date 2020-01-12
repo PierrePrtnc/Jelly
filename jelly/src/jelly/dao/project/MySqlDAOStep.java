@@ -31,26 +31,18 @@ public class MySqlDAOStep implements StepDAO {
      * @return
      */
     @Override
-    public Step insertStep(String name, Date initialDate, Date finalDate, State state, int idBoard) {
-        String query = "insert into step (nameStep, initialDateStep, finalDateStep, idBoard, stepState) values(?,?,?,?,?)";
+    public Step insertStep(String name, Date initialDate, Date finalDate, int idBoard, int state, int difficulty, String description) {
+        String query = "insert into step (nameStep, initialDateStep, finalDateStep, idBoard, stateStep, difficultyStep, descriptionStep) values(?,?,?,?,?,?,?)";
         if(sql.connect()) {
             try {
-                int stateId;
-                if (state.equals(State.ToDo)) {
-                    stateId = 0;
-                } else if (state.equals(State.InProgress)) {
-                    stateId = 1;
-                } else if (state.equals(State.Finished)) {
-                    stateId = 2;
-                } else {
-                    stateId = 3;
-                }
-                PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
+                PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
                 pQuery.setString(1, name);
                 pQuery.setDate(2, new java.sql.Date(initialDate.getTime()));
                 pQuery.setDate(3, new java.sql.Date(finalDate.getTime()));
                 pQuery.setInt(4, idBoard);
-                pQuery.setInt(5, stateId);
+                pQuery.setInt(5, state);
+                pQuery.setInt(6, difficulty);
+                pQuery.setString(7, description);
                 pQuery.executeUpdate();
                 ResultSet res = pQuery.getGeneratedKeys();
                 if (res.next()) {
@@ -186,10 +178,11 @@ public class MySqlDAOStep implements StepDAO {
         return null;
     }
 
-    public ArrayList<Step> getAllStepsByBoard(int boardID) {
-        if (boardID != 0) {
+    public ArrayList<Step> getAllStepsByBoard(int idBoard) {
+        if (idBoard != 0) {
             String query = "select * from step where idBoard = ?";
 
+            int idStep;
             String nameStep = "";
             int stateStep;
             int difficultyStep;
@@ -199,15 +192,16 @@ public class MySqlDAOStep implements StepDAO {
             if(sql.connect()) {
                 try {
                     PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
-                    pQuery.setInt(1, boardID);
+                    pQuery.setInt(1, idBoard);
                     ResultSet res = pQuery.executeQuery();
                     while (res.next()) {
+                        idStep = res.getInt(1);
                         nameStep = res.getString(2);
                         initialDateStep = res.getDate(3);
                         finalDateStep = res.getDate(4);
                         stateStep = res.getInt(6);
                         difficultyStep = res.getInt(7);
-                        steps.add(new Step(nameStep, initialDateStep, finalDateStep, stateStep, difficultyStep));
+                        steps.add(new Step(idStep, idBoard, nameStep, initialDateStep, finalDateStep, stateStep, difficultyStep));
                     }
                     return (ArrayList) steps;
                 } catch (SQLException e) {

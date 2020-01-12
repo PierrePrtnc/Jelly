@@ -47,6 +47,13 @@ public class Board {
     public Collection<Step> steps;
 
     /**
+     * The subject of the board
+     *
+     * @see Board#getSubjectBoard()
+     */
+    public String subjectBoard;
+
+    /**
      * The description of the board
      *
      * @see Board#getDescriptionBoard()
@@ -66,6 +73,11 @@ public class Board {
      * Number ID for a board
      */
     private int idBoard = 0;
+
+    /**
+     * Number ID of the project containing the board
+     */
+    private int idProject = 0;
 
     /**
      * Default constructor of Board.
@@ -92,9 +104,6 @@ public class Board {
      *
      * @param idBoard
      *                  The id of the Board.
-     * @param boardName
-     *                  The name of the board
-     *
      * @see Board#nameBoard
      * @see Board#steps
      */
@@ -143,6 +152,37 @@ public class Board {
         this.nameBoard = nameBoard;
         this.steps = steps;
         this.project = project;
+    }
+
+    /**
+     * Constructor of Board.
+     *
+     * At the construction of a Board object, the state of the board is set to "to do".
+     *
+     * @param idBoard
+     *                  The id of the Board.
+     * @param idProject
+     *                  The id of the Project containing the Board.
+     * @param nameBoard
+     *                  The name of  the Board.
+     * @param descriptionBoard
+     *                  The description of the Board.
+     * @param subjectBoard
+     *                  The subject of  the Board.
+     *
+     * @see Board#nameBoard
+     * @see Board#steps
+     */
+    public Board(int idBoard, int idProject, String nameBoard, String descriptionBoard, String subjectBoard) {
+        this.idBoard = idBoard;
+        this.idProject = idProject;
+        this.nameBoard = nameBoard;
+        this.descriptionBoard = descriptionBoard;
+        this.subjectBoard = subjectBoard;
+    }
+
+    public Board() {
+
     }
 
     /**
@@ -231,6 +271,22 @@ public class Board {
 
     /**
      *
+     * @return the subject of the current board
+     */
+    public String getSubjectBoard() {
+        return subjectBoard;
+    }
+
+    /**
+     * sets the subject of the current board with
+     * @param subjectBoard
+     */
+    public void setSubjectBoard(String subjectBoard) {
+        this.subjectBoard = subjectBoard;
+    }
+
+    /**
+     *
      * @return the description of the current board
      */
     public String getDescriptionBoard() {
@@ -283,4 +339,9 @@ public class Board {
         this.idBoard = idBoard;
     }
 
+    /**
+     *
+     * @return the id of the project containing the board
+     */
+    public int getIdProjectOfBoard() { return idProject; }
 }

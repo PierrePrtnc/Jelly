@@ -103,6 +103,11 @@ public class Step {
     public int idStep;
 
     /**
+     * @see Step#getIdBoardOfStep()
+     */
+    public int idBoard;
+
+    /**
      *
      * @param idStep
      */
@@ -171,12 +176,18 @@ public class Step {
      * @param finalDateStep date of the step end
      * @param stateStep state of the step
      */
-    public Step(String nameStep, java.sql.Date initialDateStep, java.sql.Date finalDateStep, int stateStep, int difficultyStep) {
+    public Step(int idStep, int idBoard, String nameStep, java.sql.Date initialDateStep, java.sql.Date finalDateStep, int stateStep, int difficultyStep) {
+        this.idStep = idStep;
+        this.idBoard = idBoard;
         this.nameStep = nameStep;
         this.state = stateStep;
         this.initialDate = initialDateStep;
         this.finalDate = finalDateStep;
         this.difficulty = difficultyStep;
+    }
+
+    public Step() {
+
     }
 
     /**
@@ -392,5 +403,11 @@ public class Step {
     public String toString() {
         return "";
     }
+
+    /**
+     *
+     * @return the id of the board containing the step
+     */
+    public int getIdProjectOfStep() { return idBoard; }
 
 }

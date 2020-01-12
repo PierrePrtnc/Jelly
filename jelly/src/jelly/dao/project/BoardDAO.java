@@ -12,8 +12,8 @@ import java.util.Collection;
 
 public interface BoardDAO {
 
-    public Board insertBoard(String nameBoard, String descriptionBoard, int idProject);
-    public boolean updateBoard(int idBoard, String nameBoard, String descriptionBoard);
+    public Board insertBoard(String nameBoard, String subjectBoard, String descriptionBoard, int idProject);
+    public boolean updateBoard(int idBoard, int idProject, String nameBoard, String subjectBoard, String descriptionBoard);
     public boolean deleteBoard(int idBoard);
     public Board readBoard(int idBoard);
     public ResultSet readAllBoards();

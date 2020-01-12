@@ -30,17 +30,16 @@ public class MySqlDAOBoard implements BoardDAO {
      * @return
      */
     @Override
-    public Board insertBoard(String nameBoard, String descriptionBoard, int idProject) {
+    public Board insertBoard(String nameBoard, String subjectBoard, String descriptionBoard, int idProject) {
         System.out.println("DEBUT INSERT BOARD");
-        String query = "insert into board (nameBoard, idProject, descriptionBoard) values(?,?,?)";
+        String query = "insert into board (nameBoard, idProject, descriptionBoard, subjectBoard) values(?,?,?,?)";
         if(sql.connect()) {
-            System.out.println("CONNEXION INSERT BOARD");
             try {
-                System.out.println("TRY INSERT BOARD");
                 PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
                 pQuery.setString(1, nameBoard);
                 pQuery.setInt(2, idProject);
                 pQuery.setString(3, descriptionBoard);
+                pQuery.setString(4, subjectBoard);
                 pQuery.executeUpdate();
                 ResultSet res = pQuery.getGeneratedKeys();
                 if (res.next()) {
@@ -65,14 +64,17 @@ public class MySqlDAOBoard implements BoardDAO {
      * @return
      */
     @Override
-    public boolean updateBoard(int idBoard, String nameBoard, String descriptionBoard) {
-        String query = "update board set nameBoard = ?, descriptionBoard = ? where idBoard = ?";
+    public boolean updateBoard(int idBoard, int idProject, String nameBoard, String subjectBoard, String descriptionBoard) {
+        String query = "update board set idBoard = ?, nameBoard = ?, idProject = ?, descriptionBoard = ?, subjectBoard = ? where idBoard = ?";
         if(sql.connect()) {
             try {
                 PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
-                pQuery.setString(1, nameBoard);
-                pQuery.setString(2, descriptionBoard);
-                pQuery.setInt(3, idBoard);
+                pQuery.setInt(1, idBoard);
+                pQuery.setString(2, nameBoard);
+                pQuery.setInt(3, idProject);
+                pQuery.setString(4, descriptionBoard);
+                pQuery.setString(5, subjectBoard);
+                pQuery.setInt(6, idBoard);
                 pQuery.executeUpdate();
                 pQuery.close();
                 return true;
@@ -162,27 +164,34 @@ public class MySqlDAOBoard implements BoardDAO {
      */
     @Override
     public ArrayList<Board> getAllBoardsByProject(int idProject) {
-        String query = "select * from board where idProject = ?";
-        String nameBoard = "";
-        String descriptionBoard = "";
-        List<Board> boards = new ArrayList<Board>();
-        if(sql.connect()) {
-            try {
-                PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
-                pQuery.setInt(1, idProject);
-                ResultSet res = pQuery.executeQuery();
-                while (res.next()) {
-                    nameBoard = res.getString(2);
-                    descriptionBoard = res.getString(4);
-                    boards.add(new Board(nameBoard, descriptionBoard));
+        if (idProject != 0) {
+            String query = "select * from board where idProject = ?";
+
+            int idBoard;
+            String nameBoard;
+            String descriptionBoard;
+            String subjectBoard;
+            List<Board> boards = new ArrayList<Board>();
+            if(sql.connect()) {
+                try {
+                    PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
+                    pQuery.setInt(1, idProject);
+                    ResultSet res = pQuery.executeQuery();
+                    while (res.next()) {
+                        idBoard = res.getInt(1);
+                        nameBoard = res.getString(2);
+                        descriptionBoard = res.getString(4);
+                        subjectBoard = res.getString(5);
+                        boards.add(new Board(idBoard, idProject, nameBoard, descriptionBoard, subjectBoard));
+                    }
+                    return (ArrayList) boards;
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
                 }
-                return (ArrayList) boards;
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
             }
+            sql.close();
         }
-        sql.close();
         return null;
     }
 

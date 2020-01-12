@@ -55,6 +55,11 @@ public class Project {
     private int idProject = 0;
 
     /**
+     * Number ID of the creator of the project
+     */
+    private int idCreator = 0;
+
+    /**
      *
      * @param idProject
      */
@@ -88,6 +93,19 @@ public class Project {
         this.descriptionProject = description;
         this.initialDateProject = initialDate;
         this.finalDateProject = finalDate;
+    }
+
+    public Project() {
+
+    }
+
+    public Project(int idProject, int idCreator, String nameProject, String descriptionProject, Date initialDateProject, Date finalDateProject) {
+        this.idProject = idProject;
+        this.idCreator = idCreator;
+        this.nameProject = nameProject;
+        this.descriptionProject = descriptionProject;
+        this.initialDateProject = initialDateProject;
+        this.finalDateProject = finalDateProject;
     }
 
     /**

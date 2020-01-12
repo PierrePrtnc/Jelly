@@ -10,7 +10,7 @@ import java.util.Date;
 
 public interface StepDAO {
 
-    public Step insertStep(String name, Date initialDate, Date finalDate, State step, int Board);
+    public Step insertStep(String name, Date initialDate, Date finalDate, int Board, int step, int difficulty, String description);
     public boolean updateStep(int idStep, String name, Date initialDate, Date finalDate, State step);
     public boolean deleteStep(int idStep);
     public Step readStep(int idStep);
