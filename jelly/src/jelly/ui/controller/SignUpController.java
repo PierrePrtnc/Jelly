@@ -122,7 +122,7 @@ public class SignUpController {
 
 					else {
 						try {
-							User connectedUser = jellyFacade.addUser(firstNameField.getText(), lastNameField.getText(), emailField.getText(), pseudoField.getText(), passwordField.getText());
+							User connectedUser = jellyFacade.addUser(firstNameField.getText(), lastNameField.getText(), pseudoField.getText(), emailField.getText(), passwordField.getText());
 							showAlert(Alert.AlertType.INFORMATION, window.getScene().getWindow(), "Successfully logged in", "Welcome" + " " + connectedUser.getFirstNameUser());										}
 						catch(Exception e) {
 							showAlert(Alert.AlertType.ERROR, window.getScene().getWindow(), "Error", "This mail address is already taken");

@@ -138,7 +138,10 @@ public class MySqlDAOUser implements UserDAO {
 					 mail = res.getString(4);
 					 pseudo = res.getString(5);
 				}
-				return new User(firstName, lastName, mail, pseudo);
+				if (firstName != "")
+					return new User(firstName, lastName, mail, pseudo);
+				else
+					return null;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
