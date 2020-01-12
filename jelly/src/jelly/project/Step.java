@@ -174,7 +174,7 @@ public class Step {
      * @param descStep description of the step
      * @param initialDateStep date of the step beginning
      * @param finalDateStep date of the step end
-     * @param difficulty difficulty of the step
+     * @param difficultyStep difficulty of the step
      */
     public Step(String nameStep, String descStep, Date initialDateStep, Date finalDateStep, int difficultyStep) {
         this.nameStep = nameStep;
@@ -448,6 +448,6 @@ public class Step {
      *
      * @return the id of the board containing the step
      */
-    public int getIdProjectOfStep() { return idBoard; }
+    public int getIdBoardOfStep() { return idBoard; }
 
 }

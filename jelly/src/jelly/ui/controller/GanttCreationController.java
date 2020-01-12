@@ -75,8 +75,8 @@ public class GanttCreationController {
     public void showGanttEdit() throws IOException, ParseException {
         if (this.projectNameInput.getText().isEmpty() || this.projectNameInput.getText().length() > 55)
             showAlert(Alert.AlertType.ERROR, projectNameInput.getScene().getWindow(), "Error", "Please enter the name of the project (length < 55 characters)");
-        else if(this.projectDescriptionInput.getText().isEmpty() || this.projectDescriptionInput.getText().length() > 55)
-            showAlert(Alert.AlertType.ERROR, projectNameInput.getScene().getWindow(), "Error", "Please enter the description of the project (length < 55 characters)");
+        else if(this.projectDescriptionInput.getText().isEmpty() || this.projectDescriptionInput.getText().length() > 255)
+            showAlert(Alert.AlertType.ERROR, projectNameInput.getScene().getWindow(), "Error", "Please enter the description of the project (length < 255 characters)");
         else if(this.ganttDiagramStartingDate.getValue() == null)
             showAlert(Alert.AlertType.ERROR, projectNameInput.getScene().getWindow(), "Error", "Please choose a starting date");
         else if(this.ganttDiagramEndingDate.getValue() == null)

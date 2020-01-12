@@ -90,8 +90,8 @@ public class ProjectCreationController {
     public void createProject() throws IOException {
         if (this.projectNameInput.getText().isEmpty() || this.projectNameInput.getText().length() > 55)
             showAlert(Alert.AlertType.ERROR, projectNameInput.getScene().getWindow(), "Error", "Please enter the name of the project (length < 55 characters)");
-        else if(this.projectDescriptionInput.getText().isEmpty())
-            showAlert(Alert.AlertType.ERROR, projectNameInput.getScene().getWindow(), "Error", "Please enter the description of the project (length < 55 characters)");
+        else if(this.projectDescriptionInput.getText().isEmpty() || this.projectDescriptionInput.getText().length() > 255)
+            showAlert(Alert.AlertType.ERROR, projectNameInput.getScene().getWindow(), "Error", "Please enter the description of the project (length < 255 characters)");
         else if(this.projectStartingDateDP.getValue() == null)
             showAlert(Alert.AlertType.ERROR, projectNameInput.getScene().getWindow(), "Error", "Please choose a starting date");
         else if(this.projectEndingDateDP.getValue() == null)

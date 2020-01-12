@@ -72,12 +72,12 @@ public class Board {
     /**
      * Number ID for a board
      */
-    private int idBoard = 0;
+    private int idBoard;
 
     /**
      * Number ID of the project containing the board
      */
-    private int idProject = 0;
+    private int idProject;
 
     /**
      * Default constructor of Board.
