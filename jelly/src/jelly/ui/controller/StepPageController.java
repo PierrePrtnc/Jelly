@@ -21,6 +21,7 @@ import jelly.project.Project;
 import jelly.project.Step;
 import jelly.project.Task;
 
+import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -29,6 +30,8 @@ import java.util.ResourceBundle;
 
 public class StepPageController {
     protected JellyFacade jellyFacade;
+    protected User connectedUser;
+
     protected Step step;
     private Scene scene;
 
@@ -61,6 +64,22 @@ public class StepPageController {
 
     @FXML
     private VBox taskVBox;
+    
+    public void showUnreadNotifications() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+            Parent root;
+            root = loader.load();
+            this.scene.setRoot(root);
+			((NotificationsController)loader.getController()).emailUser = connectedUser.getMailUser();
+			((NotificationsController)loader.getController()).currentUser = connectedUser;
+
+            ((NotificationsController)loader.getController()).setScene(scene);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void setScene(Scene scene) {
         List<Task> tasks = jellyFacade.getAllTasksByStep(5);

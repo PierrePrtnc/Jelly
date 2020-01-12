@@ -31,6 +31,8 @@ import java.util.ResourceBundle;
 public class UpdateBoardController {
 
     protected JellyFacade jellyFacade;
+    protected User connectedUser;
+
     protected Board board;
     protected Project project;
     private Scene scene;
@@ -67,6 +69,8 @@ public class UpdateBoardController {
         }
         ((BoardPageController)loader.getController()).board = board;
         ((BoardPageController)loader.getController()).project = project;
+        ((BoardPageController)loader.getController()).connectedUser = connectedUser;
+
         ((BoardPageController)loader.getController()).jellyFacade = jellyFacade;
         ((BoardPageController)loader.getController()).setScene(scene);
     }
@@ -95,7 +99,23 @@ public class UpdateBoardController {
             }
         }
     }
+   
+    public void showUnreadNotifications() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+            Parent root;
+            root = loader.load();
+            this.scene.setRoot(root);
+			((NotificationsController)loader.getController()).emailUser = connectedUser.getMailUser();
+			((NotificationsController)loader.getController()).currentUser = connectedUser;
 
+            ((NotificationsController)loader.getController()).setScene(scene);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     public void setScene(Scene scene) {
         this.scene = scene;
     }

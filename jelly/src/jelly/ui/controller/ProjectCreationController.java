@@ -70,6 +70,22 @@ public class ProjectCreationController {
         ((GanttCreationController)loader.getController()).jellyFacade = jellyFacade;
 		((GanttCreationController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
     }
+    
+    public void showUnreadNotifications() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+            Parent root;
+            root = loader.load();
+            this.scene.setRoot(root);
+			((NotificationsController)loader.getController()).emailUser = connectedUser.getMailUser();
+			((NotificationsController)loader.getController()).currentUser = connectedUser;
+
+            ((NotificationsController)loader.getController()).setScene(scene);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void createProject() throws IOException {
         if (this.projectNameInput.getText().isEmpty() || this.projectNameInput.getText().length() > 55)

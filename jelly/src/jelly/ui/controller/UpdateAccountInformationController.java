@@ -79,6 +79,22 @@ public class UpdateAccountInformationController {
 		}
 	}
 	
+    public void showUnreadNotifications() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+            Parent root;
+            root = loader.load();
+            this.scene.setRoot(root);
+			((NotificationsController)loader.getController()).emailUser = connectedUser.getMailUser();
+			((NotificationsController)loader.getController()).currentUser = connectedUser;
+
+            ((NotificationsController)loader.getController()).setScene(scene);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+	
 	public void handle() {
 		if(firstNameField.getText().isEmpty() || lastNameField.getText().isEmpty() || pseudoField.getText().isEmpty() || emailField.getText().isEmpty() || passwordField.getText().isEmpty() || passwordConfirmationField.getText().isEmpty()) {
 			String emptyFields = "Please enter your:\n";

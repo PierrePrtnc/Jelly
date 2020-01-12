@@ -48,16 +48,29 @@ public class AllNotificationsController {
 	public void setEmailUser(String emailUser) {
 		this.emailUser = emailUser;
 	}
+	
+    public void showUnreadNotifications() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+            Parent root;
+            root = loader.load();
+            this.scene.setRoot(root);
+			((NotificationsController)loader.getController()).emailUser = emailUser;
+			((NotificationsController)loader.getController()).currentUser = jellyFacade.getUser(emailUser);
+            ((NotificationsController)loader.getController()).setScene(scene);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     
 	public void setScene(Scene scene) {
 		notifications = jellyFacade.getAllNotificationList(jellyFacade.getUser(emailUser));
-		System.out.println(notifications.size());
         User currentuser = jellyFacade.getUser(emailUser);
         notificationsGridPane.setPrefHeight(460);
         notificationsGridPane.setPrefWidth(600);
         for (int i = 0; i < notifications.size(); i++) {
             VBox vbox = new VBox();
-            System.out.println(notifications.get(i).getOriginator().getUser().getMailUser());
             vbox.getChildren().add(new Label("Sender : " + notifications.get(i).getOriginator().getUser().getMailUser()));
             vbox.getChildren().add(new Label("Project : " + notifications.get(i).getOriginator().getProject().getProjectName()));
             vbox.getChildren().add(new Label("Message : " + notifications.get(i).getMessage()));
@@ -108,6 +121,7 @@ public class AllNotificationsController {
 			            Parent root;
 			            root = loader.load();
 			            this.scene.setRoot(root);
+			            System.out.println(notifications.get(k).getIdNotification() == 4);
 						((AllNotificationsController)loader.getController()).emailUser = currentuser.getMailUser();
 						((AllNotificationsController)loader.getController()).currentUser = currentuser;
 			            ((AllNotificationsController)loader.getController()).setScene(scene);

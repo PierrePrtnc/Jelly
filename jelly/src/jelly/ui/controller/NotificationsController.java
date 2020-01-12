@@ -50,9 +50,7 @@ public class NotificationsController {
 	}
     
 	public void setScene(Scene scene) {
-		notifications = jellyFacade.getUnreadNotificationList(jellyFacade.getUser(emailUser));
-		System.out.println(notifications.size());
-        User currentuser = jellyFacade.getUser(emailUser);
+		notifications = jellyFacade.getUnreadNotificationList(jellyFacade.getUser(emailUser));        User currentuser = jellyFacade.getUser(emailUser);
         notificationsGridPane.setPrefHeight(460);
         notificationsGridPane.setPrefWidth(600);
         for (int i = 0; i < notifications.size(); i++) {

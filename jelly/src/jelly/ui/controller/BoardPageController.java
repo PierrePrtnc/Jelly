@@ -10,6 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Window;
 import jelly.JellyFacade;
+import jelly.User;
 import jelly.project.Board;
 import jelly.project.Project;
 import jelly.project.Step;
@@ -23,6 +24,8 @@ public class BoardPageController {
 
     public JellyFacade jellyFacade;
     public Project project;
+    protected User connectedUser;
+
     public Board board;
     private Scene scene;
 
@@ -76,6 +79,22 @@ public class BoardPageController {
     public void leaveProject(ActionEvent actionEvent) {
 
     }
+    
+    public void showUnreadNotifications() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+            Parent root;
+            root = loader.load();
+            this.scene.setRoot(root);
+			((NotificationsController)loader.getController()).emailUser = connectedUser.getMailUser();
+			((NotificationsController)loader.getController()).currentUser = connectedUser;
+
+            ((NotificationsController)loader.getController()).setScene(scene);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void editBoard(ActionEvent actionEvent) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/updateBoard.fxml"));
@@ -87,6 +106,7 @@ public class BoardPageController {
             e.printStackTrace();
         }
         ((UpdateBoardController)loader.getController()).board = board;
+        ((UpdateBoardController)loader.getController()).connectedUser = connectedUser;
         ((UpdateBoardController)loader.getController()).project = project;
         ((UpdateBoardController)loader.getController()).jellyFacade = jellyFacade;
         ((UpdateBoardController)loader.getController()).boardNameLabel.setText(board.getBoardName());
@@ -105,6 +125,8 @@ public class BoardPageController {
                 root = loader.load();
                 this.scene.setRoot(root);
                 ((ProjectPageController)loader.getController()).board = board;
+                ((ProjectPageController)loader.getController()).connectedUser = connectedUser;
+
                 ((ProjectPageController)loader.getController()).project = project;
                 ((ProjectPageController)loader.getController()).jellyFacade = jellyFacade;
                 ((ProjectPageController)loader.getController()).setScene(scene);
@@ -124,6 +146,8 @@ public class BoardPageController {
             e.printStackTrace();
         }
         ((NewStepController)loader.getController()).step = new Step();
+        ((NewStepController)loader.getController()).connectedUser = connectedUser;
+
         ((NewStepController)loader.getController()).project = project;
         ((NewStepController)loader.getController()).board = board;
         ((NewStepController)loader.getController()).jellyFacade = jellyFacade;

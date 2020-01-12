@@ -10,6 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Window;
 import jelly.JellyFacade;
+import jelly.User;
 import jelly.project.Board;
 import jelly.project.Project;
 import jelly.project.Step;
@@ -26,6 +27,8 @@ public class ProjectPageController {
     public JellyFacade jellyFacade;
     public Project project;
     public Board board;
+    protected User connectedUser;
+
     private Scene scene;
 
     @FXML
@@ -76,6 +79,7 @@ public class ProjectPageController {
         ((NewBoardController)loader.getController()).board = board;
         ((NewBoardController)loader.getController()).project = project;
         ((NewBoardController)loader.getController()).jellyFacade = jellyFacade;
+        ((NewBoardController)loader.getController()).connectedUser = connectedUser;
 
         ((NewBoardController)loader.getController()).setScene(scene);
     }
@@ -137,6 +141,22 @@ public class ProjectPageController {
             j++;
         }
         this.scene = scene;
+    }
+    
+    public void showUnreadNotifications() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+            Parent root;
+            root = loader.load();
+            this.scene.setRoot(root);
+			((NotificationsController)loader.getController()).emailUser = connectedUser.getMailUser();
+			((NotificationsController)loader.getController()).currentUser = connectedUser;
+
+            ((NotificationsController)loader.getController()).setScene(scene);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static double round(double value, int places) {

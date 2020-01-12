@@ -130,6 +130,22 @@ public class GanttEditController {
         }
         return (ArrayList) totalDates;
     }
+    
+    public void showUnreadNotifications() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+            Parent root;
+            root = loader.load();
+            this.scene.setRoot(root);
+			((NotificationsController)loader.getController()).emailUser = connectedUser.getMailUser();
+			((NotificationsController)loader.getController()).currentUser = connectedUser;
+
+            ((NotificationsController)loader.getController()).setScene(scene);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void addStep() {
         if (ganttStepNameField.getText().isEmpty() || this.ganttStepNameField.getText().length() > 20)

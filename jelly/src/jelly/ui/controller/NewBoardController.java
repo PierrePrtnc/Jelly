@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Window;
 import jelly.JellyFacade;
+import jelly.User;
 import jelly.project.Board;
 import jelly.project.Project;
 import jelly.project.Step;
@@ -20,6 +21,8 @@ public class NewBoardController {
 
     protected JellyFacade jellyFacade;
     protected Project project;
+    protected User connectedUser;
+
     protected Board board;
     private Scene scene;
 
@@ -65,6 +68,22 @@ public class NewBoardController {
             }
         }
     }
+    
+    public void showUnreadNotifications() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+            Parent root;
+            root = loader.load();
+            this.scene.setRoot(root);
+			((NotificationsController)loader.getController()).emailUser = connectedUser.getMailUser();
+			((NotificationsController)loader.getController()).currentUser = connectedUser;
+
+            ((NotificationsController)loader.getController()).setScene(scene);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void returnToProjectPage() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/projectPage.fxml"));
@@ -77,6 +96,8 @@ public class NewBoardController {
         }
         ((ProjectPageController)loader.getController()).jellyFacade = jellyFacade;
         ((ProjectPageController)loader.getController()).board = board;
+        ((ProjectPageController)loader.getController()).connectedUser = connectedUser;
+
         ((ProjectPageController)loader.getController()).project = project;
         ((ProjectPageController)loader.getController()).setScene(scene);
     }

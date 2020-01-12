@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Window;
 import jelly.JellyFacade;
+import jelly.User;
 import jelly.project.Board;
 import jelly.project.Project;
 import jelly.project.Step;
@@ -21,6 +22,8 @@ public class NewStepController {
 
     protected JellyFacade jellyFacade;
     protected Project project;
+    protected User connectedUser;
+
     protected Board board;
     protected Step step;
     private Scene scene;
@@ -51,6 +54,22 @@ public class NewStepController {
 
     @FXML
     private DatePicker endingDatePicker;
+    
+    public void showUnreadNotifications() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+            Parent root;
+            root = loader.load();
+            this.scene.setRoot(root);
+			((NotificationsController)loader.getController()).emailUser = connectedUser.getMailUser();
+			((NotificationsController)loader.getController()).currentUser = connectedUser;
+
+            ((NotificationsController)loader.getController()).setScene(scene);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void toDoMenu(javafx.event.ActionEvent actionEvent) {
         stateMenuButton.setText("To do");
@@ -154,6 +173,8 @@ public class NewStepController {
         }
         ((BoardPageController)loader.getController()).jellyFacade = jellyFacade;
         ((BoardPageController)loader.getController()).project = project;
+        ((BoardPageController)loader.getController()).connectedUser = connectedUser;
+
         ((BoardPageController)loader.getController()).board = board;
         ((BoardPageController)loader.getController()).setScene(scene);
     }
