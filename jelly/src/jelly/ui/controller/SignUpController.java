@@ -123,7 +123,19 @@ public class SignUpController {
 					else {
 						try {
 							User connectedUser = jellyFacade.addUser(firstNameField.getText(), lastNameField.getText(), pseudoField.getText(), emailField.getText(), passwordField.getText());
-							showAlert(Alert.AlertType.INFORMATION, window.getScene().getWindow(), "Successfully logged in", "Welcome" + " " + connectedUser.getFirstNameUser());										}
+					        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/loginUI.fxml"));
+					        Parent root;
+					        try {
+					            root = loader.load();
+					            this.scene.setRoot(root);
+
+					        } catch (IOException e) {
+					            e.printStackTrace();
+					        }
+
+					        ((LoginController)loader.getController()).jellyFacade = jellyFacade;
+					        ((LoginController)loader.getController()).setScene(scene);
+						}
 						catch(Exception e) {
 							showAlert(Alert.AlertType.ERROR, window.getScene().getWindow(), "Error", "This mail address is already taken");
 					}
