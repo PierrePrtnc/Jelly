@@ -64,33 +64,35 @@
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
                           <rowConstraints>
-                            <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button fx:id="addNewStepButton" onAction="#addNewStep" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="+ add new step" />
-                              <CheckBox fx:id="allStepsCheckBox" mnemonicParsing="false" text="All Steps" GridPane.rowIndex="1" />
-                              <CheckBox fx:id="toDoCheckBox" mnemonicParsing="false" text="To do" GridPane.rowIndex="2" />
-                              <CheckBox fx:id="inProgressCheckBox" mnemonicParsing="false" text="In progress" GridPane.rowIndex="3" />
-                              <CheckBox fx:id="redoCheckBox" mnemonicParsing="false" text="Redo" GridPane.rowIndex="4" />
-                              <CheckBox fx:id="doneCheckBox" mnemonicParsing="false" text="Done" GridPane.rowIndex="5" />
-                              <MenuButton fx:id="sortByMenuButton" mnemonicParsing="false" prefHeight="28.0" prefWidth="114.0" text="Sort by" GridPane.rowIndex="6">
+                               <Hyperlink onAction="#returnToProject" text="&lt;&lt; Return to project" />
+                              <Button fx:id="addNewStepButton" onAction="#addNewStep" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="+ add new step" GridPane.rowIndex="1" />
+                              <CheckBox fx:id="allStepsCheckBox" mnemonicParsing="false" text="All Steps" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="toDoCheckBox" mnemonicParsing="false" text="To do" GridPane.rowIndex="3" />
+                              <CheckBox fx:id="inProgressCheckBox" mnemonicParsing="false" text="In progress" GridPane.rowIndex="4" />
+                              <CheckBox fx:id="redoCheckBox" mnemonicParsing="false" text="Redo" GridPane.rowIndex="5" />
+                              <CheckBox fx:id="doneCheckBox" mnemonicParsing="false" text="Done" GridPane.rowIndex="6" />
+                              <MenuButton fx:id="sortByMenuButton" mnemonicParsing="false" prefHeight="28.0" prefWidth="114.0" text="Sort by" GridPane.rowIndex="7">
                                 <items>
                                   <MenuItem mnemonicParsing="false" text="Action 1" />
                                   <MenuItem mnemonicParsing="false" text="Action 2" />
                                 </items>
                               </MenuButton>
-                              <Hyperlink fx:id="viewMembersLink" onAction="#showMembers" text="View members" GridPane.rowIndex="7" />
-                              <Hyperlink fx:id="viewGanttDiagramLink" onAction="#showGantt" text="View Gantt diagram" GridPane.rowIndex="8" />
-                              <Hyperlink fx:id="leaveThisProjectLink" onAction="#leaveProject" text="Leave this project" GridPane.rowIndex="9" />
+                              <Hyperlink fx:id="viewMembersLink" onAction="#showMembers" text="View members" GridPane.rowIndex="8" />
+                              <Hyperlink fx:id="viewGanttDiagramLink" onAction="#showGantt" text="View Gantt diagram" GridPane.rowIndex="9" />
+                              <Hyperlink fx:id="leaveThisProjectLink" onAction="#leaveProject" text="Leave this project" GridPane.rowIndex="10" />
                            </children>
                            <BorderPane.margin>
                               <Insets left="5.0" right="5.0" top="5.0" />

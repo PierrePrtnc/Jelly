@@ -29,10 +29,12 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class StepPageController {
+
     protected JellyFacade jellyFacade;
     protected User connectedUser;
-
     protected Step step;
+    protected Board board;
+    protected Project project;
     private Scene scene;
 
     @FXML
@@ -48,7 +50,7 @@ public class StepPageController {
     private VBox stepDescriptionVBox;
 
     @FXML
-    private MenuButton addNewTaskMenuButton;
+    private Button addNewTaskButton;
 
     @FXML
     private CheckBox allTasksCheckBox;
@@ -64,6 +66,19 @@ public class StepPageController {
 
     @FXML
     private VBox taskVBox;
+
+    public void returnToBoard(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/boardPage.fxml"));
+        Parent root;
+        root = loader.load();
+        this.scene.setRoot(root);
+        ((BoardPageController)loader.getController()).project = project;
+        ((BoardPageController)loader.getController()).board = board;
+        ((BoardPageController)loader.getController()).connectedUser = connectedUser;
+        ((BoardPageController)loader.getController()).jellyFacade = jellyFacade;
+        //((ProjectPageController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
+        ((BoardPageController)loader.getController()).setScene(scene);
+    }
     
     public void showUnreadNotifications() {
         try {
@@ -82,15 +97,15 @@ public class StepPageController {
     }
 
     public void setScene(Scene scene) {
-        List<Task> tasks = jellyFacade.getAllTasksByStep(5);
-        stepLabel.setText("Step 1");
+        List<Task> tasks = jellyFacade.getAllTasksByStep(step.idStep);
+        stepLabel.setText("Step : " + step.getStepName());
         for (int i = 0; i < tasks.size(); i++) {
             GridPane taskGP = new GridPane();
-            taskGP.add(new CheckBox("Task " + i + " : "),0, i);
+            taskGP.add(new CheckBox("Task " + (i+1) + " : "),0, i);
             taskGP.add((new Label (tasks.get(i).getTaskDesc())), 1, i);
             taskGP.add(new Button("Edit"), 2, i);
             taskGP.add(new Button("Delete"), 3, i);
-            taskVBox.getChildren().add(taskVBox);
+            taskVBox.getChildren().add(taskGP);
         }
         this.scene = scene;
     }

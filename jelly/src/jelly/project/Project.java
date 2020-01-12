@@ -52,12 +52,12 @@ public class Project {
     /**
      * Number ID for a project
      */
-    private int idProject = 0;
+    private int idProject;
 
     /**
      * Number ID of the creator of the project
      */
-    private int idCreator = 0;
+    private int idCreator;
 
     /**
      *
@@ -89,6 +89,24 @@ public class Project {
      * @param finalDate date of the project end
      */
     public Project(String name, String description, Date initialDate, Date finalDate) {
+        this.nameProject = name;
+        this.descriptionProject = description;
+        this.initialDateProject = initialDate;
+        this.finalDateProject = finalDate;
+        this.boards = new ArrayList<>();
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param idProject id of the project
+     * @param name name of the project
+     * @param description description of the project
+     * @param initialDate date of the project beginning
+     * @param finalDate date of the project end
+     */
+    public Project(int idProject, String name, String description, Date initialDate, Date finalDate) {
+        this.idProject = idProject;
         this.nameProject = name;
         this.descriptionProject = description;
         this.initialDateProject = initialDate;
@@ -224,7 +242,7 @@ public class Project {
      * @return the id of the last project created
      */
     public int getIdProject() {
-        return idProject;
+        return this.idProject;
     }
 
     /**

@@ -95,7 +95,6 @@ public class NewBoardController {
             e.printStackTrace();
         }
         ((ProjectPageController)loader.getController()).jellyFacade = jellyFacade;
-        ((ProjectPageController)loader.getController()).board = board;
         ((ProjectPageController)loader.getController()).connectedUser = connectedUser;
 
         ((ProjectPageController)loader.getController()).project = project;

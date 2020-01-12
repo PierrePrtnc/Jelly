@@ -67,7 +67,6 @@ public class UpdateBoardController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ((BoardPageController)loader.getController()).board = board;
         ((BoardPageController)loader.getController()).project = project;
         ((BoardPageController)loader.getController()).connectedUser = connectedUser;
 

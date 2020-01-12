@@ -2,6 +2,7 @@ package jelly.ui.controller;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,12 +19,20 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import jelly.JellyFacade;
 import jelly.User;
+import jelly.dao.MySqlDAOFactory;
+import jelly.database.MySqlClient;
+import jelly.project.Board;
 import jelly.project.Project;
 
 import javax.swing.*;
+import javax.swing.tree.DefaultTreeModel;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -129,20 +138,87 @@ public class HomeController {
         projectsGridPane.setPrefWidth(600);
         int j = 0;
         int k = 0;
-        for (int i = 0; i < projects.size(); i++) {
-            if (j == 3) {
-                j = 0;
-                k++;
+        if (!projects.equals(null) && !projects.isEmpty()){
+            for (int i = 0; i < projects.size(); i++) {
+                if (j == 3) {
+                    j = 0;
+                    k++;
+                }
+                VBox vbox = new VBox();
+                vbox.getChildren().add(new Label(projects.get(i).getProjectName()));
+                vbox.getChildren().add(new Label(projects.get(i).getProjectDescription()));
+                DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                vbox.getChildren().add(new Label(df.format(projects.get(i).getInitialDate())));
+                vbox.getChildren().add(new Label(df.format(projects.get(i).getFinalDate())));
+                Button myButton = new Button("View");
+                vbox.getChildren().add(myButton);
+                int finalI = i;
+                myButton.setOnAction(new EventHandler<ActionEvent>() {
+                    public void handle(ActionEvent event) {
+                        MySqlClient sql = MySqlDAOFactory.getConnection();
+                        Project project = new Project();
+                        if(sql.connect()) {
+                            String query = "select * from project where idProject = ?";
+                            PreparedStatement pQuery = null;
+                            try {
+                                pQuery = sql.getDbConnect().prepareStatement(query);
+                                pQuery.setInt(1, projects.get(finalI).getIdProject());
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                            ResultSet res = null;
+                            try {
+                                res = pQuery.executeQuery();
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                            int idProject = 0;
+                            int idCreator = 0;
+                            String nameProject = "";
+                            String descriptionProject = "";
+                            Date initialDateProject = new Date(0,0,0);
+                            Date finalDateProject = new Date(0,0,0);
+                            while (true) {
+                                try {
+                                    if (!res.next()) break;
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
+                                }
+                                try {
+                                    idProject = res.getInt(1);
+                                    nameProject = res.getString(2);
+                                    descriptionProject = res.getString(3);
+                                    initialDateProject = res.getDate(4);
+                                    finalDateProject = res.getDate(5);
+                                    idCreator = res.getInt(6);
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            project = new Project(idProject, idCreator, nameProject, descriptionProject, initialDateProject, finalDateProject);
+                        }
+                        try {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/projectPage.fxml"));
+                            Parent root;
+                            root = loader.load();
+                            scene.setRoot(root);
+                            ((ProjectPageController)loader.getController()).connectedUser = connectedUser;
+                            ((ProjectPageController)loader.getController()).project = project;
+                            ((ProjectPageController)loader.getController()).jellyFacade = jellyFacade;
+                            ((ProjectPageController)loader.getController()).setScene(scene);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                projectsGridPane.add(vbox, j, k);
+                j++;
             }
+        }
+        else{
             VBox vbox = new VBox();
-            vbox.getChildren().add(new Label(projects.get(i).getProjectName()));
-            vbox.getChildren().add(new Label(projects.get(i).getProjectDescription()));
-            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-            vbox.getChildren().add(new Label(df.format(projects.get(i).getInitialDate())));
-            vbox.getChildren().add(new Label(df.format(projects.get(i).getFinalDate())));
-            vbox.getChildren().add(new Button("Consulter"));
-            projectsGridPane.add(vbox, j, k);
-            j++;
+            vbox.getChildren().add(new Label("You have no projects"));
+            projectsGridPane.add(vbox, 0,0);
         }
         this.scene = scene;
     }

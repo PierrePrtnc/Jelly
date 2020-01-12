@@ -186,10 +186,13 @@ public class Step {
 
     /**
      * Constructor.
-     *  @param nameStep name of the step
+     * @param idStep id of the step
+     * @param idBoard id of the board containing step
+     * @param nameStep name of the step
      * @param initialDateStep date of the step beginning
      * @param finalDateStep date of the step end
      * @param stateStep state of the step
+     * @param difficultyStep difficulty of the step
      */
     public Step(int idStep, int idBoard, String nameStep, java.sql.Date initialDateStep, java.sql.Date finalDateStep, int stateStep, int difficultyStep) {
         this.idStep = idStep;
@@ -199,6 +202,28 @@ public class Step {
         this.initialDate = initialDateStep;
         this.finalDate = finalDateStep;
         this.difficulty = difficultyStep;
+    }
+
+    /**
+     * Constructor.
+     * @param idStep id of the step
+     * @param idBoard id of the board containing step
+     * @param nameStep name of the step
+     * @param initialDateStep date of the step beginning
+     * @param finalDateStep date of the step end
+     * @param stateStep state of the step
+     * @param difficultyStep difficulty of the step
+     * @param descriptionStep descriptionS of the step
+     */
+    public Step(int idStep, String nameStep, java.sql.Date initialDateStep, java.sql.Date finalDateStep, int idBoard,  int stateStep, int difficultyStep, String descriptionStep) {
+        this.idStep = idStep;
+        this.idBoard = idBoard;
+        this.nameStep = nameStep;
+        this.state = stateStep;
+        this.initialDate = initialDateStep;
+        this.finalDate = finalDateStep;
+        this.difficulty = difficultyStep;
+        this.descStep = descriptionStep;
     }
 
     public Step() {

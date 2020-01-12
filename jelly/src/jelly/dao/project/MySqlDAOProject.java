@@ -184,6 +184,7 @@ public class MySqlDAOProject implements ProjectDAO {
         if (id != 0) {
             String query = "select * from project where idCreator = ?";
 
+            int idProject = 0;
             String nameProject = "";
             String descriptionProject = "";
             java.sql.Date initialDateProject;
@@ -195,11 +196,12 @@ public class MySqlDAOProject implements ProjectDAO {
                     pQuery.setInt(1, id);
                     ResultSet res = pQuery.executeQuery();
                     while (res.next()) {
+                        idProject = res.getInt(1);
                         nameProject = res.getString(2);
                         descriptionProject = res.getString(3);
                         initialDateProject = res.getDate(4);
                         finalDateProject = res.getDate(5);
-                        projects.add(new Project(nameProject, descriptionProject, new java.util.Date(initialDateProject.getTime()), new java.util.Date(finalDateProject.getTime())));
+                        projects.add(new Project(idProject, nameProject, descriptionProject, new java.util.Date(initialDateProject.getTime()), new java.util.Date(finalDateProject.getTime())));
                     }
                     return (ArrayList) projects;
                 } catch (SQLException e) {
