@@ -33,11 +33,11 @@ public class MainView extends Application {
 		}
 		catch(Exception e) {
 			e.printStackTrace();
-		}		       
+		}
 	}
 
-	
-    public static void main(String[] args) {
-        launch(args);
-    }
+
+	public static void main(String[] args) {
+		launch(args);
+	}
 }

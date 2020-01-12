@@ -290,6 +290,11 @@ public class Project {
      * @return the instance of the creator of the project
      */
     public Creator getCreator() {
+        for (Collaborator c : this.collaborators) {
+            if (c instanceof Creator) {
+                return (Creator) c;
+            }
+        }
         return null;
     }
 
@@ -297,8 +302,13 @@ public class Project {
      * @return all the members of the project
      */
     public Collection<Member> getMembers() {
-        // TODO implement here
-        return null;
+        Collection<Member> members = new ArrayList<Member>();
+        for(Collaborator c : this.collaborators) {
+            if (c instanceof Member) {
+                members.add((Member) c);
+            }
+        }
+        return members;
     }
 
     /**
@@ -306,7 +316,12 @@ public class Project {
      * @return the member having the mail address given in parameter. IF there is not any member with this mail address in the project, it return an exception.
      */
     public Member getMember(String mail) {
-        // TODO implement here
+        Collection<Member> members = this.getMembers();
+        for (Member m : members) {
+            if (m.user.getMailUser().equals(mail)) {
+                return m;
+            }
+        }
         return null;
     }
 

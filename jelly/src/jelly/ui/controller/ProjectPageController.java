@@ -249,4 +249,35 @@ public class ProjectPageController {
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();
     }
+
+    public void editProject(ActionEvent actionEvent) {
+        
+    }
+
+    public void deleteProject(ActionEvent actionEvent) {
+        if (jellyFacade.deleteProject(project.getIdProject())) {
+            try {
+                //showAlert(Alert.AlertType.INFORMATION, projectNameInput.getScene().getWindow(), "Success", "Project deleted.");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
+                Parent root;
+                root = loader.load();
+                this.scene.setRoot(root);
+                ((HomeController) loader.getController()).connectedUser = connectedUser;
+                ((HomeController) loader.getController()).jellyFacade = jellyFacade;
+                ((HomeController) loader.getController()).setScene(scene);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    public void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.initOwner(owner);
+        alert.show();
+    }
 }
