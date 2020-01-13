@@ -74,7 +74,7 @@
                           </rowConstraints>
                            <children>
                                <Hyperlink onAction="#returnToBoard" text="&lt;&lt; Return to board" />
-                              <Button fx:id="addNewTaskButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="+ add new task" GridPane.rowIndex="1" />
+                              <Button fx:id="addNewTaskButton" onAction="#addNewTask" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="+ add new task" GridPane.rowIndex="1" />
                               <CheckBox fx:id="allTasksCheckBox" mnemonicParsing="false" text="All tasks" GridPane.rowIndex="2" />
                               <CheckBox fx:id="undoneCheckBox" mnemonicParsing="false" text="Undone" GridPane.rowIndex="3" />
                               <CheckBox fx:id="doneCheckBox" mnemonicParsing="false" text="Done" GridPane.rowIndex="4" />

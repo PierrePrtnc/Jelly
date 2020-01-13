@@ -23,7 +23,6 @@ public class NewStepController {
     protected JellyFacade jellyFacade;
     protected Project project;
     protected User connectedUser;
-
     protected Board board;
     protected Step step;
     private Scene scene;
@@ -102,8 +101,8 @@ public class NewStepController {
     public void createStep() {
         if(stepNameField.getText().isEmpty() ||  stateMenuButton.getText().equals("Choose state") || difficultyMenuButton.getText().equals("Choose difficulty") || startingDatePicker.getValue() == null || endingDatePicker.getValue() == null || descriptionField.getText().isEmpty()) {
             String emptyFields = "Please enter :\n";
-            if(stepNameField.getText().isEmpty()) {
-                emptyFields += "step name\n";
+            if(stepNameField.getText().isEmpty() || stepNameField.getText().length() > 55) {
+                emptyFields += "step name (length < 55 characters)\n";
             }
             if(stateMenuButton.getText().equals("Choose state")) {
                 emptyFields += "step state\n";
@@ -117,8 +116,8 @@ public class NewStepController {
             if(endingDatePicker.getValue() == null) {
                 emptyFields += "ending date\n";
             }
-            if(descriptionField.getText().isEmpty()) {
-                emptyFields += "step description\n";
+            if(descriptionField.getText().isEmpty() || descriptionField.getText().length() > 255) {
+                emptyFields += "step description (length < 255 characters)\n";
             }
             showAlert(Alert.AlertType.ERROR, window.getScene().getWindow(), "Error", emptyFields);
         }

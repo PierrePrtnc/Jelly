@@ -46,14 +46,14 @@ public class NewBoardController {
     public void createBoard() {
         if(boardNameField.getText().isEmpty() || subjectField.getText().isEmpty() || descriptionArea.getText().isEmpty()) {
             String emptyFields = "Please enter :\n";
-            if(boardNameField.getText().isEmpty()) {
-                emptyFields += "board name\n";
+            if(boardNameField.getText().isEmpty() || boardNameField.getText().length() > 55) {
+                emptyFields += "board name (length < 55 characters)\n";
             }
-            if(subjectField.getText().isEmpty()) {
-                emptyFields += "board subjct\n";
+            if(subjectField.getText().isEmpty() || subjectField.getText().length() > 55) {
+                emptyFields += "board subject (length < 55 characters)\n";
             }
-            if(descriptionArea.getText().isEmpty()) {
-                emptyFields += "board description\n";
+            if(descriptionArea.getText().isEmpty() || descriptionArea.getText().length() > 255) {
+                emptyFields += "board description (length < 255 characters)\n";
             }
             showAlert(Alert.AlertType.ERROR, window.getScene().getWindow(), "Error", emptyFields);
         }

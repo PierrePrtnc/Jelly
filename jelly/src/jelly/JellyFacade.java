@@ -14,6 +14,7 @@ import jelly.dao.project.TaskDAO;
 import jelly.notification.Notification;
 import jelly.project.*;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -273,7 +274,7 @@ public class JellyFacade {
 	 * @param idStep	the ID of the step to which the task is associated to
 	 * @return	the task created
 	 */
-	public Task insertTask(String desc, State state, int idStep) {
+	public Task insertTask(String desc, int state, int idStep) throws SQLException {
 		TaskDAO task = fact.getTaskDAO();
 		return task.insertTask(desc, state, idStep);
 	}
@@ -285,9 +286,9 @@ public class JellyFacade {
 	 * @param state		the state of the task to update
 	 * @return	true if the task was update successfully
 	 */
-	public boolean updateTask(int idTask, String desc, State state) {
+	public boolean updateTask(int idTask, String desc, int state, int idStep) {
 		TaskDAO task = fact.getTaskDAO();
-		return task.updateTask(idTask, desc, state);
+		return task.updateTask(idTask, desc, state, idStep);
 	}
 
 	/**
@@ -299,17 +300,6 @@ public class JellyFacade {
 		TaskDAO task = fact.getTaskDAO();
 		return task.deleteTask(idTask);
 	}
-
-	/**
-	 *
-	 * @param idTask 	the ID of the task to display
-	 * @return	the task to display
-	 */
-	public Task readTask(int idTask) {
-		TaskDAO task = fact.getTaskDAO();
-		return task.readTask(idTask);
-	}
-
 
 		/************************** NOTIFICATIONS METHODS ********************************/
 

@@ -108,8 +108,8 @@ public class UpdateStepController {
     public void updateStep() {
         if(stepNameField.getText().isEmpty() ||  stateMenuButton.getText().equals("Choose state") || difficultyMenuButton.getText().equals("Choose difficulty") || startingDatePicker.getValue() == null || endingDatePicker.getValue() == null || descriptionArea.getText().isEmpty()) {
             String emptyFields = "Please enter :\n";
-            if(stepNameField.getText().isEmpty()) {
-                emptyFields += "step name\n";
+            if(stepNameField.getText().isEmpty() || stepNameField.getText().length() > 55) {
+                emptyFields += "step name (length < 55 characters)\n";
             }
             if(stateMenuButton.getText().equals("Choose state")) {
                 emptyFields += "step state\n";
@@ -123,8 +123,8 @@ public class UpdateStepController {
             if(endingDatePicker.getValue() == null) {
                 emptyFields += "ending date\n";
             }
-            if(descriptionArea.getText().isEmpty()) {
-                emptyFields += "step description\n";
+            if(descriptionArea.getText().isEmpty() || descriptionArea.getText().length() > 255) {
+                emptyFields += "step description (length < 255 characters)\n";
             }
             showAlert(Alert.AlertType.ERROR, window.getScene().getWindow(), "Error", emptyFields);
         }

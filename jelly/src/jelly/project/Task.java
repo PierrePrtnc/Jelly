@@ -29,28 +29,22 @@ public class Task {
     public String description;
 
     /**
-     * The state of the Task. The state can either be "to do", "in progress", "finished" or "re do".
-     *
-     * @see State
+     * The state of the Task. The state can either be 1 = "done", 2 = "undone".
      *
      * @see Task#getTaskState()
-     * @see Task#setTaskState(State)
+     * @see Task#setTaskState(int)
      */
-    public State state;
-
-    /**
-     * The step in which the Task was created.
-     *
-     * @see Step
-     *
-     * @see Task#getStep()
-     */
-    public Step step;
+    public int state;
 
     /**
      * @see Task#getIdTask()
      */
     public int idTask;
+
+    /**
+     * @see Task#getIdStepOfTask()
+     */
+    public int idStep;
 
     /**
      *
@@ -73,6 +67,17 @@ public class Task {
      */
     public Task(String desc) {
         this.description = desc;
+    }
+
+    public Task(int idTask, String descriptionTask, int stateTask, int idStep) {
+        this.idTask = idTask;
+        this.description = descriptionTask;
+        this.state = stateTask;
+        this.idStep = idStep;
+    }
+
+    public Task() {
+
     }
 
     /**
@@ -99,7 +104,7 @@ public class Task {
      *
      * @return the state of the task, as a State.
      */
-    public State getTaskState() {
+    public int getTaskState() {
         return this.state;
     }
 
@@ -109,7 +114,7 @@ public class Task {
      * @param state
      *              The state of the task.
      */
-    public void setTaskState(State state) {
+    public void setTaskState(int state) {
         this.state = state;
     }
 
@@ -123,19 +128,18 @@ public class Task {
 
     /**
      *
+     * @return
+     */
+    public int getIdStepOfTask() {
+        return idStep;
+    }
+
+    /**
+     *
      * @param idTask
      */
     public void setIdTask(int idTask) {
         this.idTask = idTask;
-    }
-
-    /**
-     * Returns the step in which the task was created.
-     *
-     * @return the step in which the task was created, as a Step.
-     */
-    public Step getStep() {
-        return this.step;
     }
 
     /**

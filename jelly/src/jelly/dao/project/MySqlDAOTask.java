@@ -27,24 +27,13 @@ public class MySqlDAOTask implements TaskDAO {
      * @return
      */
     @Override
-    public Task insertTask(String desc, State state, int idStep) {
+    public Task insertTask(String desc, int state, int idStep) throws SQLException {
         String query = "insert into task (description, stateTask, idStep) values(?,?,?)";
         if(sql.connect()) {
             try {
-                int stateId = 0;
-                switch (state) {
-                    case ToDo:
-                        stateId = 0;
-                    case InProgress:
-                        stateId = 1;
-                    case Finished:
-                        stateId = 2;
-                    case ReDo:
-                        stateId = 3;
-                }
                 PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
                 pQuery.setString(1, desc);
-                pQuery.setInt(2, stateId);
+                pQuery.setInt(2, state);
                 pQuery.setInt(3, idStep);
                 pQuery.executeUpdate();
                 ResultSet res = pQuery.getGeneratedKeys();
@@ -52,9 +41,8 @@ public class MySqlDAOTask implements TaskDAO {
                     return new Task(res.getInt(1));
                 }
                 pQuery.close();
-            } catch (SQLException e) {
+            }catch (SQLException e) {
                 // TODO Auto-generated catch block
-                System.out.println("1");
                 e.printStackTrace();
             }
         }
@@ -70,34 +58,22 @@ public class MySqlDAOTask implements TaskDAO {
      * @return
      */
     @Override
-    public boolean updateTask(int idTask, String desc, State state) {
-        String query = "update task set description = ?, stateTask = ? where idTask = ?";
+    public boolean updateTask(int idTask, String desc, int state, int idStep) {
+        String query = "update task set idTask = ?, description = ?, stateTask = ?, int idStep = ? where idTask = ?";
         if(sql.connect()) {
-            if(readTask(idTask) == null) {
-                try {
-                    int stateId = 0;
-                    switch (state) {
-                        case ToDo:
-                            stateId = 0;
-                        case InProgress:
-                            stateId = 1;
-                        case Finished:
-                            stateId = 2;
-                        case ReDo:
-                            stateId = 3;
-                    }
-                    PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
-                    pQuery.setString(1, desc);
-                    pQuery.setInt(2, stateId);
-                    pQuery.setInt(4, idTask);
-                    pQuery.executeUpdate();
-                    pQuery.close();
-                    return true;
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    System.out.println("1");
-                    e.printStackTrace();
-                }
+            try {
+                PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
+                pQuery.setInt(1, idTask);
+                pQuery.setString(2, desc);
+                pQuery.setInt(3, state);
+                pQuery.setInt(4, idTask);
+                pQuery.setInt(5, idTask);
+                pQuery.executeUpdate();
+                pQuery.close();
+                return true;
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
         }
         sql.close();
@@ -128,50 +104,6 @@ public class MySqlDAOTask implements TaskDAO {
 
     /**
      *
-     * @param idTask
-     * @return
-     */
-    @Override
-    public Task readTask(int idTask) {
-        String query = "select * from task where idTask = ?";
-        String description = "";
-        int stateTask;
-        if(sql.connect()) {
-            try {
-                PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
-                pQuery.setInt(1, idTask);
-                ResultSet res = pQuery.executeQuery();
-                int stateValue = 0;
-                State state;
-                description = res.getString(2);
-                stateTask = res.getInt(3);
-                Task task = new Task(description);
-                switch(stateTask) {
-                    case 0:
-                        state = State.ToDo;
-                        task.setTaskState(state);
-                    case 1:
-                        state = State.InProgress;
-                        task.setTaskState(state);
-                    case 2:
-                        state = State.Finished;
-                        task.setTaskState(state);
-                    case 3:
-                        state = State.ReDo;
-                        task.setTaskState(state);
-                }
-                return task;
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-        sql.close();
-        return null;
-    }
-
-    /**
-     *
      * @return
      */
     @Override
@@ -198,6 +130,8 @@ public class MySqlDAOTask implements TaskDAO {
     @Override
     public ArrayList<Task> getAllTasksByStep(int idStep) {
         String query = "select * from task where idStep = ?";
+
+        int idTask;
         String descriptionTask = "";
         int stateTask;
         List<Task> tasks = new ArrayList<Task>();
@@ -206,26 +140,11 @@ public class MySqlDAOTask implements TaskDAO {
                 PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
                 pQuery.setInt(1, idStep);
                 ResultSet res = pQuery.executeQuery();
-                State state;
                 while (res.next()) {
+                    idTask = res.getInt(1);
                     descriptionTask = res.getString(2);
                     stateTask = res.getInt(3);
-                    Task task = new Task(descriptionTask);
-                    switch(stateTask) {
-                        case 0:
-                            state = State.ToDo;
-                            task.setTaskState(state);
-                        case 1:
-                            state = State.InProgress;
-                            task.setTaskState(state);
-                        case 2:
-                            state = State.Finished;
-                            task.setTaskState(state);
-                        case 3:
-                            state = State.ReDo;
-                            task.setTaskState(state);
-                    }
-                    tasks.add(task);
+                    tasks.add(new Task(idTask, descriptionTask, stateTask, idStep));
                 }
                 return (ArrayList) tasks;
             } catch (SQLException e) {

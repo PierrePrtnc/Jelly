@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:id="window" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jelly.ui.controller.UpdateTaskController">
+   <children>
+      <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="Home">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Sign in">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <BorderPane prefHeight="102.0" prefWidth="640.0">
+         <center>
+            <ImageView fitHeight="87.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                   <Image url="@../../../../../lib/jellyLogo.png" />
+               </image>
+            </ImageView>
+         </center>
+          <right>
+              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="29.0" BorderPane.alignment="CENTER">
+                  <children>
+                      <Button fx:id="button" onAction="#showUnreadNotifications" layoutY="8.0" mnemonicParsing="false" prefHeight="8.0" prefWidth="70.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <graphic>
+                              <ImageView fitHeight="32.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                  <image>
+                                      <Image url="https://previews.123rf.com/images/martialred/martialred1507/martialred150700877/42615148-notification-de-message-cloche-esquisser-ic%C3%B4ne-plat-pour-les-applications.jpg" />
+                                  </image>
+                              </ImageView>
+                          </graphic>
+                      </Button>
+                      <StackPane layoutX="57.0" layoutY="-13.0" AnchorPane.rightAnchor="-10" AnchorPane.topAnchor="-10">
+                          <children>
+                              <Circle radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                  <fill>
+                                      <RadialGradient centerX="0.5" centerY="0.5" radius="0.8164556962025317">
+                                          <stops>
+                                              <Stop color="#ff361beb" />
+                                              <Stop color="WHITE" offset="1.0" />
+                                          </stops>
+                                      </RadialGradient>
+                                  </fill>
+                              </Circle>
+                              <Label fx:id="notificationNumber" text="5" />
+                          </children>
+                      </StackPane>
+                  </children>
+                  <BorderPane.margin>
+                      <Insets right="15.0" />
+                  </BorderPane.margin>
+              </AnchorPane>
+          </right>
+      </BorderPane>
+      <BorderPane prefHeight="246.0" prefWidth="640.0">
+         <center>
+            <GridPane BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="360.0" minWidth="10.0" prefWidth="308.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="483.199951171875" minWidth="10.0" prefWidth="332.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="87.0" minHeight="10.0" prefHeight="78.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                   <TextArea fx:id="descriptionArea" prefHeight="62.0" prefWidth="235.0" GridPane.columnIndex="1">
+                       <GridPane.margin>
+                           <Insets left="15.0" right="150.0" />
+                       </GridPane.margin>
+                   </TextArea>
+                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Brief description" GridPane.halignment="RIGHT">
+                       <font>
+                           <Font size="20.0" />
+                       </font>
+                   </Text>
+                  <Button fx:id="cancelButton" onAction="#returnToStepPage" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #ACD6FA;" text="Cancel" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <GridPane.margin>
+                        <Insets left="50.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Task state" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+                   <MenuButton fx:id="stateMenuButton" mnemonicParsing="false" prefWidth="165.0" text="Choose state" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                       <items>
+                           <MenuItem mnemonicParsing="false" onAction="#done" text="Done" />
+                           <MenuItem mnemonicParsing="false" onAction="#undone" text="Undone" />
+                       </items>
+                       <GridPane.margin>
+                           <Insets left="15.0" />
+                       </GridPane.margin>
+                   </MenuButton>
+                  <Button fx:id="updateButton" onAction="#updateTask" layoutX="300.0" layoutY="185.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #ACD6FA;" text="Update" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <GridPane.margin>
+                        <Insets right="50.0" />
+                     </GridPane.margin>
+                  </Button>
+               </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </GridPane>
+         </center>
+      </BorderPane>
+   </children>
+</VBox>

@@ -51,7 +51,6 @@ public class MySqlDAOStep implements StepDAO {
                 pQuery.close();
             } catch (SQLException e) {
                 // TODO Auto-generated catch block
-                System.out.println("1");
                 e.printStackTrace();
             }
         }
@@ -91,7 +90,6 @@ public class MySqlDAOStep implements StepDAO {
                 return true;
             } catch (SQLException e) {
                 // TODO Auto-generated catch block
-                System.out.println("1");
                 e.printStackTrace();
             }
         }

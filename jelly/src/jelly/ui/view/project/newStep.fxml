@@ -37,7 +37,7 @@
                </image>
             </ImageView>
          </center>
-                               <right>
+          <right>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="29.0" BorderPane.alignment="CENTER">
                <children>
                   <Button fx:id="button" onAction="#showUnreadNotifications" layoutY="8.0" mnemonicParsing="false" prefHeight="8.0" prefWidth="70.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

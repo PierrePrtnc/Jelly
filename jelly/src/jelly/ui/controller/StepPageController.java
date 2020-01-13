@@ -1,6 +1,7 @@
 package jelly.ui.controller;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,12 +12,18 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Window;
 import jelly.JellyFacade;
 import jelly.User;
+import jelly.dao.MySqlDAOFactory;
+import jelly.database.MySqlClient;
 import jelly.project.Board;
 import jelly.project.Project;
 import jelly.project.Step;
 import jelly.project.Task;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -59,6 +66,24 @@ public class StepPageController {
 
     @FXML
     private VBox taskVBox;
+
+    public void addNewTask(ActionEvent actionEvent) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/newTask.fxml"));
+        Parent root;
+        try {
+            root = loader.load();
+            this.scene.setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ((NewTaskController)loader.getController()).task = new Task();
+        ((NewTaskController)loader.getController()).step = step;
+        ((NewTaskController)loader.getController()).connectedUser = connectedUser;
+        ((NewTaskController)loader.getController()).project = project;
+        ((NewTaskController)loader.getController()).board = board;
+        ((NewTaskController)loader.getController()).jellyFacade = jellyFacade;
+        ((NewTaskController)loader.getController()).setScene(scene);
+    }
 
     public void editStep(ActionEvent actionEvent) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/updateStep.fxml"));
@@ -106,7 +131,6 @@ public class StepPageController {
         }
         ((UpdateStepController)loader.getController()).difficultyMenuButton.setText(difficulty);
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-
         ((UpdateStepController)loader.getController()).startingDatePicker.setPromptText(df.format(step.getInitialDate()));
         ((UpdateStepController)loader.getController()).endingDatePicker.setPromptText(df.format(step.getFinalDate()));
         ((UpdateStepController)loader.getController()).descriptionArea.setText(step.getStepDesc());
@@ -192,10 +216,145 @@ public class StepPageController {
         stepLabel.setText("Step : " + step.getStepName() + " [" + state + "]" + " [" + difficulty + "]");
         for (int i = 0; i < tasks.size(); i++) {
             GridPane taskGP = new GridPane();
-            taskGP.add(new CheckBox("Task " + (i+1) + " : "),0, i);
+            CheckBox cb = new CheckBox();
+            cb.setText("Task " + (i+1) + " : ");
+            System.out.println("state "+ i + tasks.get(i).getTaskState());
+            if (((Integer) tasks.get(i).getTaskState()).equals(1)){ cb.setSelected(true); }
+            else{ cb.setSelected(false); }
+            taskGP.add(cb,0, i);
+            cb.setSelected(true);;
             taskGP.add((new Label (tasks.get(i).getTaskDesc())), 1, i);
-            taskGP.add(new Button("Edit"), 2, i);
-            taskGP.add(new Button("Delete"), 3, i);
+            Button editButton = new Button("Edit");
+            taskGP.add(editButton, 2, i);
+            int finalI = i;
+            editButton.setOnAction(new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent event) {
+                    MySqlClient sql = MySqlDAOFactory.getConnection();
+                    Task task = new Task();
+                    if(sql.connect()) {
+                        String query = "select * from task where idTask = ?";
+                        PreparedStatement pQuery = null;
+                        try {
+                            pQuery = sql.getDbConnect().prepareStatement(query);
+                            pQuery.setInt(1, tasks.get(finalI).getIdTask());
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                        ResultSet res = null;
+                        try {
+                            res = pQuery.executeQuery();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                        int idTask = 0;
+                        int idStep = 0;
+                        int stateTask = 0;
+                        String descriptionTask = "";
+                        while (true) {
+                            try {
+                                if (!res.next()) break;
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                            try {
+                                idTask = res.getInt(1);
+                                descriptionTask = res.getString(2);
+                                stateTask = res.getInt(3);
+                                idStep = res.getInt(4);
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        task = new Task(idTask, descriptionTask, stateTask, idStep);
+                    }
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/updateTask.fxml"));
+                        Parent root;
+                        root = loader.load();
+                        scene.setRoot(root);
+                        ((UpdateTaskController)loader.getController()).connectedUser = connectedUser;
+                        ((UpdateTaskController)loader.getController()).task = task;
+                        ((UpdateTaskController)loader.getController()).step = step;
+                        ((UpdateTaskController)loader.getController()).board = board;
+                        ((UpdateTaskController)loader.getController()).project = project;
+                        ((UpdateTaskController)loader.getController()).jellyFacade = jellyFacade;
+                        ((UpdateTaskController)loader.getController()).descriptionArea.setText(task.getTaskDesc());
+                        String state = "";
+                        switch(step.getStepState()) {
+                            case 1:
+                                state = "Done";
+                                break;
+                            case 2:
+                                state = "Undone";
+                                break;
+                        }
+                        ((UpdateTaskController)loader.getController()).stateMenuButton.setText(state);
+                        ((UpdateTaskController)loader.getController()).setScene(scene);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            Button deleteButton = new Button("Delete");
+            taskGP.add(deleteButton, 3, i);
+            deleteButton.setOnAction(new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent event) {
+                    MySqlClient sql = MySqlDAOFactory.getConnection();
+                    Task task = new Task();
+                    if(sql.connect()) {
+                        String query = "select * from task where idTask = ?";
+                        PreparedStatement pQuery = null;
+                        try {
+                            pQuery = sql.getDbConnect().prepareStatement(query);
+                            pQuery.setInt(1, tasks.get(finalI).getIdTask());
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                        ResultSet res = null;
+                        try {
+                            res = pQuery.executeQuery();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                        int idTask = 0;
+                        int idStep = 0;
+                        int stateTask = 0;
+                        String descriptionTask = "";
+                        while (true) {
+                            try {
+                                if (!res.next()) break;
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                            try {
+                                idTask = res.getInt(1);
+                                descriptionTask = res.getString(2);
+                                stateTask = res.getInt(3);
+                                idStep = res.getInt(4);
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        task = new Task(idTask, descriptionTask, stateTask, idStep);
+                    }
+                    showAlert(Alert.AlertType.INFORMATION, window.getScene().getWindow(), "Success", "Your task has been deleted");
+                    if(jellyFacade.deleteTask(task.getIdTask())){
+                        try {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/boardPage.fxml"));
+                            Parent root;
+                            root = loader.load();
+                            scene.setRoot(root);
+                            ((BoardPageController)loader.getController()).connectedUser = connectedUser;
+                            ((BoardPageController)loader.getController()).project = project;
+                            ((BoardPageController)loader.getController()).board = board;
+                            ((BoardPageController)loader.getController()).jellyFacade = jellyFacade;
+                            ((BoardPageController)loader.getController()).setScene(scene);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
             taskVBox.getChildren().add(taskGP);
         }
         this.scene = scene;
