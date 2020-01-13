@@ -3,15 +3,13 @@ package jelly.dao.notification;
 import jelly.User;
 import jelly.collaboration.Collaborator;
 import jelly.dao.MySqlDAOFactory;
+import jelly.dao.MySqlDAOUser;
 import jelly.dao.UserDAO;
 import jelly.database.MySqlClient;
 import jelly.notification.Notification;
 import jelly.project.Project;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -22,40 +20,36 @@ public class MySqlDAONotification implements NotificationDAO {
 	@Override
 	public boolean insertNotification(Collaborator sender, Collection<User> users, String message, String action) {
 		String query = "insert into notification (messageNotification, actionNotification, idOriginator) values(?,?,?)";
-		String query2 =  "insert into notification_journal (idNotification, idUser, isRead) values(?,?,0)";
+		System.out.println("SENDER ID aka idOriginator: "+sender.user.getMailUser());
+		for(User u : users) {
+			System.out.println("USER ID aka idUser: "+u.getMailUser());
+		}
+		boolean insertSuccess = false;
 		if(sql.connect()) {
-			String senderMail = sender.user.getMailUser();
-			System.out.println(readUser(senderMail).getFirstNameUser());
+			MySqlDAOUser userDAO = new MySqlDAOUser();
+			int senderID = userDAO.getIdByMailUser(sender.user.getMailUser());
 			try {
-				PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
+				PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 				pQuery.setString(1, message);
 				pQuery.setString(2, action);
-				pQuery.setString(3, senderMail);
+				pQuery.setInt(3, senderID);
 				pQuery.executeUpdate();
-				pQuery.close();
-				PreparedStatement pQueryGet = sql.getDbConnect().prepareStatement("SELECT LAST_INSERT_ID() from notification");
-				ResultSet res = pQueryGet.executeQuery();
+				ResultSet res = pQuery.getGeneratedKeys();
 				int idNotif = 0;
 				while (res.next()) {
 					 idNotif = res.getInt(1);
+					 System.out.println("NOTIFICATION ID CREATED : "+idNotif);
 				}
-				for(int i = 0; i<users.size();i++) {
-					PreparedStatement pQuery2 = sql.getDbConnect().prepareStatement(query2);
-					pQuery2.setInt(1, idNotif);
-					PreparedStatement pQueryGetUsers = sql.getDbConnect().prepareStatement("select idUser from notification where mailUser = ?");
-					pQueryGetUsers.setString(1, ((User)users.toArray()[i]).getMailUser());
-					ResultSet res2 = pQueryGetUsers.executeQuery();
-					int idUser = 0;
-					while (res2.next()) {
-						 idUser = res2.getInt(1);
+				for (User u : users) {
+					if (insertJournal(idNotif, userDAO.getIdUser(u.getMailUser()), 0)) {
+						insertSuccess = true;
+					} else {
+						insertSuccess = false;
 					}
-					pQuery2.setInt(2, idUser);
-					pQuery2.executeUpdate();
-					pQuery2.close();
-					
 				}
 				System.out.println("ok");
-				return true;
+				pQuery.close();
+				return insertSuccess;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				System.out.println("1");
@@ -63,6 +57,26 @@ public class MySqlDAONotification implements NotificationDAO {
 			}	
 		} 
 		sql.close();
+		return false;
+	}
+
+	public boolean insertJournal(int idNotification, int idUser, int isRead) {
+		String query =  "insert into notification_journal (idNotification, idUser, isRead) values(?,?,?)";
+		System.out.println("NOTIFICATION ID TO INSERT IN JOURNAL : "+idNotification);
+		System.out.println("USER ID TO INSERT IN JOURNAL : "+idUser);
+		if(sql.connect()) {
+			try {
+				PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
+				pQuery.setInt(1, idNotification);
+				pQuery.setInt(2, idUser);
+				pQuery.setInt(3, isRead);
+				pQuery.executeUpdate();
+				pQuery.close();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		return false;
 	}
 
@@ -303,6 +317,5 @@ public class MySqlDAONotification implements NotificationDAO {
 		sql.close();
 		return null;
 	}
-
 
 }

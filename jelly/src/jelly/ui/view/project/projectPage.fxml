@@ -88,7 +88,7 @@
                               <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                               <Hyperlink onAction="#returnHome" text="&lt;&lt; Return to home" />
+                               <Hyperlink fx:id="returnHomeHL" onAction="#returnHome" text="&lt;&lt; Return to home" />
                                <Button fx:id="addNewBoardButton" mnemonicParsing="false" onAction="#addNewBoard" prefHeight="25.0" prefWidth="114.0" text="+ add new board" GridPane.rowIndex="1" />
                               <CheckBox fx:id="allBoardsCheckBox" mnemonicParsing="false" text="All Boards" GridPane.rowIndex="2" />
                               <CheckBox fx:id="currentCheckBox" mnemonicParsing="false" text="Current" GridPane.rowIndex="3" />

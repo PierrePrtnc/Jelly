@@ -82,9 +82,6 @@ public class ProjectPageController {
     @FXML
     private DatePicker finalDatePicker;
 
-    @FXML
-    private TextField userMailField;
-
     public void showMembers(ActionEvent actionEvent){
 
     }
@@ -267,6 +264,17 @@ public class ProjectPageController {
         }
     }
 
+    public void returnHome() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
+        Parent root;
+        root = loader.load();
+        this.scene.setRoot(root);
+        ((HomeController)loader.getController()).connectedUser = jellyFacade.getUser(connectedUser.getMailUser());
+        ((HomeController)loader.getController()).jellyFacade = jellyFacade;
+        ((HomeController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(jellyFacade.getUser(connectedUser.getMailUser())).size());
+        ((HomeController)loader.getController()).setScene(scene);
+    }
+
     public static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
 
@@ -293,25 +301,6 @@ public class ProjectPageController {
         }
     }
 
-    public void handleEdition() {
-        java.util.Date startingDate = java.util.Date.from(initialDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-        java.util.Date endingDate = Date.from(finalDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-        if (jellyFacade.updateProject(project.getIdProject(), projectNameField.getText(), projectDescriptionText.getText(), startingDate, endingDate)) {
-            try {
-                showAlert(Alert.AlertType.INFORMATION, projectDeletion.getScene().getWindow(), "Success", "Project updated.");
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/projectPage.fxml"));
-                Parent root;
-                root = loader.load();
-                this.scene.setRoot(root);
-                ((ProjectPageController) loader.getController()).connectedUser = connectedUser;
-                ((ProjectPageController) loader.getController()).jellyFacade = jellyFacade;
-                ((ProjectPageController) loader.getController()).setScene(scene);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     public void deleteProject() {
         if (jellyFacade.deleteProject(project.getIdProject())) {
             try {
@@ -320,9 +309,9 @@ public class ProjectPageController {
                 Parent root;
                 root = loader.load();
                 this.scene.setRoot(root);
-                ((ProjectPageController) loader.getController()).connectedUser = connectedUser;
-                ((ProjectPageController) loader.getController()).jellyFacade = jellyFacade;
-                ((ProjectPageController) loader.getController()).setScene(scene);
+                ((HomeController) loader.getController()).connectedUser = connectedUser;
+                ((HomeController) loader.getController()).jellyFacade = jellyFacade;
+                ((HomeController) loader.getController()).setScene(scene);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -350,16 +339,18 @@ public class ProjectPageController {
     }
 
     public void handleInvite() {
+        System.out.println("START HANDLE INVITE");
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/inviteUserPage.fxml"));
             Parent root;
             root = loader.load();
             this.scene.setRoot(root);
             ((InvitationsController) loader.getController()).connectedUser = connectedUser;
-            ((InvitationsController) loader.getController()).jellyFacade = jellyFacade;
             ((InvitationsController) loader.getController()).project = project;
-            ((InvitationsController) loader.getController()).userMailField = userMailField;
+            //((InvitationsController) loader.getController()).invitation = true;
             ((InvitationsController) loader.getController()).setScene(scene);
+            System.out.println("PROJECT VALUE IN PROJECT PAGE HANDLE INVITE "+project.getProjectName());
+            System.out.println("END HANDLE INVITE");
         } catch (IOException e) {
             e.printStackTrace();
         }

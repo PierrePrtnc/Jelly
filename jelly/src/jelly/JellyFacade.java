@@ -19,6 +19,7 @@ import jelly.project.*;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -310,6 +311,11 @@ public class JellyFacade {
 	public ArrayList<Notification> getUnreadNotificationList(User user){
 		NotificationDAO notification = fact.getNotificationDAO();
 		return notification.unreadNotifications(user);
+	}
+
+	public boolean insertNotification(Collaborator sender, Collection<User> users, String message, String action) {
+		NotificationDAO notification = fact.getNotificationDAO();
+		return notification.insertNotification(sender, users, message, action);
 	}
 	
 	public boolean deleteNotification(int idNotification, User user) {

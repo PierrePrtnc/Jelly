@@ -19,7 +19,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="window" prefHeight="366.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jelly.ui.controller.ProjectPageController">
+<VBox fx:id="window" prefHeight="366.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jelly.ui.controller.InvitationsController">
    <children>
       <MenuBar>
          <menus>
@@ -60,23 +60,24 @@
       </VBox>
       <BorderPane prefHeight="156.0" prefWidth="640.0">
          <center>
-            <GridPane prefHeight="165.0" prefWidth="640.0" BorderPane.alignment="CENTER">
+            <GridPane fx:id="mailGridPane" prefHeight="165.0" prefWidth="640.0" BorderPane.alignment="CENTER">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="360.0" minWidth="10.0" prefWidth="240.59996337890624" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="483.199951171875" minWidth="10.0" prefWidth="399.00003662109367" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints maxHeight="74.0" minHeight="10.0" prefHeight="74.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="68.0" minHeight="0.0" prefHeight="32.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="81.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="74.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="68.0" minHeight="0.0" prefHeight="22.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="81.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <TextField fx:id="userMailField" prefHeight="26.0" prefWidth="212.0" GridPane.columnIndex="1">
+                  <TextField fx:id="userMailField" prefHeight="26.0" prefWidth="274.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="15.0" right="150.0" />
                      </GridPane.margin>
                   </TextField>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="User mail" GridPane.halignment="CENTER">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="User mail" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -84,7 +85,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Text>
-                  <Button fx:id="addUserButton" defaultButton="true" mnemonicParsing="false" onAction="#handleInvite" onMouseEntered="#handleMouseEntered" onMouseExited="#handleMouseExited" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #ACD6FA;" text="Confirm" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Button fx:id="addUserButton" defaultButton="true" mnemonicParsing="false" onAction="#sendInvite" onMouseEntered="#handleMouseEntered" onMouseExited="#handleMouseExited" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #ACD6FA;" text="Confirm" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -92,11 +93,12 @@
                         <Insets left="50.0" />
                      </GridPane.margin>
                   </Button>
-                  <Hyperlink prefHeight="24.0" prefWidth="148.0" text="+ Add another user" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Hyperlink fx:id="inviteOtherUserHL" onAction="#addUserToInvite" prefHeight="24.0" prefWidth="148.0" text="+ Add another user" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="60.0" />
                      </GridPane.margin>
                   </Hyperlink>
+                  <Hyperlink fx:id="backToProjectHL" onAction="#returnToProject" text="&lt;&lt; Return to project" />
                </children>
             </GridPane>
          </center>

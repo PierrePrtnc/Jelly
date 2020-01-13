@@ -138,29 +138,31 @@ public class MySqlDAOCollaborator implements CollaboratorDAO {
         return null;
     }
 
-    //TODO actully implement
+    /**
+     *
+     * @param idProject
+     * @return
+     */
     public ArrayList<Collaborator> getAllCollaboratorsByProject(int idProject) {
+        MySqlDAOProject project = new MySqlDAOProject();
+        MySqlDAOUser user = new MySqlDAOUser();
         if (idProject != 0) {
-            String query = "select * from board where idProject = ?";
+            String query = "select * from collaborator where idProject = ?";
 
-            int idBoard;
-            String nameBoard;
-            String descriptionBoard;
-            String subjectBoard;
-            List<Board> boards = new ArrayList<Board>();
+            int idCollaborator;
+            int idUser;
+            List<Collaborator> collaborators = new ArrayList<Collaborator>();
             if(sql.connect()) {
                 try {
                     PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
                     pQuery.setInt(1, idProject);
                     ResultSet res = pQuery.executeQuery();
                     while (res.next()) {
-                        idBoard = res.getInt(1);
-                        nameBoard = res.getString(2);
-                        descriptionBoard = res.getString(4);
-                        subjectBoard = res.getString(5);
-                        boards.add(new Board(idBoard, idProject, nameBoard, descriptionBoard, subjectBoard));
+                        idCollaborator = res.getInt(1);
+                        idUser = res.getInt(3);
+                        collaborators.add(new Collaborator(idCollaborator, project.readProject(idProject), user.readUser(user.getEmailUser(idUser))));
                     }
-                    return (ArrayList) boards;
+                    return (ArrayList) collaborators;
                 } catch (SQLException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -190,4 +192,5 @@ public class MySqlDAOCollaborator implements CollaboratorDAO {
         sql.close();
         return null;
     }
+
 }

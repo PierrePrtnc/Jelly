@@ -28,15 +28,20 @@ import jelly.project.Project;
 
 public class NotificationsController {
 
+	public Project project;
 	private JellyFacade jellyFacade = new JellyFacade();
 	protected String emailUser;
 	protected User currentUser;
 	private Scene scene;
+	public boolean invitation;
 	@FXML
     private VBox window;
 	
     @FXML
     private GridPane notificationsGridPane;
+
+    @FXML
+	public TextField userMailField;
 	
 	ArrayList<Notification> notifications;
 
@@ -59,7 +64,6 @@ public class NotificationsController {
             vbox.getChildren().add(new Label("Sender : " + notifications.get(i).getOriginator().getUser().getMailUser()));
             vbox.getChildren().add(new Label("Project : " + notifications.get(i).getOriginator().getProject().getProjectName()));
             vbox.getChildren().add(new Label("Message : " + notifications.get(i).getMessage()));
-			boolean invitation = true;
             try {
     			Collaborator[] projectCollaborators = (Collaborator[]) notifications.get(i).getOriginator().project.getCollaborators().toArray();
     			int j = 0;
@@ -77,14 +81,14 @@ public class NotificationsController {
     							//((ProjectController)loader.getController()).setScene(scene);
     							vbox.getChildren().add(seeProject);						
     						} catch (IOException e2) {
-    							
+    							e2.printStackTrace();
     						}
     					});
     				}
     			}
             }
 			catch(NullPointerException e3) {
-				
+				e3.printStackTrace();
 			}
 				if(invitation) {
 					Button joinProject = new Button("Join this project");
