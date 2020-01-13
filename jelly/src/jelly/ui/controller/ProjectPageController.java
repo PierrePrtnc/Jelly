@@ -67,21 +67,6 @@ public class ProjectPageController {
     @FXML
     private Button projectDeletion;
 
-    @FXML
-    private Button editProjectButton;
-
-    @FXML
-    private TextField projectNameField;
-
-    @FXML
-    private TextArea projectDescriptionText;
-
-    @FXML
-    private DatePicker initialDatePicker;
-
-    @FXML
-    private DatePicker finalDatePicker;
-
     public void showMembers(ActionEvent actionEvent){
 
     }
@@ -290,11 +275,10 @@ public class ProjectPageController {
             root = loader.load();
             this.scene.setRoot(root);
             ((UpdateProjectController) loader.getController()).project = project;
+            ((UpdateProjectController) loader.getController()).connectedUser = connectedUser;
             ((UpdateProjectController) loader.getController()).jellyFacade = jellyFacade;
-            ((UpdateProjectController) loader.getController()).projectNameField = projectNameField;
-            ((UpdateProjectController) loader.getController()).projectDescriptionText = projectDescriptionText;
-            ((UpdateProjectController) loader.getController()).initialDatePicker = initialDatePicker;
-            ((UpdateProjectController) loader.getController()).finalDatePicker = finalDatePicker;
+            ((UpdateProjectController) loader.getController()).projectNameField.setText(project.getProjectName());
+            ((UpdateProjectController) loader.getController()).projectDescriptionText.setText(project.getProjectDescription());
             ((UpdateProjectController) loader.getController()).setScene(scene);
         } catch(IOException e) {
             e.printStackTrace();
@@ -325,17 +309,6 @@ public class ProjectPageController {
         alert.setContentText(message);
         alert.initOwner(owner);
         alert.show();
-    }
-
-    public void handleMouseEntered() {
-        this.scene.setCursor(Cursor.HAND);
-        editProjectButton.setStyle("#ACD6FX");
-
-    }
-
-    public void handleMouseExited() {
-        this.scene.setCursor(Cursor.DEFAULT);
-        editProjectButton.setStyle("#ACD6FA");
     }
 
     public void handleInvite() {

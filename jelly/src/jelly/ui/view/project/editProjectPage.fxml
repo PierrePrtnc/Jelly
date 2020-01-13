@@ -20,7 +20,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jelly.ui.controller.ProjectPageController">
+<VBox fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jelly.ui.controller.UpdateProjectController">
    <children>
       <MenuBar>
          <menus>
@@ -108,7 +108,7 @@
                   </TextArea>
                   <DatePicker fx:id="initialDatePicker" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                   <DatePicker fx:id="finalDatePicker" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                  <Hyperlink onAction="#returnHome" prefHeight="24.0" prefWidth="158.0" text="&lt;&lt; Return to home" />
+                  <Hyperlink fx:id="returnHomeHL" onAction="#returnToProject" prefHeight="24.0" prefWidth="158.0" text="&lt;&lt; Return to home" />
                </children>
             </GridPane>
          </center>
