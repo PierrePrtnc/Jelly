@@ -1,5 +1,8 @@
 package jelly.dao;
 
+import jelly.collaboration.Collaborator;
+import jelly.dao.collaboration.CollaboratorDAO;
+import jelly.dao.collaboration.MySqlDAOCollaborator;
 import jelly.dao.notification.MySqlDAONotification;
 import jelly.dao.notification.NotificationDAO;
 import jelly.dao.project.*;
@@ -35,6 +38,8 @@ public class MySqlDAOFactory extends DAOFactory {
 	}
 
 	public TaskDAO getTaskDAO() { return new MySqlDAOTask(); }
+
+	public CollaboratorDAO getCollaboratorDAO () { return new MySqlDAOCollaborator();}
 
 	@Override
 	public NotificationDAO getNotificationDAO() {

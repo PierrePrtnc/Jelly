@@ -4,8 +4,10 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import jelly.collaboration.Collaborator;
 import jelly.dao.DAOFactory;
 import jelly.dao.UserDAO;
+import jelly.dao.collaboration.CollaboratorDAO;
 import jelly.dao.notification.NotificationDAO;
 import jelly.dao.project.BoardDAO;
 import jelly.dao.project.ProjectDAO;
@@ -15,6 +17,7 @@ import jelly.notification.Notification;
 import jelly.project.*;
 
 import java.sql.SQLException;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -323,6 +326,28 @@ public class JellyFacade {
 	public ArrayList<Notification> getAllNotificationList(User user) {
 		NotificationDAO notification = fact.getNotificationDAO();
 		return notification.readAllNotifications(user);
+	}
+
+	/************************** COLLABORATION METHODS ********************************/
+
+	public Collaborator insertCollaborator(Project p, User u) {
+		CollaboratorDAO collaborator = fact.getCollaboratorDAO();
+		return collaborator.insertCollaborator(p, u);
+	}
+
+	public boolean updateCollaborator(int idCollaborator, Project p, User u) {
+		CollaboratorDAO collaborator = fact.getCollaboratorDAO();
+		return collaborator.updateCollaborator(idCollaborator, p, u);
+	}
+
+	public boolean deleteCollaborator(int idCollaborator) {
+		CollaboratorDAO collaborator = fact.getCollaboratorDAO();
+		return collaborator.deleteCollaborator(idCollaborator);
+	}
+
+	public Collaborator readCollaborator(int idCollaborator) {
+		CollaboratorDAO collaborator = fact.getCollaboratorDAO();
+		return collaborator.readCollaborator(idCollaborator);
 	}
 
 }

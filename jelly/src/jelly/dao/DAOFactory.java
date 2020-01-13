@@ -1,5 +1,6 @@
 package jelly.dao;
 
+import jelly.dao.collaboration.CollaboratorDAO;
 import jelly.dao.notification.NotificationDAO;
 import jelly.dao.project.BoardDAO;
 import jelly.dao.project.ProjectDAO;
@@ -28,6 +29,8 @@ public abstract class DAOFactory {
 	public abstract TaskDAO getTaskDAO();
 	
 	public abstract NotificationDAO getNotificationDAO();
+
+	public abstract  CollaboratorDAO getCollaboratorDAO();
 	
 	/**
 	 * Returns an instance of one of the subclasses of DAOFactory, depending on the database chosen as parameter.
