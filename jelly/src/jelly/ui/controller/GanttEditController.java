@@ -74,8 +74,6 @@ public class GanttEditController {
         scrollPaneGantt.getScene().getWindow().setWidth(1200);
         this.gridPane = new GridPane();
         gridPane.setGridLinesVisible(true);
-        String date1 = "31/12/2019";
-        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(date1);
         dates = getDates(project.getInitialDate(), project.getFinalDate());
         for (int i = 0; i < dates.size(); i++) {
             Label dateGantt = new Label(dates.get(i).toString());

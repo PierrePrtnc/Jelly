@@ -65,6 +65,13 @@ public class Project {
      */
     public Project(int idProject) {
         this.idProject = idProject;
+        this.collaborators = new ArrayList<>();
+        this.ganttDiagramProject = new ArrayList<>();
+        this.boards = new ArrayList<>();
+    }
+
+
+    public Project() {
     }
 
     /**
@@ -77,6 +84,9 @@ public class Project {
     public Project(String name, String description, Collection<Board> boards) {
         this.nameProject = name;
         this.descriptionProject = description;
+        this.boards = boards;
+        this.collaborators = new ArrayList<>();
+        this.ganttDiagramProject = new ArrayList<>();
         this.boards = boards;
     }
 
@@ -93,6 +103,8 @@ public class Project {
         this.descriptionProject = description;
         this.initialDateProject = initialDate;
         this.finalDateProject = finalDate;
+        this.collaborators = new ArrayList<>();
+        this.ganttDiagramProject = new ArrayList<>();
         this.boards = new ArrayList<>();
     }
 
@@ -111,11 +123,9 @@ public class Project {
         this.descriptionProject = description;
         this.initialDateProject = initialDate;
         this.finalDateProject = finalDate;
+        this.collaborators = new ArrayList<>();
+        this.ganttDiagramProject = new ArrayList<>();
         this.boards = new ArrayList<>();
-    }
-
-    public Project() {
-
     }
 
     public Project(int idProject, int idCreator, String nameProject, String descriptionProject, Date initialDateProject, Date finalDateProject) {
@@ -125,6 +135,8 @@ public class Project {
         this.descriptionProject = descriptionProject;
         this.initialDateProject = initialDateProject;
         this.finalDateProject = finalDateProject;
+        this.collaborators = new ArrayList<>();
+        this.ganttDiagramProject = new ArrayList<>();
         this.boards = new ArrayList<>();
     }
 
@@ -163,8 +175,13 @@ public class Project {
     /**
      * @return the collection of all the steps of the project. This allows to get the Gantt Diagram of the project
      */
-    public Collection<Step> getGanttDiagram() {
-        return ((Board) boards).getSteps();
+    public ArrayList<Step> getGanttDiagram() {
+        for (Board aBoard:
+             boards) {
+            this.ganttDiagramProject.addAll(aBoard.getSteps());
+        }
+
+        return (ArrayList) ganttDiagramProject;
     }
 
     /**
@@ -332,6 +349,10 @@ public class Project {
      */
     public void broadcastToMembers(Collaborator sender, Collection<Collaborator> receivers) {
         // TODO implement here
+    }
+
+    public void addStepGanttDiagram(List<Step> steps) {
+        this.ganttDiagramProject.addAll(steps);
     }
 
 }

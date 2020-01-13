@@ -130,7 +130,7 @@ public class HomeController {
     }
 
     public void setScene(Scene scene) {
-        welcomeLabel.getScene().getWindow().setHeight(850);
+        welcomeLabel.getScene().getWindow().setWidth(850);
         welcomeLabel.getScene().getWindow().setHeight(540);
         List<Project> projects = jellyFacade.getAllProjectsByUser(connectedUser.getMailUser());
         welcomeLabel.setText("Welcome " + connectedUser.getFirstNameUser());
@@ -204,6 +204,7 @@ public class HomeController {
                             scene.setRoot(root);
                             ((ProjectPageController)loader.getController()).connectedUser = connectedUser;
                             ((ProjectPageController)loader.getController()).project = project;
+                            ((ProjectPageController)loader.getController()).boardDescriptionVBox.getScene().getWindow().setHeight(700);
                             ((ProjectPageController)loader.getController()).jellyFacade = jellyFacade;
                             ((ProjectPageController)loader.getController()).setScene(scene);
                         } catch (IOException e) {

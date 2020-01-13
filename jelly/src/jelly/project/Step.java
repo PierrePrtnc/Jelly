@@ -140,6 +140,7 @@ public class Step {
         this.nameStep = name;
         this.initialDate = initialDate;
         this.finalDate = finalDate;
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -174,7 +175,7 @@ public class Step {
      * @param descStep description of the step
      * @param initialDateStep date of the step beginning
      * @param finalDateStep date of the step end
-     * @param difficultyStep difficulty of the step
+     * @param difficulty difficulty of the step
      */
     public Step(String nameStep, String descStep, Date initialDateStep, Date finalDateStep, int difficultyStep) {
         this.nameStep = nameStep;
@@ -182,6 +183,7 @@ public class Step {
         this.initialDate = initialDateStep;
         this.finalDate = finalDateStep;
         this.difficulty = difficultyStep;
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -202,6 +204,7 @@ public class Step {
         this.initialDate = initialDateStep;
         this.finalDate = finalDateStep;
         this.difficulty = difficultyStep;
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -224,6 +227,7 @@ public class Step {
         this.finalDate = finalDateStep;
         this.difficulty = difficultyStep;
         this.descStep = descriptionStep;
+        this.tasks = new ArrayList<>();
     }
 
     public Step() {

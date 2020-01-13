@@ -30,6 +30,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class ProjectPageController {
     private Label projectLabel;
 
     @FXML
-    private VBox boardDescriptionVBox;
+    protected VBox boardDescriptionVBox;
 
     @FXML
     private CheckBox allBoardsCheckBox;
@@ -71,8 +72,18 @@ public class ProjectPageController {
 
     }
 
-    public void showGantt(ActionEvent actionEvent){
-
+    public void showGantt() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/gantt/GanttView.fxml"));
+        Parent root;
+        root = loader.load();
+        this.scene.setRoot(root);
+        ((GanttViewController)loader.getController()).connectedUser = connectedUser;
+        ((GanttViewController)loader.getController()).jellyFacade = jellyFacade;
+        ((GanttViewController)loader.getController()).project = project;
+        ((GanttViewController)loader.getController()).notificationNumber.getScene().getWindow().setHeight(780);
+        ((GanttViewController)loader.getController()).notificationNumber.getScene().getWindow().setWidth(1200);
+        ((GanttViewController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
+        ((GanttViewController)loader.getController()).setScene(scene);
     }
 
     public void leaveProject(ActionEvent actionEvent){
@@ -125,6 +136,7 @@ public class ProjectPageController {
                     k++;
                 }
                 List<Step> steps = jellyFacade.getAllStepsByBoard(boards.get(i).getIdBoard());
+                project.addStepGanttDiagram(steps);
                 double accomplishmentPercent = 0;
                 double stepFinished = 0;
                 double totalStep = 0;
