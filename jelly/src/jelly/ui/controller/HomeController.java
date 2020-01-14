@@ -1,12 +1,9 @@
 package jelly.ui.controller;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,21 +11,13 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import jelly.JellyFacade;
 import jelly.User;
 import jelly.dao.MySqlDAOFactory;
 import jelly.database.MySqlClient;
-import jelly.project.Board;
 import jelly.project.Project;
 
-import javax.swing.*;
-import javax.swing.tree.DefaultTreeModel;
-import java.awt.*;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -36,7 +25,6 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class HomeController {
 
@@ -44,9 +32,6 @@ public class HomeController {
     protected User connectedUser;
     @FXML
     private GridPane projectsGridPane;
-
-    @FXML
-    private Hyperlink myInfoLink;
 
     @FXML
     private Label welcomeLabel;
@@ -204,6 +189,7 @@ public class HomeController {
                             scene.setRoot(root);
                             ((ProjectPageController)loader.getController()).connectedUser = connectedUser;
                             ((ProjectPageController)loader.getController()).project = project;
+                            ((ProjectPageController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
                             ((ProjectPageController)loader.getController()).boardDescriptionVBox.getScene().getWindow().setHeight(700);
                             ((ProjectPageController)loader.getController()).jellyFacade = jellyFacade;
                             ((ProjectPageController)loader.getController()).setScene(scene);

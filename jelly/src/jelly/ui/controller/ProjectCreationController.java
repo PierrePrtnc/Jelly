@@ -111,6 +111,7 @@ public class ProjectCreationController {
                     this.scene.setRoot(root);
                     ((HomeController) loader.getController()).connectedUser = connectedUser;
                     ((HomeController) loader.getController()).jellyFacade = jellyFacade;
+                    ((HomeController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
                     ((HomeController) loader.getController()).setScene(scene);
                 } else
                     showAlert(Alert.AlertType.ERROR, projectNameInput.getScene().getWindow(), "Error", "An error occured, please try again.");

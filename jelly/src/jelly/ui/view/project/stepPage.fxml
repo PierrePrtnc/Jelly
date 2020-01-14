@@ -10,21 +10,8 @@
 
 <VBox fx:id="window" prefHeight="546.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jelly.ui.controller.StepPageController">
    <children>
-      <MenuBar>
-        <menus>
-          <Menu mnemonicParsing="false" text="Home" />
-          <Menu mnemonicParsing="false" text="Log out" />
-            <Menu mnemonicParsing="false" text="My account" />
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
       <BorderPane prefHeight="469.0" prefWidth="640.0">
          <right>
-            <ScrollBar orientation="VERTICAL" BorderPane.alignment="CENTER" />
          </right>
          <center>
             <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
@@ -44,12 +31,19 @@
                               <Button fx:id="deleteButton" onAction="#deleteStep" mnemonicParsing="false" text="Delete" GridPane.columnIndex="1" />
                            </children>
                            <BorderPane.margin>
-                              <Insets />
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </BorderPane.margin>
                         </GridPane>
                      </right>
                      <center>
-                        <Label fx:id="stepLabel" text="Step" BorderPane.alignment="CENTER" />
+                        <Label fx:id="stepLabel" text="Step" BorderPane.alignment="CENTER">
+                            <font>
+                                <Font name="Roboto Regular" size="24.0" />
+                            </font>
+                            <padding>
+                                <Insets top="10.0" />
+                            </padding>
+                        </Label>
                      </center>
                   </BorderPane>
                </center>
@@ -64,38 +58,19 @@
                               <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
                                <Hyperlink onAction="#returnToBoard" text="&lt;&lt; Return to board" />
                               <Button fx:id="addNewTaskButton" onAction="#addNewTask" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="+ add new task" GridPane.rowIndex="1" />
-                              <CheckBox fx:id="allTasksCheckBox" mnemonicParsing="false" text="All tasks" GridPane.rowIndex="2" />
-                              <CheckBox fx:id="undoneCheckBox" mnemonicParsing="false" text="Undone" GridPane.rowIndex="3" />
-                              <CheckBox fx:id="doneCheckBox" mnemonicParsing="false" text="Done" GridPane.rowIndex="4" />
-                              <MenuButton fx:id="sortByMenuButton" mnemonicParsing="false" prefHeight="28.0" prefWidth="115.0" text="Sort by" GridPane.rowIndex="5">
-                                <items>
-                                  <MenuItem mnemonicParsing="false" text="Action 1" />
-                                  <MenuItem mnemonicParsing="false" text="Action 2" />
-                                </items>
-                              </MenuButton>
-                              <Hyperlink fx:id="viewMembersLink" text="View members" GridPane.rowIndex="6" />
-                              <Hyperlink fx:id="ganttLink" text="View Gantt diagram" GridPane.rowIndex="7" />
-                              <Hyperlink fx:id="projectLink" text="Leave this project" GridPane.rowIndex="8" />
-                              <Hyperlink fx:id="viewCollaboratorsLink" text="View Collaborators" GridPane.rowIndex="9" />
+                              <Hyperlink fx:id="ganttLink" onAction="#showGantt" text="View Gantt diagram" GridPane.rowIndex="2" />
                            </children>
                            <BorderPane.margin>
-                              <Insets left="5.0" right="5.0" top="5.0" />
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </BorderPane.margin>
                         </GridPane>
                      </left>
                      <center>
-                        <VBox fx:id="taskVBox" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+                         <VBox fx:id="taskVBox" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
                </bottom>
@@ -137,7 +112,7 @@
             </StackPane>
          </children>
                <BorderPane.margin>
-                  <Insets right="15.0" />
+                  <Insets bottom="5.0" left="5.0" top="5.0" right="15.0" />
                </BorderPane.margin>
       </AnchorPane>
          </right>

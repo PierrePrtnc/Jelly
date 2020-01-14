@@ -4,11 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Window;
@@ -20,7 +20,6 @@ import jelly.project.Board;
 import jelly.project.Project;
 import jelly.project.Step;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -29,9 +28,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ProjectPageController {
@@ -42,25 +38,10 @@ public class ProjectPageController {
     private Scene scene;
 
     @FXML
-    private VBox window;
-
-    @FXML
     private Label projectLabel;
 
     @FXML
     protected VBox boardDescriptionVBox;
-
-    @FXML
-    private CheckBox allBoardsCheckBox;
-
-    @FXML
-    private CheckBox currentCheckBox;
-
-    @FXML
-    private CheckBox finishedCheckBox;
-
-    @FXML
-    private MenuButton sortByMenuButton;
 
     @FXML
     private GridPane boardGripPane;
@@ -68,7 +49,10 @@ public class ProjectPageController {
     @FXML
     private Button projectDeletion;
 
-    public void showMembers(ActionEvent actionEvent){
+    @FXML
+    protected Label notificationNumber;
+
+    public void showMembers(){
 
     }
 
@@ -86,7 +70,7 @@ public class ProjectPageController {
         ((GanttViewController)loader.getController()).setScene(scene);
     }
 
-    public void leaveProject(ActionEvent actionEvent){
+    public void leaveProject(){
 
     }
 
@@ -225,6 +209,7 @@ public class ProjectPageController {
                             ((BoardPageController)loader.getController()).connectedUser = connectedUser;
                             ((BoardPageController)loader.getController()).board = board;
                             ((BoardPageController)loader.getController()).project = project;
+                            ((BoardPageController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
                             ((BoardPageController)loader.getController()).jellyFacade = jellyFacade;
                             ((BoardPageController)loader.getController()).setScene(scene);
                         } catch (IOException e) {
@@ -232,7 +217,6 @@ public class ProjectPageController {
                         }
                     }
                 });
-
                 boardGripPane.add(vbox, j, k);
                 j++;
             }
@@ -306,6 +290,7 @@ public class ProjectPageController {
                 root = loader.load();
                 this.scene.setRoot(root);
                 ((HomeController) loader.getController()).connectedUser = connectedUser;
+                ((HomeController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
                 ((HomeController) loader.getController()).jellyFacade = jellyFacade;
                 ((HomeController) loader.getController()).setScene(scene);
             } catch (IOException e) {

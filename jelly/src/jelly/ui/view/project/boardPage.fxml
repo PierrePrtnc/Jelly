@@ -10,21 +10,8 @@
 
 <VBox fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jelly.ui.controller.BoardPageController">
    <children>
-      <MenuBar>
-        <menus>
-          <Menu mnemonicParsing="false" text="Home" />
-          <Menu mnemonicParsing="false" text="Log out" />
-            <Menu mnemonicParsing="false" text="My account" />
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
       <BorderPane prefHeight="469.0" prefWidth="640.0">
          <right>
-            <ScrollBar orientation="VERTICAL" BorderPane.alignment="CENTER" />
          </right>
          <center>
             <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
@@ -44,12 +31,19 @@
                               <Button fx:id="deleteButton" onAction="#deleteBoard" mnemonicParsing="false" text="Delete" GridPane.columnIndex="1" />
                            </children>
                            <BorderPane.margin>
-                              <Insets />
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </BorderPane.margin>
                         </GridPane>
                      </right>
                      <center>
-                        <Label fx:id="boardLabel" text="Board" BorderPane.alignment="CENTER" />
+                        <Label fx:id="boardLabel" text="Board" BorderPane.alignment="CENTER">
+                            <font>
+                                <Font name="Roboto Regular" size="24.0" />
+                            </font>
+                            <padding>
+                                <Insets top="10.0" />
+                            </padding>
+                        </Label>
                      </center>
                      <bottom>
                         <VBox fx:id="boardDescriptionVBox" prefHeight="30.0" prefWidth="626.0" BorderPane.alignment="CENTER" />
@@ -67,49 +61,28 @@
                               <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
                                <Hyperlink onAction="#returnToProject" text="&lt;&lt; Return to project" />
                               <Button fx:id="addNewStepButton" onAction="#addNewStep" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="+ add new step" GridPane.rowIndex="1" />
-                              <CheckBox fx:id="allStepsCheckBox" mnemonicParsing="false" text="All Steps" GridPane.rowIndex="2" />
-                              <CheckBox fx:id="toDoCheckBox" mnemonicParsing="false" text="To do" GridPane.rowIndex="3" />
-                              <CheckBox fx:id="inProgressCheckBox" mnemonicParsing="false" text="In progress" GridPane.rowIndex="4" />
-                              <CheckBox fx:id="redoCheckBox" mnemonicParsing="false" text="Redo" GridPane.rowIndex="5" />
-                              <CheckBox fx:id="doneCheckBox" mnemonicParsing="false" text="Done" GridPane.rowIndex="6" />
-                              <MenuButton fx:id="sortByMenuButton" mnemonicParsing="false" prefHeight="28.0" prefWidth="114.0" text="Sort by" GridPane.rowIndex="7">
-                                <items>
-                                  <MenuItem mnemonicParsing="false" text="Action 1" />
-                                  <MenuItem mnemonicParsing="false" text="Action 2" />
-                                </items>
-                              </MenuButton>
-                              <Hyperlink fx:id="viewMembersLink" onAction="#showMembers" text="View members" GridPane.rowIndex="8" />
-                              <Hyperlink fx:id="viewGanttDiagramLink" onAction="#showGantt" text="View Gantt diagram" GridPane.rowIndex="9" />
-                              <Hyperlink fx:id="leaveThisProjectLink" onAction="#leaveProject" text="Leave this project" GridPane.rowIndex="10" />
+                              <Hyperlink fx:id="viewGanttDiagramLink" onAction="#showGantt" text="View Gantt diagram" GridPane.rowIndex="2" />
                            </children>
                            <BorderPane.margin>
-                              <Insets left="5.0" right="5.0" top="5.0" />
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </BorderPane.margin>
                         </GridPane>
                      </left>
                      <center>
-                        <GridPane fx:id="stepGripPane" BorderPane.alignment="CENTER">
-                          <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="405.0" minWidth="0.0" prefWidth="150.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="459.0" minWidth="10.0" prefWidth="180.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="459.0" minWidth="10.0" prefWidth="132.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                        </GridPane>
+                         <GridPane fx:id="stepGripPane" BorderPane.alignment="CENTER">
+                             <columnConstraints>
+                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                             </columnConstraints>
+                             <rowConstraints>
+                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                             </rowConstraints>
+                         </GridPane>
                      </center>
                   </BorderPane>
                </bottom>
@@ -151,7 +124,7 @@
                   </StackPane>
                </children>
                <BorderPane.margin>
-                  <Insets right="15.0" />
+                  <Insets bottom="5.0" left="5.0" top="5.0" right="15.0" />
                </BorderPane.margin>
             </AnchorPane>
          </right>

@@ -59,7 +59,7 @@ public class MySqlDAOTask implements TaskDAO {
      */
     @Override
     public boolean updateTask(int idTask, String desc, int state, int idStep) {
-        String query = "update task set idTask = ?, description = ?, stateTask = ?, int idStep = ? where idTask = ?";
+        String query = "update task set idTask = ?, description = ?, stateTask = ?, idStep = ? where idTask = ?";
         if(sql.connect()) {
             try {
                 PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);

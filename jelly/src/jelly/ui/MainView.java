@@ -25,7 +25,7 @@ public class MainView extends Application {
 
 			Scene scene = new Scene(root, 700, 380);
 			((LoginController)loader.getController()).setScene(scene);
-			stage.setTitle("Jelly - Login");
+			stage.setTitle("Jelly");
 			Image image = new Image("https://www.pngrepo.com/png/298931/170/jellyfish.png");
 			stage.getIcons().add(image);
 			stage.setScene(scene);

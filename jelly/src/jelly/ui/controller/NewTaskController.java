@@ -59,6 +59,7 @@ public class NewTaskController {
         ((StepPageController)loader.getController()).jellyFacade = jellyFacade;
         ((StepPageController)loader.getController()).project = project;
         ((StepPageController)loader.getController()).step = step;
+        ((StepPageController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
         ((StepPageController)loader.getController()).connectedUser = connectedUser;
         ((StepPageController)loader.getController()).board = board;
         ((StepPageController)loader.getController()).setScene(scene);

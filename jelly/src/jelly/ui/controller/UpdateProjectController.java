@@ -48,6 +48,7 @@ public class UpdateProjectController {
             e.printStackTrace();
         }
         ((ProjectPageController)loader.getController()).jellyFacade = jellyFacade;
+        ((ProjectPageController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
         ((ProjectPageController)loader.getController()).connectedUser = connectedUser;
         ((ProjectPageController)loader.getController()).project = project;
         ((ProjectPageController)loader.getController()).setScene(scene);
@@ -75,6 +76,7 @@ public class UpdateProjectController {
                 this.scene.setRoot(root);
                 ((ProjectPageController) loader.getController()).project = project;
                 ((ProjectPageController) loader.getController()).connectedUser = connectedUser;
+                ((ProjectPageController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
                 ((ProjectPageController) loader.getController()).jellyFacade = jellyFacade;
                 ((ProjectPageController) loader.getController()).setScene(scene);
             } catch (IOException e) {

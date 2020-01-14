@@ -100,6 +100,7 @@ public class UpdateStepController {
         ((StepPageController)loader.getController()).project = project;
         ((StepPageController)loader.getController()).step = step;
         ((StepPageController)loader.getController()).connectedUser = connectedUser;
+        ((StepPageController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
         ((StepPageController)loader.getController()).board = board;
         ((StepPageController)loader.getController()).jellyFacade = jellyFacade;
         ((StepPageController)loader.getController()).setScene(scene);
@@ -169,6 +170,7 @@ public class UpdateStepController {
                     e.printStackTrace();
                 }
                 ((BoardPageController)loader.getController()).project = project;
+                ((BoardPageController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
                 ((BoardPageController)loader.getController()).connectedUser = connectedUser;
                 ((BoardPageController)loader.getController()).board = board;
                 ((BoardPageController)loader.getController()).jellyFacade = jellyFacade;
@@ -189,7 +191,6 @@ public class UpdateStepController {
             this.scene.setRoot(root);
             ((NotificationsController)loader.getController()).emailUser = connectedUser.getMailUser();
             ((NotificationsController)loader.getController()).currentUser = connectedUser;
-
             ((NotificationsController)loader.getController()).setScene(scene);
 
         } catch (IOException e) {

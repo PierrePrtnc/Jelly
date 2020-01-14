@@ -1,52 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Hyperlink?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
-
+<?import javafx.scene.text.Font?>
 <VBox fx:id="window" prefHeight="546.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jelly.ui.controller.ProjectPageController">
    <children>
-      <MenuBar>
-        <menus>
-          <Menu mnemonicParsing="false" text="Home" />
-          <Menu mnemonicParsing="false" text="Log out" />
-            <Menu mnemonicParsing="false" text="My account" />
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
       <BorderPane prefHeight="469.0" prefWidth="640.0">
          <right>
-            <ScrollBar orientation="VERTICAL" BorderPane.alignment="CENTER" />
          </right>
          <center>
             <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <center>
                   <BorderPane prefHeight="46.0" prefWidth="626.0" BorderPane.alignment="CENTER">
                      <center>
-                        <Label fx:id="projectLabel" text="Project" BorderPane.alignment="CENTER" />
+                        <Label fx:id="projectLabel" text="Project" BorderPane.alignment="CENTER">
+                            <font>
+                                <Font name="Roboto Regular" size="24.0" />
+                            </font>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+                            </padding>
+                        </Label>
                      </center>
                      <bottom>
                         <GridPane BorderPane.alignment="CENTER">
@@ -80,45 +60,30 @@
                               <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
                                <Hyperlink fx:id="returnHomeHL" onAction="#returnHome" text="&lt;&lt; Return to home" />
                                <Button fx:id="addNewBoardButton" mnemonicParsing="false" onAction="#addNewBoard" prefHeight="25.0" prefWidth="114.0" text="+ add new board" GridPane.rowIndex="1" />
-                              <CheckBox fx:id="allBoardsCheckBox" mnemonicParsing="false" text="All Boards" GridPane.rowIndex="2" />
-                              <CheckBox fx:id="currentCheckBox" mnemonicParsing="false" text="Current" GridPane.rowIndex="3" />
-                              <CheckBox fx:id="finishedCheckBox" mnemonicParsing="false" text="Finished" GridPane.rowIndex="4" />
-                              <MenuButton fx:id="sortByMenuButton" mnemonicParsing="false" prefHeight="28.0" prefWidth="114.0" text="Sort by" GridPane.rowIndex="5">
-                                <items>
-                                  <MenuItem mnemonicParsing="faa@a.lse" text="Action 1" />
-                                  <MenuItem mnemonicParsing="false" text="Action 2" />
-                                </items>
-                              </MenuButton>
-                              <Hyperlink fx:id="viewMembersLink" onAction="#showMembers" text="View members" GridPane.rowIndex="6" />
-                              <Hyperlink fx:id="viewGanttDiagramLink" onAction="#showGantt" text="View Gantt diagram" GridPane.rowIndex="7" />
-                              <Hyperlink fx:id="leaveThisProjectLink" onAction="#leaveProject" text="Leave this project" GridPane.rowIndex="8" />
+                              <Hyperlink fx:id="viewGanttDiagramLink" onAction="#showGantt" text="View Gantt diagram" GridPane.rowIndex="2" />
                            </children>
                            <BorderPane.margin>
-                              <Insets left="5.0" right="5.0" top="5.0" />
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </BorderPane.margin>
                         </GridPane>
                      </left>
                      <center>
-                        <GridPane fx:id="boardGripPane" BorderPane.alignment="CENTER">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                        </GridPane>
+                         <ScrollPane prefHeight="357.0" prefWidth="364.0" BorderPane.alignment="CENTER">
+                             <GridPane fx:id="boardGripPane" BorderPane.alignment="CENTER">
+                                 <columnConstraints>
+                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                             </GridPane>
+                         </ScrollPane>
                      </center>
                   </BorderPane>
                </bottom>
@@ -160,7 +125,7 @@
             </StackPane>
          </children>
                <BorderPane.margin>
-                  <Insets right="15.0" />
+                  <Insets bottom="5.0" left="5.0" top="5.0" right="15.0" />
                </BorderPane.margin>
       </AnchorPane>
          </right>

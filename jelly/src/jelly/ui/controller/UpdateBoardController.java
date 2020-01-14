@@ -51,12 +51,6 @@ public class UpdateBoardController {
     @FXML
     protected TextArea descriptionArea;
 
-    @FXML
-    private Button cancelButton;
-
-    @FXML
-    private Button updateButton;
-
     public void returnToBoardPage() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/boardPage.fxml"));
         Parent root;
@@ -69,6 +63,7 @@ public class UpdateBoardController {
         ((BoardPageController)loader.getController()).project = project;
         ((BoardPageController)loader.getController()).connectedUser = connectedUser;
         ((BoardPageController)loader.getController()).board = board;
+        ((BoardPageController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
         ((BoardPageController)loader.getController()).jellyFacade = jellyFacade;
         ((BoardPageController)loader.getController()).setScene(scene);
     }

@@ -27,17 +27,6 @@
 <children>
 <BorderPane prefHeight="86.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <MenuBar BorderPane.alignment="CENTER">
-         <menus>
-            <Menu fx:id="homeMenu" mnemonicParsing="false" text="Home" />
-            <Menu mnemonicParsing="false" text="Help">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="About" />
-               </items>
-            </Menu>
-         </menus>
-      </MenuBar>
-
    </top>
    <left>
                               <Hyperlink onAction="#showHome" prefHeight="31.0" prefWidth="136.0" text="&lt;&lt; Return to home">

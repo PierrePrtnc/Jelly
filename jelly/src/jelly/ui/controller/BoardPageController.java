@@ -42,51 +42,29 @@ public class BoardPageController {
     private Label boardLabel;
 
     @FXML
-    private Button editButton;
-
-    @FXML
-    private Button deleteButton;
-
-    @FXML
     private VBox boardDescriptionVBox;
-
-    @FXML
-    private Button addNewStepButton;
-
-    @FXML
-    private CheckBox allStepsCheckBox;
-
-    @FXML
-    private CheckBox toDoCheckBox;
-
-    @FXML
-    private CheckBox inProgressCheckBox;
-
-    @FXML
-    private CheckBox redoCheckBox;
-
-    @FXML
-    private CheckBox doneCheckBox;
-
-    @FXML
-    private MenuButton sortByMenuButton;
 
     @FXML
     private GridPane stepGripPane;
 
-    public void showMembers(ActionEvent actionEvent) {
+    @FXML
+    protected Label notificationNumber;
 
+    public void showGantt() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/gantt/GanttView.fxml"));
+        Parent root;
+        root = loader.load();
+        this.scene.setRoot(root);
+        ((GanttViewController)loader.getController()).connectedUser = connectedUser;
+        ((GanttViewController)loader.getController()).jellyFacade = jellyFacade;
+        ((GanttViewController)loader.getController()).project = project;
+        ((GanttViewController)loader.getController()).notificationNumber.getScene().getWindow().setHeight(780);
+        ((GanttViewController)loader.getController()).notificationNumber.getScene().getWindow().setWidth(1200);
+        ((GanttViewController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
+        ((GanttViewController)loader.getController()).setScene(scene);
     }
 
-    public void showGantt(ActionEvent actionEvent) {
-
-    }
-
-    public void leaveProject(ActionEvent actionEvent) {
-
-    }
-
-    public void returnToProject(ActionEvent actionEvent) throws IOException {
+    public void returnToProject() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/projectPage.fxml"));
         Parent root;
         root = loader.load();
@@ -94,7 +72,7 @@ public class BoardPageController {
         ((ProjectPageController)loader.getController()).project = project;
         ((ProjectPageController)loader.getController()).connectedUser = connectedUser;
         ((ProjectPageController)loader.getController()).jellyFacade = jellyFacade;
-        //((ProjectPageController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
+        ((ProjectPageController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
         ((ProjectPageController)loader.getController()).setScene(scene);
     }
     
@@ -114,7 +92,7 @@ public class BoardPageController {
         }
     }
 
-    public void editBoard(ActionEvent actionEvent) {
+    public void editBoard() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/updateBoard.fxml"));
         Parent root;
         try {
@@ -134,7 +112,7 @@ public class BoardPageController {
         ((UpdateBoardController)loader.getController()).setScene(scene);
     }
 
-    public void deleteBoard(ActionEvent actionEvent) {
+    public void deleteBoard() {
         showAlert(Alert.AlertType.INFORMATION, window.getScene().getWindow(), "Success", "Your board has been deleted");
         if(jellyFacade.deleteBoard(board.getIdBoard())){
             try {
@@ -144,6 +122,7 @@ public class BoardPageController {
                 this.scene.setRoot(root);
                 ((ProjectPageController)loader.getController()).connectedUser = connectedUser;
                 ((ProjectPageController)loader.getController()).project = project;
+                ((ProjectPageController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
                 ((ProjectPageController)loader.getController()).jellyFacade = jellyFacade;
                 ((ProjectPageController)loader.getController()).setScene(scene);
             } catch (IOException e) {
@@ -152,7 +131,7 @@ public class BoardPageController {
         }
     }
 
-    public void addNewStep(ActionEvent actionEvent) {
+    public void addNewStep() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/newStep.fxml"));
         Parent root;
         try {
@@ -177,7 +156,7 @@ public class BoardPageController {
         stepGripPane.setPrefWidth(450);
         int j = 0;
         int k = 0;
-        if (!steps.equals(null) && !steps.isEmpty()){
+        if (steps != null && !steps.isEmpty()){
             for (int i = 0; i < steps.size(); i++) {
                 if (j == 3) {
                     j = 0;
@@ -216,11 +195,11 @@ public class BoardPageController {
                 Button myButton = new Button("View");
                 vbox.getChildren().add(myButton);
                 int finalI = i;
-                myButton.setOnAction(new EventHandler<ActionEvent>() {
+                myButton.setOnAction(new EventHandler<>() {
                     public void handle(ActionEvent event) {
                         MySqlClient sql = MySqlDAOFactory.getConnection();
                         Step step = new Step();
-                        if(sql.connect()) {
+                        if (sql.connect()) {
                             String query = "select * from step where idStep = ?";
                             PreparedStatement pQuery = null;
                             try {
@@ -231,20 +210,22 @@ public class BoardPageController {
                             }
                             ResultSet res = null;
                             try {
+                                assert pQuery != null;
                                 res = pQuery.executeQuery();
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
                             int idStep = 0;
                             String nameStep = "";
-                            Date initialDateStep = new Date(0,0,0);
-                            Date finalDateStep = new Date(0,0,0);
+                            Date initialDateStep = new Date(0, 0, 0);
+                            Date finalDateStep = new Date(0, 0, 0);
                             int idBoard = 0;
                             int stateStep = 0;
                             int difficultyStep = 0;
                             String descriptionStep = "";
                             while (true) {
                                 try {
+                                    assert res != null;
                                     if (!res.next()) break;
                                 } catch (SQLException e) {
                                     e.printStackTrace();
@@ -269,12 +250,13 @@ public class BoardPageController {
                             Parent root;
                             root = loader.load();
                             scene.setRoot(root);
-                            ((StepPageController)loader.getController()).connectedUser = connectedUser;
-                            ((StepPageController)loader.getController()).step = step;
-                            ((StepPageController)loader.getController()).board = board;
-                            ((StepPageController)loader.getController()).project = project;
-                            ((StepPageController)loader.getController()).jellyFacade = jellyFacade;
-                            ((StepPageController)loader.getController()).setScene(scene);
+                            ((StepPageController) loader.getController()).connectedUser = connectedUser;
+                            ((StepPageController) loader.getController()).step = step;
+                            ((StepPageController) loader.getController()).board = board;
+                            ((StepPageController) loader.getController()).project = project;
+                            ((StepPageController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
+                            ((StepPageController) loader.getController()).jellyFacade = jellyFacade;
+                            ((StepPageController) loader.getController()).setScene(scene);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

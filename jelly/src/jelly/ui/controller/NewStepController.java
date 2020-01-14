@@ -174,6 +174,7 @@ public class NewStepController {
         ((BoardPageController)loader.getController()).jellyFacade = jellyFacade;
         ((BoardPageController)loader.getController()).project = project;
         ((BoardPageController)loader.getController()).connectedUser = connectedUser;
+        ((BoardPageController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
         ((BoardPageController)loader.getController()).board = board;
         ((BoardPageController)loader.getController()).setScene(scene);
     }

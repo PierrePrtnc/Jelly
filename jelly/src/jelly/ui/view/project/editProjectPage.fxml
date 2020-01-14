@@ -22,18 +22,6 @@
 
 <VBox fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jelly.ui.controller.UpdateProjectController">
    <children>
-      <MenuBar>
-         <menus>
-            <Menu mnemonicParsing="false" text="Home" />
-            <Menu mnemonicParsing="false" text="Log out" />
-            <Menu mnemonicParsing="false" text="My account" />
-            <Menu mnemonicParsing="false" text="Help">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="About" />
-               </items>
-            </Menu>
-         </menus>
-      </MenuBar>
       <BorderPane prefHeight="100.0" prefWidth="600.0">
          <center>
             <ImageView fitHeight="73.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">

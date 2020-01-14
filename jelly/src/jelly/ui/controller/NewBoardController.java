@@ -96,6 +96,7 @@ public class NewBoardController {
         }
         ((ProjectPageController)loader.getController()).jellyFacade = jellyFacade;
         ((ProjectPageController)loader.getController()).connectedUser = connectedUser;
+        ((ProjectPageController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
         ((ProjectPageController)loader.getController()).project = project;
         ((ProjectPageController)loader.getController()).setScene(scene);
     }

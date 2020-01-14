@@ -10,25 +10,6 @@
 
 <VBox fx:id="window" prefHeight="548.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jelly.ui.controller.NewStepController">
    <children>
-      <MenuBar>
-        <menus>
-          <Menu mnemonicParsing="false" text="Home">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Sign in">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
       <BorderPane prefHeight="102.0" prefWidth="640.0">
          <center>
             <ImageView fitHeight="87.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
@@ -38,37 +19,6 @@
             </ImageView>
          </center>
           <right>
-            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="29.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Button fx:id="button" onAction="#showUnreadNotifications" layoutY="8.0" mnemonicParsing="false" prefHeight="8.0" prefWidth="70.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="https://previews.123rf.com/images/martialred/martialred1507/martialred150700877/42615148-notification-de-message-cloche-esquisser-ic%C3%B4ne-plat-pour-les-applications.jpg" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <StackPane layoutX="57.0" layoutY="-13.0" AnchorPane.rightAnchor="-10" AnchorPane.topAnchor="-10">
-                     <children>
-                        <Circle radius="10.0" stroke="BLACK" strokeType="INSIDE">
-                           <fill>
-                              <RadialGradient centerX="0.5" centerY="0.5" radius="0.8164556962025317">
-                                 <stops>
-                                    <Stop color="#ff361beb" />
-                                    <Stop color="WHITE" offset="1.0" />
-                                 </stops>
-                              </RadialGradient>
-                           </fill>
-                        </Circle>
-                        <Label fx:id="notificationNumber" text="5" />
-                     </children>
-                  </StackPane>
-               </children>
-               <BorderPane.margin>
-                  <Insets right="15.0" />
-               </BorderPane.margin>
-            </AnchorPane>
          </right>
       </BorderPane>
       <BorderPane prefHeight="421.0" prefWidth="640.0">
