@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"jelly"},{"l":"jelly.collaboration"},{"l":"jelly.dao"},{"l":"jelly.dao.collaboration"},{"l":"jelly.dao.notification"},{"l":"jelly.dao.project"},{"l":"jelly.database"},{"l":"jelly.notification"},{"l":"jelly.project"},{"l":"jelly.ui"},{"l":"jelly.ui.controller"},{"l":"project"}]

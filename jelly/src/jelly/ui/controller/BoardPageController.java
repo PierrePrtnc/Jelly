@@ -50,6 +50,10 @@ public class BoardPageController {
     @FXML
     protected Label notificationNumber;
 
+    /**
+     * Displays the Gantt JavaFX page
+     * @throws IOException
+     */
     public void showGantt() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/gantt/GanttView.fxml"));
         Parent root;
