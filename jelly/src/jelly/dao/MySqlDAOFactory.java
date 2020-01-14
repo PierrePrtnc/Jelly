@@ -58,7 +58,7 @@ public class MySqlDAOFactory extends DAOFactory {
 	 * @return MySqlClient
 	 */
 	public static MySqlClient getConnection() {
-		return new MySqlClient("remotemysql.com:3306", "EvR1zSObCT", "eMA8QUCWIG", "EvR1zSObCT");
+		return new MySqlClient("mysql-aleblanc.alwaysdata.net:3306", "aleblanc_jelly", "adminJelly", "aleblanc_jelly");
 	}
 
 	

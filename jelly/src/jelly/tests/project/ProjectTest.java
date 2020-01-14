@@ -1,8 +1,8 @@
-package jelly.project;
+package project;
 
 import jelly.User;
 import jelly.collaboration.Collaborator;
-import junit.framework.TestCase;
+import jelly.project.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

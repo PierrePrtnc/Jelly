@@ -1,5 +1,6 @@
-package jelly.project;
+package project;
 
+import jelly.project.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

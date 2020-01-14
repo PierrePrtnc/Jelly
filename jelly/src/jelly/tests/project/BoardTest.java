@@ -1,9 +1,10 @@
-package jelly.project;
+package project;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import jelly.project.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 

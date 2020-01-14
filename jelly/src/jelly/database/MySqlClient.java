@@ -44,7 +44,7 @@ public class MySqlClient {
     public Boolean connect() {
         try {
             //Class.forName("com.mysql.jdbc.Driver").newInstance();
-            this.dbConnect = DriverManager.getConnection("jdbc:mysql://" + this.dbURL + "/" + this.database, this.user, this.password);
+            this.dbConnect = DriverManager.getConnection("jdbc:mysql://" + this.dbURL + "/" + this.database + "?useTimezone=true&serverTimezone=UTC", this.user, this.password);
             this.dbStatement = this.dbConnect.createStatement();
             return true;
         } catch (SQLException ex) {

@@ -129,19 +129,21 @@ public class MySqlDAOProject implements ProjectDAO {
         String descriptionProject = "";
         Date initialDateProject = new Date();
         Date finalDateProject = new Date();
+        int idP = 0;
         if(sql.connect()) {
             try {
                 PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
                 pQuery.setInt(1, idProject);
                 ResultSet res = pQuery.executeQuery();
                 while (res.next()) {
+                    idP = res.getInt(1);
                     nameProject = res.getString(2);
                     descriptionProject = res.getString(3);
                     initialDateProject = res.getDate(4);
                     finalDateProject = res.getDate(5);
                 }
                 Project p = new Project(nameProject, descriptionProject, initialDateProject, finalDateProject);
-                p.setIdProject(res.getInt(1));
+                p.setIdProject(idP);
                 return p;
             } catch (SQLException e) {
                 // TODO Auto-generated catch block
