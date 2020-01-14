@@ -33,7 +33,7 @@ public class NotificationsController {
 	protected String emailUser;
 	protected User currentUser;
 	private Scene scene;
-	public boolean invitation;
+
 	@FXML
     private VBox window;
 	
@@ -55,7 +55,8 @@ public class NotificationsController {
 	}
     
 	public void setScene(Scene scene) {
-		notifications = jellyFacade.getUnreadNotificationList(jellyFacade.getUser(emailUser));        User currentuser = jellyFacade.getUser(emailUser);
+		notifications = jellyFacade.getUnreadNotificationList(jellyFacade.getUser(emailUser));        
+		User currentuser = jellyFacade.getUser(emailUser);
         notificationsGridPane.setPrefHeight(460);
         notificationsGridPane.setPrefWidth(600);
         for (int i = 0; i < notifications.size(); i++) {
@@ -65,11 +66,15 @@ public class NotificationsController {
             vbox.getChildren().add(new Label("Project : " + notifications.get(i).getOriginator().getProject().getProjectName()));
             vbox.getChildren().add(new Label("Message : " + notifications.get(i).getMessage()));
             try {
-    			Collaborator[] projectCollaborators = (Collaborator[]) notifications.get(i).getOriginator().project.getCollaborators().toArray();
+    			Collaborator[] projectCollaborators = new Collaborator[notifications.get(i).getOriginator().project.getCollaborators().size()];
+    			for(int k = 0; k < notifications.get(i).getOriginator().project.getCollaborators().size();k++) {
+    				projectCollaborators[k] = (Collaborator) notifications.get(i).getOriginator().project.getCollaborators().toArray()[k];
+    			}
     			int j = 0;
+    			boolean invitation = true;
     			while(j < projectCollaborators.length && invitation) {
     				
-    				if(projectCollaborators[j].getUser().equals(currentuser)) {
+    				if(projectCollaborators[j].getUser().getMailUser().equals(currentuser.getMailUser())) {
     					invitation = false;
     					Button seeProject = new Button("View project");
     					seeProject.setOnAction( e->{
@@ -78,7 +83,7 @@ public class NotificationsController {
     							Parent root;
     							root = loader.load();
     							this.scene.setRoot(root);
-    							//((ProjectController)loader.getController()).setScene(scene);
+    							((ProjectPageController)loader.getController()).setScene(scene);
     							vbox.getChildren().add(seeProject);						
     						} catch (IOException e2) {
     							e2.printStackTrace();
@@ -86,11 +91,7 @@ public class NotificationsController {
     					});
     				}
     			}
-            }
-			catch(NullPointerException e3) {
-				e3.printStackTrace();
-			}
-				if(invitation) {
+    			if(invitation) {
 					Button joinProject = new Button("Join this project");
 					final int index = i;
 					joinProject.setOnAction( e-> {
@@ -100,30 +101,13 @@ public class NotificationsController {
 					vbox.getChildren().add(joinProject);
 	
 				}
-				
-				Button deleteNotification = new Button("Delete");
-				final int k = i;
-				deleteNotification.setOnAction(e ->{
-					System.out.println(notifications.get(k).getIdNotification());
-					jellyFacade.deleteNotification(notifications.get(k).getIdNotification(), currentuser);
-			        try {
-			            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
-			            Parent root;
-			            root = loader.load();
-			            this.scene.setRoot(root);
-						((NotificationsController)loader.getController()).emailUser = emailUser;
-						((NotificationsController)loader.getController()).currentUser = currentuser;
-			            ((NotificationsController)loader.getController()).setScene(scene);
-
-			        } catch (IOException ex) {
-			            ex.printStackTrace();
-			        }
-				});
-				vbox.getChildren().add(deleteNotification);
-				notificationsGridPane.add(vbox, 1,i);
-	        	jellyFacade.changeStateNotification(notifications.get(i).getIdNotification(), jellyFacade.getUser(emailUser));
-
+            }
+			catch(NullPointerException e3) {
+				e3.printStackTrace();
 			}
+	        jellyFacade.changeStateNotification(notifications.get(i).getIdNotification(), jellyFacade.getUser(emailUser));
+
+		}
         
         this.scene = scene;
     }

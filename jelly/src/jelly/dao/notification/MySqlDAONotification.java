@@ -217,6 +217,13 @@ public class MySqlDAONotification implements NotificationDAO {
 					 mailS = res6.getString(4);
 					 pseudoS = res6.getString(5);
 				}
+				String query7 = "select * from collaborator where idProject = ?";
+				PreparedStatement pQuery7 = sql.getDbConnect().prepareStatement(query7);
+				pQuery7.setInt(1, idProject);
+				ResultSet res7 = pQuery7.executeQuery();
+				while (res7.next()) {
+					 project.addCollaborator(readUser(getEmailUser(res7.getInt(1))));
+				}
 				User senderuser = new User(firstNameS, lastNameS, mailS, pseudoS);
 				Collaborator sender = new Collaborator(project, senderuser);
 				return new Notification(sender, receivers, messageNotification, actionNotification);
@@ -316,6 +323,25 @@ public class MySqlDAONotification implements NotificationDAO {
 		}
 		sql.close();
 		return null;
+	}
+    
+	public String getEmailUser(int idUser) {
+		String query = "select * from user where idUser = ?";
+		if(sql.connect()) {
+			try {
+				PreparedStatement pQuery = sql.getDbConnect().prepareStatement(query);
+				pQuery.setInt(1, idUser);
+				ResultSet res = pQuery.executeQuery();
+				if (res.next()) {
+					return res.getString(4);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		sql.close();
+		return "";
 	}
 
 }
