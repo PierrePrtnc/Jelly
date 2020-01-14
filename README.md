@@ -39,7 +39,7 @@ Explain how to run the automated tests for this system
 
 ## Contributing
 
-Please contactus us for details on our code of conduct, and the process for submitting pull requests to us.
+Please contact us for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Authors
 
