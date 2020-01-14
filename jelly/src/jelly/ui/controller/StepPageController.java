@@ -81,7 +81,11 @@ public class StepPageController {
         ((GanttViewController)loader.getController()).setScene(scene);
     }
 
-    public void editStep() {
+    /**
+     * calls the JavaFX page to update the displayed step
+     * @param actionEvent
+     */
+    public void editStep(ActionEvent actionEvent) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/updateStep.fxml"));
         Parent root;
         try {
@@ -133,7 +137,11 @@ public class StepPageController {
         ((UpdateStepController)loader.getController()).setScene(scene);
     }
 
-    public void deleteStep() {
+    /**
+     * deletes the displayed step from the database
+     * @param actionEvent
+     */
+    public void deleteStep(ActionEvent actionEvent) {
         showAlert(Alert.AlertType.INFORMATION, window.getScene().getWindow(), "Success", "Your board has been deleted");
         if(jellyFacade.deleteStep(step.getIdStep())){
             try {
@@ -153,7 +161,10 @@ public class StepPageController {
         }
     }
 
-    public void returnToBoard() throws IOException {
+    /**
+     * calls the JavaFX page "projectPage" to go back to the project page
+     */
+    public void returnToBoard(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/boardPage.fxml"));
         Parent root;
         root = loader.load();
@@ -165,7 +176,13 @@ public class StepPageController {
         ((BoardPageController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
         ((BoardPageController)loader.getController()).setScene(scene);
     }
-    
+
+    /**
+     * calls the JavaFX component "NotificationUI" to display unread notifications
+     * @see NotificationsController#emailUser
+     * @see NotificationsController#currentUser
+     * @see NotificationsController#setScene(Scene)
+     */
     public void showUnreadNotifications() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
@@ -181,6 +198,11 @@ public class StepPageController {
         }
     }
 
+    /**
+     * sets the scene attribute
+     * builds the page to display a step with tasks
+     * @param scene
+     */
     public void setScene(Scene scene) {
         List<Task> tasks = jellyFacade.getAllTasksByStep(step.idStep);
         String state = "";
@@ -365,6 +387,13 @@ public class StepPageController {
         this.scene = scene;
     }
 
+    /**
+     * displays an alert
+     * @param alertType     the type of alert to display
+     * @param owner         the window part that owns the alert (where the alert should be displayed)
+     * @param title         the title of the alert
+     * @param message       the message of the alert
+     */
     public void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);

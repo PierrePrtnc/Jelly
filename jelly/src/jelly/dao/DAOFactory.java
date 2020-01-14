@@ -20,22 +20,44 @@ public abstract class DAOFactory {
 	 */
 	public abstract UserDAO getUserDAO();
 
+	/**
+	 * Returns an instance of the class ProjectDAO.
+	 * @return ProjectDAO
+	 */
 	public abstract ProjectDAO getProjectDAO();
 
+	/**
+	 * Returns an instance of the class BoardDAO.
+	 * @return BoardDAO
+	 */
 	public abstract BoardDAO getBoardDAO();
 
+	/**
+	 * Returns an instance of the class StepDAO.
+	 * @return StepDAO
+	 */
 	public abstract StepDAO getStepDAO();
 
+	/**
+	 * Returns an instance of the class TaskDAO.
+	 * @return TaskDAO
+	 */
 	public abstract TaskDAO getTaskDAO();
-	
+
+	/**
+	 * Returns an instance of the class NotificationDAO.
+	 * @return NotificationDAO
+	 */
 	public abstract NotificationDAO getNotificationDAO();
 
+	/**
+	 * Returns an instance of the class CollaboratorDAO.
+	 * @return CollaboratorDAO
+	 */
 	public abstract  CollaboratorDAO getCollaboratorDAO();
 	
 	/**
 	 * Returns an instance of one of the subclasses of DAOFactory, depending on the database chosen as parameter.
-	 * @param dbName
-	 * 				The name of the database (mySQL, Oracle ...)
 	 * @return DAOFactory
 	 */
 	public static DAOFactory getDAOFactory() {

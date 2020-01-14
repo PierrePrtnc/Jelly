@@ -56,6 +56,10 @@ public class ProjectPageController {
 
     }
 
+    /**
+     * calls the JavaFX page "GanttView" of a given project for a given user
+     * @throws IOException
+     */
     public void showGantt() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/gantt/GanttView.fxml"));
         Parent root;
@@ -74,6 +78,14 @@ public class ProjectPageController {
 
     }
 
+    /**
+     * calls the JavaFX component "home" to display the home page
+     * @see HomeController#connectedUser
+     * @see HomeController#jellyFacade
+     * @see HomeController#notificationNumber
+     * @see HomeController#setScene(Scene)
+     * @throws IOException
+     */
     public void returnHome(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
         Parent root;
@@ -85,6 +97,10 @@ public class ProjectPageController {
         ((HomeController)loader.getController()).setScene(scene);
     }
 
+    /**
+     * calls the JavaFX page "newBoard" to create a new board
+     * @param actionEvent
+     */
     public void addNewBoard(ActionEvent actionEvent) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/newBoard.fxml"));
         Parent root;
@@ -102,6 +118,11 @@ public class ProjectPageController {
         ((NewBoardController)loader.getController()).setScene(scene);
     }
 
+    /**
+     * sets the scene attribute
+     * builds the project page with a project description, the initial date of the project and the ending date of the project
+     * @param scene
+     */
     public void setScene(Scene scene) {
         List<Board> boards = jellyFacade.getAllBoardsByProject(project.getIdProject());
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -228,7 +249,13 @@ public class ProjectPageController {
         }
         this.scene = scene;
     }
-    
+
+    /**
+     * calls the JavaFX component "NotificationUI" to display unread notifications
+     * @see NotificationsController#emailUser
+     * @see NotificationsController#currentUser
+     * @see NotificationsController#setScene(Scene)
+     */
     public void showUnreadNotifications() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
@@ -245,6 +272,14 @@ public class ProjectPageController {
         }
     }
 
+    /**
+     * calls the JavaFX component "home" to display the home page
+     * @see HomeController#connectedUser
+     * @see HomeController#jellyFacade
+     * @see HomeController#notificationNumber
+     * @see HomeController#setScene(Scene)
+     * @throws IOException
+     */
     public void returnHome() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
         Parent root;
@@ -256,6 +291,12 @@ public class ProjectPageController {
         ((HomeController)loader.getController()).setScene(scene);
     }
 
+    /**
+     * rounds up a double at a given decimal
+     * @param value
+     * @param places
+     * @return  the rounded up value
+     */
     public static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
 
@@ -264,6 +305,9 @@ public class ProjectPageController {
         return bd.doubleValue();
     }
 
+    /**
+     * calls the JavaFX page to edit a project
+     */
     public void editProject() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/editProjectPage.fxml"));
@@ -281,6 +325,9 @@ public class ProjectPageController {
         }
     }
 
+    /**
+     * deletes a given project from the database
+     */
     public void deleteProject() {
         if (jellyFacade.deleteProject(project.getIdProject())) {
             try {
@@ -299,6 +346,13 @@ public class ProjectPageController {
         }
     }
 
+    /**
+     * displays an alert
+     * @param alertType     the type of alert to display
+     * @param owner         the window part that owns the alert (where the alert should be displayed)
+     * @param title         the title of the alert
+     * @param message       the message of the alert
+     */
     public void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -308,6 +362,9 @@ public class ProjectPageController {
         alert.show();
     }
 
+    /**
+     * calls the JavaFX page that contains the form to invite a user to the project
+     */
     public void handleInvite() {
         System.out.println("START HANDLE INVITE");
         try {

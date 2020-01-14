@@ -36,8 +36,7 @@ public class User {
      * @param firstName first name of the user
      * @param lastName last name of the user
      * @param mail mail of the user 
-     * @param pseudo pseudo of the user 
-     * @param password password of the user
+     * @param pseudo pseudo of the user
      */
     public User(String firstName, String lastName, String mail, String pseudo) {
         this.firstNameUser = firstName;
@@ -57,7 +56,7 @@ public class User {
     /**
 	 * Changes the first name of the user
 	 *
-	 * @param firstName first name to be set
+	 * @param firstNameUser first name to be set
 	 */
 	public void setFirstNameUser(String firstNameUser) {
 		this.firstNameUser = firstNameUser;
@@ -71,7 +70,7 @@ public class User {
 	}
 
     /**
-     * @param lastName last name to be set
+     * @param lastNameUser last name to be set
      */
 	public void setLastNameUser(String lastNameUser) {
 		this.lastNameUser = lastNameUser;
@@ -85,7 +84,7 @@ public class User {
 	}
 
     /**
-     * @param mail the mail to be set
+     * @param mailUser the mail to be set
      */
 	public void setMailUser(String mailUser) {
 		this.mailUser = mailUser;
@@ -99,7 +98,7 @@ public class User {
 	}
 
     /**
-     * @param pseudo pseudo to be set
+     * @param pseudoUser pseudo to be set
      */
 	public void setPseudoUser(String pseudoUser) {
 		this.pseudoUser = pseudoUser;

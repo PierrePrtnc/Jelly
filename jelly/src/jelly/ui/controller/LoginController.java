@@ -58,7 +58,10 @@ public class LoginController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 	}
-	
+
+	/**
+	 * handles the button color if the mouse is over it or not
+	 */
 	public void handleMouseEntered() {
 		this.scene.setCursor(Cursor.HAND);
 		loginButton.setStyle("#ACD6FX");
@@ -69,7 +72,10 @@ public class LoginController implements Initializable{
 		this.scene.setCursor(Cursor.DEFAULT);
 		loginButton.setStyle("#ACD6FA");
 	}
-	
+
+	/**
+	 * calls the JavaFX page "SignupUI" to display the sign up form
+	 */
 	public void handleSignUp() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/SignupUI.fxml"));
@@ -82,7 +88,11 @@ public class LoginController implements Initializable{
 		}
 
 	}
-	
+
+	/**
+	 * handles the login mechanism
+	 * @param arg0
+	 */
 	public void handle(ActionEvent arg0) {
 		
 		
@@ -115,6 +125,13 @@ public class LoginController implements Initializable{
 		}
     }
 
+	/**
+	 * displays an alert
+	 * @param alertType     the type of alert to display
+	 * @param owner         the window part that owns the alert (where the alert should be displayed)
+	 * @param title         the title of the alert
+	 * @param message       the message of the alert
+	 */
 	public void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
 	    Alert alert = new Alert(alertType);
 	    alert.setTitle(title);

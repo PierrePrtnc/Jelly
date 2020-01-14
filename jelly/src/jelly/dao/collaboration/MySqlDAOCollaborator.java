@@ -21,10 +21,10 @@ public class MySqlDAOCollaborator implements CollaboratorDAO {
     MySqlClient sql = MySqlDAOFactory.getConnection();
 
     /**
-     *
-     * @param p
-     * @param user
-     * @return
+     * inserts a Collaborator into the database
+     * @param p         the project associated to the collaborator
+     * @param user      the user associated to the collaborator
+     * @return      the Collaborator inserted in the database
      */
     @Override
     public Collaborator insertCollaborator(Project p, User user) {
@@ -53,11 +53,11 @@ public class MySqlDAOCollaborator implements CollaboratorDAO {
     }
 
     /**
-     *
-     * @param idCollaborator
-     * @param P
-     * @param user
-     * @return
+     *  updates a collaborator from the database
+     * @param idCollaborator        the ID of the collaborator to update
+     * @param P                     the project to modify for the given collaborator
+     * @param user                  the user to modify for the given collaborator
+     * @return  true if the collaborator was successfully updated
      */
     @Override
     public boolean updateCollaborator(int idCollaborator, Project P, User user) {
@@ -83,9 +83,9 @@ public class MySqlDAOCollaborator implements CollaboratorDAO {
     }
 
     /**
-     *
-     * @param idCollaborator
-     * @return
+     *  deletes a collaborator from the database
+     * @param idCollaborator    ID of the collaborator to delete
+     * @return   true if the collaborator was successfully deleted
      */
     @Override
     public boolean deleteCollaborator(int idCollaborator) {
@@ -105,9 +105,9 @@ public class MySqlDAOCollaborator implements CollaboratorDAO {
     }
 
     /**
-     *
-     * @param idCollaborator
-     * @return
+     *  reads a collaborator from the database
+     * @param idCollaborator    ID of the collaborator to display
+     * @return  the collaborator to display
      */
     @Override
     public Collaborator readCollaborator(int idCollaborator) {
@@ -139,9 +139,9 @@ public class MySqlDAOCollaborator implements CollaboratorDAO {
     }
 
     /**
-     *
-     * @param idProject
-     * @return
+     *  reads all the collaborator associated to a given project
+     * @param idProject     ID of the project to which the collaborator is associated to
+     * @return  an arraylist of collaborators
      */
     public ArrayList<Collaborator> getAllCollaboratorsByProject(int idProject) {
         MySqlDAOProject project = new MySqlDAOProject();
@@ -174,8 +174,8 @@ public class MySqlDAOCollaborator implements CollaboratorDAO {
     }
 
     /**
-     *
-     * @return
+     *  reads all the collaborators from the database
+     * @return  a resultset describing the collaborator table
      */
     @Override
     public ResultSet readAllCollaborators() {

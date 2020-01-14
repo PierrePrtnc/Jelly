@@ -14,8 +14,8 @@ public class Creator extends Collaborator {
     /**
      * Builds a Creator with a given project and user calling the super-constructor
      * Pre : Project and User must exist before calling the constructor
-     * @param Project 
-     * @param User
+     * @param p
+     * @param u
      */
     public Creator(Project p, User u) {
         // TODO implement here
@@ -25,7 +25,7 @@ public class Creator extends Collaborator {
     /**
      * Adds a User to the collection of Collaborators from the current (super)project
      * as a new Member
-     * @param User 
+     * @param userToAdd
      * @return
      */
     public void addMember(User userToAdd) {
@@ -34,7 +34,7 @@ public class Creator extends Collaborator {
 
     /**
      * removes a member from the collection of Collaborators from the current (super)project
-     * @param User 
+     * @param memberToRemove
      * @return User
      */
     public User removeMember(User memberToRemove) {
@@ -45,7 +45,7 @@ public class Creator extends Collaborator {
     /**
      * replaces the current creator (aka super.user) of the current super.project
      * with a new collaborator who will be the creator
-     * @param Collaborator 
+     * @param newCollaborator
      */
     public void setCreator(Collaborator newCollaborator) {
         // TODO implement here
@@ -53,8 +53,8 @@ public class Creator extends Collaborator {
 
     /**
      * changes the name and description of the current super.project
-     * @param String 
-     * @param String 
+     * @param projectName
+     * @param projectDescription
      * @return
      */
     public void updateProject(String projectName, String projectDescription) {

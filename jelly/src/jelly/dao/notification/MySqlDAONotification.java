@@ -16,7 +16,18 @@ import java.util.Collection;
 public class MySqlDAONotification implements NotificationDAO {
 	
 	MySqlClient sql = MySqlDAOFactory.getConnection();
-	
+
+	/**
+	 * inserts a notification into the table notification
+	 *
+	 * @see MySqlDAONotification#insertJournal(int, int, int)
+	 *
+	 * @param sender  		the collaborator who triggered the notification
+	 * @param users 		the users who will receive the notification
+	 * @param message 		the message of the notification
+	 * @param action 		the action of the notification
+	 * @return 	true if the notification was successfully inserted
+	 */
 	@Override
 	public boolean insertNotification(Collaborator sender, Collection<User> users, String message, String action) {
 		String query = "insert into notification (messageNotification, actionNotification, idOriginator) values(?,?,?)";
@@ -60,6 +71,15 @@ public class MySqlDAONotification implements NotificationDAO {
 		return false;
 	}
 
+	/**
+	 * inserts an entry in the table notification_journal
+	 * @param idNotification 	the ID of the notification to insert
+	 * @param idUser 			the ID of the user who will receive the notification
+	 * @param isRead 			the status of the notification
+	 *                          1 = read
+	 *                          0 = unread
+	 * @return 	true if the entry was successfully inserted
+	 */
 	public boolean insertJournal(int idNotification, int idUser, int isRead) {
 		String query =  "insert into notification_journal (idNotification, idUser, isRead) values(?,?,?)";
 		System.out.println("NOTIFICATION ID TO INSERT IN JOURNAL : "+idNotification);
@@ -80,6 +100,13 @@ public class MySqlDAONotification implements NotificationDAO {
 		return false;
 	}
 
+	/**
+	 * 	deletes a notification from the notification table and the associated entry from the notification_journal
+	 * @param idNotification 	the ID of the notification to remove
+	 * @param user 				the user associated to the notification to remove
+	 *                          this user is used to remove the entry from the journal
+	 * @return 	true if the notification was successfully deleted
+	 */
     @Override
     public boolean deleteNotification(int idNotification, User user) {
     	String query = "select idUser from user where mailUser = ?";
@@ -105,8 +132,14 @@ public class MySqlDAONotification implements NotificationDAO {
 		sql.close();
 		return false;
     }
-    
-    @Override
+
+	/**
+	 * 	updates a notification from the table notification and an entry from the table notification_journal
+	 * @param idNotification 	the ID of the notification to modify
+	 * @param user 				the user of the entry to modify
+	 * @return 		true if the notification was successfully updated
+	 */
+	@Override
     public boolean updateNotification(int idNotification, User user) {
     	String queryInt = "Select idUser from user where mailUser = ?";
 		String query = "update notification_journal set  isRead = 1 where idNotification = ? and idUser = ?";
@@ -134,7 +167,12 @@ public class MySqlDAONotification implements NotificationDAO {
 		return false;
     }
 
-    @Override
+	/**
+	 * 	reads a notification from the table notification
+	 * @param idNotification 	the ID of the notification to display
+	 * @return	the notification to display
+	 */
+	@Override
     public Notification readNotification(int idNotification) {
     	String query = "select * from notification where idNotification = ?";
     	String query2 = "select idUser from notification_journal where idNotification = ?";
@@ -236,7 +274,12 @@ public class MySqlDAONotification implements NotificationDAO {
 		return null;
     }
 
-    @Override
+	/**
+	 *  	reads all the notifications of a given user
+	 * @param user 	the user to display notifications for
+	 * @return 	an arraylist of notifications
+	 */
+	@Override
     public ArrayList<Notification> readAllNotifications(User user) {
     	String query = "select idUser from user where mailUser = ?";
     	String query2 = "select idNotification from notification_journal where idUser = ?";
@@ -266,8 +309,13 @@ public class MySqlDAONotification implements NotificationDAO {
 			sql.close();
 			return null;
     }
-    
-    @Override
+
+	/**
+	 * 		reads unread notifications for a given user
+	 * @param user 	the user to display notifications for
+	 * @return 	an arraylist of unread notifications
+	 */
+	@Override
     public ArrayList<Notification> unreadNotifications(User user) {
     	String query = "select idUser from user where mailUser = ?";
     	String query2 = "select idNotification from notification_journal where idUser = ? and isRead = 0";
@@ -297,8 +345,12 @@ public class MySqlDAONotification implements NotificationDAO {
 			sql.close();
 			return null;
     }
-    
-    public User readUser(String mailUser) {
+
+	/**
+	 * 
+	 * @see MySqlDAOUser#readUser(String)
+	 */
+	public User readUser(String mailUser) {
 		String query = "select * from user where mailUser = ?";
 		String firstName = "";
 		String lastName = "";

@@ -22,13 +22,13 @@ public class MySqlDAOStep implements StepDAO {
     MySqlClient sql = MySqlDAOFactory.getConnection();
 
     /**
-     *
-     * @param name
-     * @param initialDate
-     * @param finalDate
-     * @param state
-     * @param idBoard
-     * @return
+     *      inserts a step into the database
+     * @param name              the name of the step to insert
+     * @param initialDate       the initial date of the step to insert
+     * @param finalDate         the final date of the step to insert
+     * @param state             the state of the step to insert
+     * @param idBoard           the ID of the board to which the step belongs to
+     * @return  the step inserted into the database
      */
     @Override
     public Step insertStep(String name, Date initialDate, Date finalDate, int idBoard, int state, int difficulty, String description) {
@@ -59,16 +59,16 @@ public class MySqlDAOStep implements StepDAO {
     }
 
     /**
-     *
-     * @param idStep
-     * @param nameStep
-     * @param initialDate
-     * @param finalDate
-     * @param idBoard
-     * @param stateStep
-     * @param difficultyStep
-     * @param description
-     * @return
+     *      updates a step from the database
+     * @param idStep            the ID of the step to update
+     * @param nameStep          the new value of the name of the step to update
+     * @param initialDate       the new value of the initial date of the step to update
+     * @param finalDate         the new value of the final date of the step to update
+     * @param idBoard           the new value of the board associated to the step to update
+     * @param stateStep         the new value of the state of the step to update
+     * @param difficultyStep    the new value of the difficulty of the step to update
+     * @param description       the new value of the description of the step to update
+     * @return  true if the step was successfully updated
      */
     @Override
     public boolean updateStep(int idStep, String nameStep, Date initialDate, Date finalDate, int idBoard, int stateStep, int difficultyStep, String description) {
@@ -98,9 +98,9 @@ public class MySqlDAOStep implements StepDAO {
     }
 
     /**
-     *
-     * @param idStep
-     * @return
+     *   deletes a step from the database
+     * @param idStep        the ID of the step to delete
+     * @return  true if the step was successfully deleted
      */
     @Override
     public boolean deleteStep(int idStep) {
@@ -120,9 +120,9 @@ public class MySqlDAOStep implements StepDAO {
     }
 
     /**
-     *
-     * @param idStep
-     * @return
+     *  reads a step from the database
+     * @param idStep    the ID of the step to display
+     * @return  the step fetched from the database
      */
     @Override
     public Step readStep(int idStep) {
@@ -152,8 +152,8 @@ public class MySqlDAOStep implements StepDAO {
     }
 
     /**
-     *
-     * @return
+     *      reads all the steps from the database
+     * @return  a resultset that describes the table step
      */
     @Override
     public ResultSet readAllSteps() {
@@ -171,6 +171,11 @@ public class MySqlDAOStep implements StepDAO {
         return null;
     }
 
+    /**
+     *   reads all the steps that belong to a given board
+     * @param idBoard       the ID of the given board
+     * @return  an arraylist of steps
+     */
     public ArrayList<Step> getAllStepsByBoard(int idBoard) {
         if (idBoard != 0) {
             String query = "select * from step where idBoard = ?";

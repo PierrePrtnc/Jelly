@@ -41,7 +41,12 @@ public class HomeController {
 
     private Scene scene;
 
-    
+    /**
+     * calls the JavaFX component "NotificationUI" to display unread notifications
+     * @see NotificationsController#emailUser
+     * @see NotificationsController#currentUser
+     * @see NotificationsController#setScene(Scene)
+     */
     public void showUnreadNotifications() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
@@ -57,7 +62,12 @@ public class HomeController {
             e.printStackTrace();
         }
     }
-    
+
+    /**
+     * calls the JavaFX page "updateInformationUI" to update the user information
+     *
+     * @param actionEvent
+     */
     public void showPersonalInfo(ActionEvent actionEvent) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/updateInformationUI.fxml"));
@@ -79,6 +89,10 @@ public class HomeController {
             }
     }
 
+    /**
+     * calls the JavaFX page "ProjectCreation" to create a new project
+     * @param actionEvent
+     */
     public void showCreateProject(ActionEvent actionEvent) {
         if(!(connectedUser.equals(null)||connectedUser.getFirstNameUser().contentEquals(""))) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/ProjectCreation.fxml"));
@@ -99,6 +113,10 @@ public class HomeController {
 
     }
 
+    /**
+     * logs the user off and displays the login page "loginUI"
+     * @param actionEvent
+     */
     public void logOff(ActionEvent actionEvent) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/loginUI.fxml"));
         Parent root;
@@ -114,6 +132,11 @@ public class HomeController {
         ((LoginController)loader.getController()).setScene(scene);
     }
 
+    /**
+     * sets the scene attribute
+     * builds the home page with the projects of the connected user
+     * @param scene
+     */
     public void setScene(Scene scene) {
         welcomeLabel.getScene().getWindow().setWidth(850);
         welcomeLabel.getScene().getWindow().setHeight(540);

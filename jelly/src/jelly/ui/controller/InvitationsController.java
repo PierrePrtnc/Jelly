@@ -46,12 +46,16 @@ public class InvitationsController {
     @FXML
     public GridPane mailGridPane;
 
-
+    /**
+     * sets the attribute scene
+     * @param scene
+     */
     public void setScene(Scene scene) { this.scene = scene; }
 
+    /**
+     * sends an invitation to a user and inserts a notification into the database
+     */
     public void sendInvite() {
-        System.out.println("START HANDLE INVITE FROM INVITATIONS CONTROLLER");
-        System.out.println("USER MAIL FIELD 1"+userMailField.getText());
         if (userMailField.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, window.getScene().getWindow(), "Error", "Please provide an mail address.");
         }
@@ -75,6 +79,13 @@ public class InvitationsController {
         }
     }
 
+    /**
+     * displays an alert
+     * @param alertType     the type of alert to display
+     * @param owner         the window part that owns the alert (where the alert should be displayed)
+     * @param title         the title of the alert
+     * @param message       the message of the alert
+     */
     public void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -84,6 +95,9 @@ public class InvitationsController {
         alert.show();
     }
 
+    /**
+     * modifies the display of a button when the mouse hovers it
+     */
     public void handleMouseEntered() {
         this.scene.setCursor(Cursor.HAND);
         addUserButton.setStyle("#ACD6FX");
@@ -95,6 +109,9 @@ public class InvitationsController {
         addUserButton.setStyle("#ACD6FA");
     }
 
+    /**
+     * calls the JavaFX page "projectPage" to go back to the project page
+     */
     public void returnToProject() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/projectPage.fxml"));
         Parent root;
@@ -110,6 +127,10 @@ public class InvitationsController {
         ((ProjectPageController)loader.getController()).setScene(scene);
     }
 
+    /**
+     * adds a row of mail user to add
+     * @param actionEvent
+     */
     public void addUserToInvite(ActionEvent actionEvent) {
     }
 }

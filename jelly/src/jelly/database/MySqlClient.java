@@ -80,27 +80,5 @@ public class MySqlClient {
             Logger.getLogger(MySqlClient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-// 
-//    /**
-//     * Exemple d'utilisation de la class
-//     * @param args
-//     */
-//    public static void main(String[] args) {
-//    	MySqlClient mysqlCli = new MySqlClient("remotemysql.com:3306", "EvR1zSObCT", "eMA8QUCWIG", "EvR1zSObCT");
-//        if (mysqlCli.connect()) {
-//            try {
-//                ResultSet rs = mysqlCli.exec("SELECT * FROM user");
-//                if (rs != null) {
-//                    while (rs.next()) {
-//                        System.out.println("Valeur: " + rs.getString(1));
-//                    }
-//                }
-//            } catch (SQLException ex) {
-//                Logger.getLogger(MySqlClient.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        } else {
-//            System.out.println("Mysql connection failed !!!");
-//        }
-//        mysqlCli.close();
-//    }
+
 }

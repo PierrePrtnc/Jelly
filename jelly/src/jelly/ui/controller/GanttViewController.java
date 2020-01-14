@@ -45,6 +45,14 @@ public class GanttViewController {
     private List<LocalDate> dates;
     private GridPane gridPane;
 
+    /**
+     * calls the JavaFX component "home" to display the home page
+     * @see HomeController#connectedUser
+     * @see HomeController#jellyFacade
+     * @see HomeController#notificationNumber
+     * @see HomeController#setScene(Scene)
+     * @throws IOException
+     */
     public void showHome() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
         Parent root;
@@ -58,6 +66,10 @@ public class GanttViewController {
         ((HomeController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
     }
 
+    /**
+     * sets the attribute scene and builds the Gantt graphic interface
+     * @param scene
+     */
     public void setScene(Scene scene) {
         this.scene = scene;
         this.gridPane = new GridPane();
@@ -109,7 +121,12 @@ public class GanttViewController {
 
     }
 
-
+    /**
+     * date management
+     * @param start     the starting date
+     * @param end       the ending date
+     * @return  an arraylist of LocalDates
+     */
     private ArrayList<LocalDate> getDates(java.util.Date start, java.util.Date end) {
         //Getting the default zone id
         ZoneId defaultZoneId = ZoneId.systemDefault();
@@ -128,6 +145,10 @@ public class GanttViewController {
         return (ArrayList) totalDates;
     }
 
+    /**
+     * calls the JavaFX component "projectPage" to go back to the project page
+     * @throws IOException
+     */
     public void showProject() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/projectPage.fxml"));
         Parent root;
@@ -141,6 +162,11 @@ public class GanttViewController {
         ((ProjectPageController)loader.getController()).setScene(scene);
     }
 
+    /** calls the JavaFX component "NotificationUI" to display unread notifications
+	 * @see NotificationsController#emailUser
+	 * @see NotificationsController#currentUser
+	 * @see NotificationsController#setScene(Scene)
+	 */
     public void showUnreadNotifications() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));

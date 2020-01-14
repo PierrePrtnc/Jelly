@@ -49,6 +49,14 @@ public class ProjectCreationController {
     @FXML
     private TextArea projectDescriptionInput;
 
+    /**
+     * calls the JavaFX component "home" to display the home page
+	 * @see HomeController#connectedUser
+	 * @see HomeController#jellyFacade
+	 * @see HomeController#notificationNumber
+	 * @see HomeController#setScene(Scene)
+	 * @throws IOException
+	 */
     public void showHome() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
         Parent root;
@@ -60,6 +68,10 @@ public class ProjectCreationController {
         ((HomeController)loader.getController()).setScene(scene);
     }
 
+    /**
+     * calls the JavaFX page "GanttCreation" and displays it
+     * @throws IOException
+     */
     public void createGanttDiagram() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/gantt/GanttCreation.fxml"));
         Parent root;
@@ -70,7 +82,13 @@ public class ProjectCreationController {
         ((GanttCreationController)loader.getController()).jellyFacade = jellyFacade;
 		((GanttCreationController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
     }
-    
+
+    /**
+     * calls the JavaFX component "NotificationUI" to display unread notifications
+     * @see NotificationsController#emailUser
+     * @see NotificationsController#currentUser
+     * @see NotificationsController#setScene(Scene)
+     */
     public void showUnreadNotifications() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
@@ -87,6 +105,10 @@ public class ProjectCreationController {
         }
     }
 
+    /**
+     * creates and inserts a new project into the database
+     * @throws IOException
+     */
     public void createProject() throws IOException {
         if (this.projectNameInput.getText().isEmpty() || this.projectNameInput.getText().length() > 55)
             showAlert(Alert.AlertType.ERROR, projectNameInput.getScene().getWindow(), "Error", "Please enter the name of the project (length < 55 characters)");
@@ -120,6 +142,13 @@ public class ProjectCreationController {
 
     }
 
+    /**
+     * displays an alert
+     * @param alertType     the type of alert to display
+     * @param owner         the window part that owns the alert (where the alert should be displayed)
+     * @param title         the title of the alert
+     * @param message       the message of the alert
+     */
     public void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);

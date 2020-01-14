@@ -67,7 +67,12 @@ public class GanttEditController {
     private List<LocalDate> dates;
     private Board board;
 
-
+    /**
+     * sets the scene attribute
+     * builds the page for the edition of a Gantt diagram
+     * @param scene
+     * @throws ParseException
+     */
     public void setScene(Scene scene) throws ParseException {
         this.scene = scene;
         scrollPaneGantt.getScene().getWindow().setHeight(770);
@@ -90,6 +95,12 @@ public class GanttEditController {
 
     }
 
+    /**
+     * Date picker for the Gantt diagram editor
+     * @param datePicker
+     * @param minDate
+     * @param maxDate
+     */
     public void restrictDatePicker(DatePicker datePicker, LocalDate minDate, LocalDate maxDate) {
         final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
             @Override
@@ -112,6 +123,12 @@ public class GanttEditController {
         datePicker.setDayCellFactory(dayCellFactory);
     }
 
+    /**
+     * Fetches the dates between two dates
+     * @param start     the starting date
+     * @param end       the ending date
+     * @return  an arraylist of LocalDates
+     */
     private ArrayList<LocalDate> getDates(Date start, Date end) {
         //Getting the default zone id
         ZoneId defaultZoneId = ZoneId.systemDefault();
@@ -128,7 +145,13 @@ public class GanttEditController {
         }
         return (ArrayList) totalDates;
     }
-    
+
+    /**
+     * calls the JavaFX component "NotificationUI" to display unread notifications
+     * @see NotificationsController#emailUser
+     * @see NotificationsController#currentUser
+     * @see NotificationsController#setScene(Scene)
+     */
     public void showUnreadNotifications() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
@@ -145,6 +168,9 @@ public class GanttEditController {
         }
     }
 
+    /**
+     * adds a step to the Gantt diagram
+     */
     public void addStep() {
         if (ganttStepNameField.getText().isEmpty() || this.ganttStepNameField.getText().length() > 20)
             showAlert(Alert.AlertType.ERROR, ganttStepNameField.getScene().getWindow(), "Error", "Please enter the name of the Step (length < 20 characters)");
@@ -202,6 +228,13 @@ public class GanttEditController {
         }
     }
 
+    /**
+     * displays an alert
+     * @param alertType     the type of alert to display
+     * @param owner         the window part that owns the alert (where the alert should be displayed)
+     * @param title         the title of the alert
+     * @param message       the message of the alert
+     */
     public void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -211,6 +244,10 @@ public class GanttEditController {
         alert.show();
     }
 
+    /**
+     * cancels the edition of the board and calls back the project creation page
+     * @throws IOException
+     */
     public void cancel() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/ProjectCreation.fxml"));
         Parent root;
@@ -224,6 +261,10 @@ public class GanttEditController {
         ((ProjectCreationController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
     }
 
+    /**
+     * saves the Gantt by inserting the newly created project into the database and newly created boards into the database
+     * @throws IOException
+     */
     public void saveGantt() throws IOException {
         boolean success = true;
         if (board.getSteps().size() == 0)
@@ -248,6 +289,14 @@ public class GanttEditController {
         }
     }
 
+    /**
+     * calls the JavaFX component "home" to display the home page
+     * @see HomeController#connectedUser
+     * @see HomeController#jellyFacade
+     * @see HomeController#notificationNumber
+     * @see HomeController#setScene(Scene)
+     * @throws IOException
+     */
     public void showHome() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
         Parent root;

@@ -64,7 +64,19 @@ public class BoardPageController {
         ((GanttViewController)loader.getController()).setScene(scene);
     }
 
-    public void returnToProject() throws IOException {
+    /**
+     * calls the JavaFX component to go back to the "projectPage"
+     * @param actionEvent
+     *
+     * @see ProjectPageController#project
+     * @see ProjectPageController#connectedUser
+     * @see ProjectPageController#jellyFacade
+     * @see ProjectPageController#setScene(Scene)
+     *
+     *
+     * @throws IOException
+     */
+    public void returnToProject(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/projectPage.fxml"));
         Parent root;
         root = loader.load();
@@ -75,7 +87,13 @@ public class BoardPageController {
         ((ProjectPageController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
         ((ProjectPageController)loader.getController()).setScene(scene);
     }
-    
+
+    /**
+     * calls the JavaFX component "NotificationUI" to display unread notifications
+     * @see NotificationsController#emailUser
+     * @see NotificationsController#currentUser
+     * @see NotificationsController#setScene(Scene)
+     */
     public void showUnreadNotifications() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
@@ -92,7 +110,21 @@ public class BoardPageController {
         }
     }
 
-    public void editBoard() {
+    /**
+     * calls the JavaFX component "updateBoard" to display the edit page for a board
+     * @param actionEvent
+     *
+     * @see UpdateBoardController#board
+     * @see UpdateBoardController#connectedUser
+     * @see UpdateBoardController#project
+     * @see UpdateBoardController#jellyFacade
+     * @see UpdateBoardController#boardNameLabel
+     * @see UpdateBoardController#boardNameField
+     * @see UpdateBoardController#subjectField
+     * @see UpdateBoardController#descriptionArea
+     * @see UpdateBoardController#setScene(Scene) 
+     */
+    public void editBoard(ActionEvent actionEvent) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/updateBoard.fxml"));
         Parent root;
         try {
@@ -112,7 +144,19 @@ public class BoardPageController {
         ((UpdateBoardController)loader.getController()).setScene(scene);
     }
 
-    public void deleteBoard() {
+    /**
+     * activates the deletion of a given board and upon successful deletion, displays the projectPage
+     * 
+     * @see jelly.dao.project.MySqlDAOBoard#deleteBoard(int) 
+     * 
+     * @see ProjectPageController#connectedUser
+     * @see ProjectPageController#project
+     * @see ProjectPageController#jellyFacade
+     * @see ProjectPageController#setScene(Scene)
+     * 
+     * @param actionEvent
+     */
+    public void deleteBoard(ActionEvent actionEvent) {
         showAlert(Alert.AlertType.INFORMATION, window.getScene().getWindow(), "Success", "Your board has been deleted");
         if(jellyFacade.deleteBoard(board.getIdBoard())){
             try {
@@ -131,7 +175,19 @@ public class BoardPageController {
         }
     }
 
-    public void addNewStep() {
+    /**
+     * activates the mechanism to add a step
+     *
+     * @see NewStepController#step
+     * @see NewStepController#connectedUser
+     * @see NewStepController#project
+     * @see NewStepController#board
+     * @see NewStepController#jellyFacade
+     * @see NewStepController#setScene(Scene)
+     *
+     * @param actionEvent
+     */
+    public void addNewStep(ActionEvent actionEvent) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/newStep.fxml"));
         Parent root;
         try {
@@ -148,6 +204,10 @@ public class BoardPageController {
         ((NewStepController)loader.getController()).setScene(scene);
     }
 
+    /**
+     * sets the scene of the board page
+     * @param scene
+     */
     public void setScene(Scene scene) {
         List<Step> steps = jellyFacade.getAllStepsByBoard(board.getIdBoard());
         boardLabel.setText("Board : " + board.getBoardName() + " : " + board.getSubjectBoard());
@@ -274,6 +334,13 @@ public class BoardPageController {
         this.scene = scene;
     }
 
+    /**
+     * displays an alert
+     * @param alertType     the type of alert to display
+     * @param owner         the window part that owns the alert (where the alert should be displayed)
+     * @param title         the title of the alert
+     * @param message       the message of the alert
+     */
     public void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);

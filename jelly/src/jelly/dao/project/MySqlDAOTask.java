@@ -20,11 +20,11 @@ public class MySqlDAOTask implements TaskDAO {
     MySqlClient sql = MySqlDAOFactory.getConnection();
 
     /**
-     *
-     * @param desc
-     * @param state
-     * @param idStep
-     * @return
+     *      inserts a task into the database
+     * @param desc          the description of the task to insert
+     * @param state         the state of the task to insert
+     * @param idStep        the ID of the step to which the task belongs to
+     * @return      the task inserted into the database
      */
     @Override
     public Task insertTask(String desc, int state, int idStep) throws SQLException {
@@ -51,11 +51,11 @@ public class MySqlDAOTask implements TaskDAO {
     }
 
     /**
-     *
-     * @param idTask
-     * @param desc
-     * @param state
-     * @return
+     *      updates a task from the database
+     * @param idTask        the ID of the task to update
+     * @param desc          the new value of the description of the task to update
+     * @param state         the new value of the state of the task to update
+     * @return      true if the task was successfully updated
      */
     @Override
     public boolean updateTask(int idTask, String desc, int state, int idStep) {
@@ -81,9 +81,9 @@ public class MySqlDAOTask implements TaskDAO {
     }
 
     /**
-     *
-     * @param idTask
-     * @return
+     *      deletes a task from the database
+     * @param idTask    the ID of the task to delete
+     * @return  true if the task was successfully deleted
      */
     @Override
     public boolean deleteTask(int idTask) {
@@ -103,8 +103,8 @@ public class MySqlDAOTask implements TaskDAO {
     }
 
     /**
-     *
-     * @return
+     *      reads all the tasks from the database
+     * @return  a resultset that describes the tasks of the database
      */
     @Override
     public ResultSet readAllTasks() {
@@ -123,9 +123,9 @@ public class MySqlDAOTask implements TaskDAO {
     }
 
     /**
-     *
-     * @param idStep
-     * @return
+     *      reads all tasks associated to a given step
+     * @param idStep    the ID of the given step
+     * @return  an arraylist of tasks
      */
     @Override
     public ArrayList<Task> getAllTasksByStep(int idStep) {

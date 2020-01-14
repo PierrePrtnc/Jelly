@@ -40,15 +40,28 @@ public class AllNotificationsController {
 	
 	ArrayList<Notification> notifications;
 
-	
+	/**
+	 * getter for the attribute emailUser
+	 * @return emailUser
+	 */
 	public String getEmailUser() {
 		return emailUser;
 	}
 
+	/**
+	 * setter for the attribute emailUser
+	 * @param emailUser
+	 */
 	public void setEmailUser(String emailUser) {
 		this.emailUser = emailUser;
 	}
-	
+
+	/**
+	 * calls the JavaFX component "NotificationUI" to display unread notifications
+	 * @see NotificationsController#emailUser
+	 * @see NotificationsController#currentUser
+	 * @see NotificationsController#setScene(Scene)
+	 */
     public void showUnreadNotifications() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
@@ -63,7 +76,11 @@ public class AllNotificationsController {
             e.printStackTrace();
         }
     }
-    
+
+	/**
+	 * displays all notifications
+	 * @param scene
+	 */
 	public void setScene(Scene scene) {
 		notifications = jellyFacade.getAllNotificationList(jellyFacade.getUser(emailUser));
         User currentuser = jellyFacade.getUser(emailUser);
@@ -138,8 +155,16 @@ public class AllNotificationsController {
         
         this.scene = scene;
     }
-	
-    public void showHome() throws IOException {
+
+	/**
+	 * calls the JavaFX component "home" to display the home page
+	 * @see HomeController#connectedUser
+	 * @see HomeController#jellyFacade
+	 * @see HomeController#notificationNumber
+	 * @see HomeController#setScene(Scene)
+	 * @throws IOException
+	 */
+	public void showHome() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
         Parent root;
         root = loader.load();
@@ -149,7 +174,13 @@ public class AllNotificationsController {
 		((HomeController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(jellyFacade.getUser(emailUser)).size());
         ((HomeController)loader.getController()).setScene(scene);
     }
-    
+
+	/**
+	 * calls the JavaFX component "NotificationUI" to display unread notifications
+	 * @see NotificationsController#emailUser
+	 * @see NotificationsController#currentUser
+	 * @see NotificationsController#setScene(Scene)
+	 */
     public void unreadNotifications() {
     	User currentuser = jellyFacade.getUser(emailUser);
     	try {

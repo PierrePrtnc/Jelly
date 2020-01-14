@@ -152,9 +152,9 @@ public class MySqlDAOUser implements UserDAO {
 	}
 
 	/**
-	 *
-	 * @param idUser
-	 * @return
+	 * 	fetches the mail address of a given user
+	 * @param idUser 		the ID of the user to fetch the mail address for
+	 * @return 		the mail address
 	 */
 	public String getEmailUser(int idUser) {
 		String query = "select * from user where idUser = ?";
@@ -176,9 +176,9 @@ public class MySqlDAOUser implements UserDAO {
 	}
 
 	/**
-	 *
-	 * @param mailUser
-	 * @return
+	 *   fetches the ID of the user with its email
+	 * @param mailUser			the mail address of the user
+	 * @return 		the ID of the user
 	 */
 	public int getIdUser(String mailUser) {
 		String query = "select * from user where mailUser = ?";
@@ -225,6 +225,8 @@ public class MySqlDAOUser implements UserDAO {
 
 	/**
 	 * Returns a boolean indicating the truthfulness of the user information.
+	 * @param mailUser 		the mail address to check
+	 * @param password		the password to check
 	 * @return boolean
 	 * 					True if the information of the user is found in the database, false otherwise.
 	 */
@@ -246,6 +248,11 @@ public class MySqlDAOUser implements UserDAO {
 		return false;
 	}
 
+	/**
+	 *   fetches the ID of the user with its email
+	 * @param mailUser			the mail address of the user
+	 * @return 		the ID of the user
+	 */
 	public int getIdByMailUser(String mailUser) {
 		String query = "select idUser from user where mailUser = ?";
 		int id = 0;
@@ -265,22 +272,5 @@ public class MySqlDAOUser implements UserDAO {
 		sql.close();
 		return id;
 	}
-
-
-//	public static void main(String[] args) {
-//		MySqlDAOUser db = new MySqlDAOUser();
-//		if(db.insertUser("testJava2", "testJava2", "testJava2@mail.com", "testJava2", "testJava2")) {
-//			System.out.println("Insert OK");
-//		}
-//		if(db.updateUser("testJava", "testJava", "weslie.rabeson@gmail.com", "testJava", "testJava")) {
-//			System.out.println("Update OK");
-//		}
-//		if(db.deleteUser("testJava@mail.com")) {
-//			System.out.println("Delete OK");
-//		}
-//		System.out.println("Check login : " + db.checkUserInfo("test@test.com", "test"));
-//		System.out.println(db.readUser("test@test.com"));
-//
-//	}
 
 }

@@ -53,10 +53,20 @@ public class GanttCreationController {
     
     @FXML protected Label notificationNumber;
 
+    /**
+     * setter for the attribute scene
+     * @param scene
+     */
     public void setScene(Scene scene) {
         this.scene = scene;
     }
 
+    /**
+     * calls the JavaFX component "NotificationUI" to display unread notifications
+     * @see NotificationsController#emailUser
+     * @see NotificationsController#currentUser
+     * @see NotificationsController#setScene(Scene)
+     */
     public void showUnreadNotifications() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
@@ -72,7 +82,18 @@ public class GanttCreationController {
             e.printStackTrace();
         }
     }
-    
+
+    /**
+     * displays the page to edit the Gantt diagram
+     * 
+     * @see GanttEditController#connectedUser
+     * @see GanttEditController#jellyFacade
+     * @see GanttEditController#project
+     * @see GanttEditController#setScene(Scene)
+     * 
+     * @throws IOException
+     * @throws ParseException
+     */
     public void showGanttEdit() throws IOException, ParseException {
         if (this.projectNameInput.getText().isEmpty() || this.projectNameInput.getText().length() > 55)
             showAlert(Alert.AlertType.ERROR, projectNameInput.getScene().getWindow(), "Error", "Please enter the name of the project (length < 55 characters)");
@@ -108,6 +129,16 @@ public class GanttCreationController {
         }
     }
 
+    /**
+     * cancels the creation of a Gantt diagram and loads the project creation page
+     *
+     * @see ProjectCreationController#connectedUser
+     * @see ProjectCreationController#jellyFacade
+     * @see ProjectCreationController#setScene(Scene)
+     * @see ProjectCreationController#notificationNumber
+     *
+     * @throws IOException
+     */
     public void cancelCreation() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/ProjectCreation.fxml"));
         Parent root;
@@ -120,6 +151,12 @@ public class GanttCreationController {
 
     }
 
+    /**
+     * calls the JavaFX component "NotificationUI" to display unread notifications
+     * @see NotificationsController#emailUser
+     * @see NotificationsController#currentUser
+     * @see NotificationsController#setScene(Scene)
+     */
     public void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);

@@ -26,13 +26,13 @@ public class MySqlDAOProject implements ProjectDAO {
     MySqlClient sql = MySqlDAOFactory.getConnection();
 
     /**
-     *
-     * @param name
-     * @param description
-     * @param initialDate
-     * @param finalDate
-     * @param creator
-     * @return
+     *  inserts a project into the database
+     * @param name              the name of the project to insert
+     * @param description       the description of the project to insert
+     * @param initialDate       the initial date of the project to insert
+     * @param finalDate         the final date of the project to insert
+     * @param creator           the creator of the project to insert
+     * @return  the project inserted into the database
      */
     @Override
     public Project insertProject(String name, String description, Date initialDate, Date finalDate, User creator) {
@@ -64,13 +64,13 @@ public class MySqlDAOProject implements ProjectDAO {
     }
 
     /**
-     *
-     * @param idProject
-     * @param name
-     * @param description
-     * @param initialDate
-     * @param finalDate
-     * @return
+     *  updates a project from the database
+     * @param idProject         the ID of the project to update
+     * @param name              the new value for the name of the project
+     * @param description       the new value for the description of the project
+     * @param initialDate       the new value for the initial date of the project
+     * @param finalDate         the new value for the final date of the project
+     * @return  true if project was successfully updated
      */
     @Override
     public boolean updateProject(int idProject, String name, String description, Date initialDate, Date finalDate) {
@@ -96,9 +96,9 @@ public class MySqlDAOProject implements ProjectDAO {
     }
 
     /**
-     *
-     * @param idProject
-     * @return
+     *  deletes a project from the database
+     * @param idProject     the ID of the project to delete
+     * @return  true if the project was successfully deleted
      */
     @Override
     public boolean deleteProject(int idProject) {
@@ -118,9 +118,9 @@ public class MySqlDAOProject implements ProjectDAO {
     }
 
     /**
-     *
-     * @param idProject
-     * @return
+     *  reads a project from the database
+     * @param idProject     the ID of the project to display
+     * @return  the project read from the database
      */
     @Override
     public Project readProject(int idProject) {
@@ -155,8 +155,8 @@ public class MySqlDAOProject implements ProjectDAO {
     }
 
     /**
-     *
-     * @return
+     *  reads all projects from the database
+     * @return  a resultset that describes the table project
      */
     @Override
     public ResultSet readAllProjects() {
@@ -175,9 +175,9 @@ public class MySqlDAOProject implements ProjectDAO {
     }
 
     /**
-     *
-     * @param mailUser
-     * @return
+     *  reads all projects associated to a given user
+     * @param mailUser      the mail address of the user to display projects for
+     * @return  an arraylist of projects
      */
     @Override
     public ArrayList<Project> getAllProjectsByUser(String mailUser) {
@@ -215,20 +215,5 @@ public class MySqlDAOProject implements ProjectDAO {
         }
         return null;
     }
-/*
-    public static void main(String[] args) {
-        MySqlDAOProject db = new MySqlDAOProject();
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        Date dateInit = new Date();
-        df.format(dateInit);
-        Date dateFinal = new Date();
-        try {
-            dateInit = df.parse("2020-01-25");
-            dateFinal = df.parse("2020-04-26");
-            db.updateProject(2, "projet1", "premierProjet", dateInit, dateFinal);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        System.out.println(db.readProject(2).getInitialDate());
-    }*/
+
 }

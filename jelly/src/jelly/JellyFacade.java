@@ -57,6 +57,15 @@ public class JellyFacade {
 		return null;
 	}
 
+	/**
+	 * Adds a user to the database
+	 * @param firstName
+	 * @param lastName
+	 * @param pseudo
+	 * @param email
+	 * @param password
+	 * @return
+	 */
 	public User addUser(String firstName, String lastName, String pseudo, String email, String password) {
 		UserDAO user = fact.getUserDAO();
 		if (user.insertUser(firstName, lastName, email, pseudo, password)) {
@@ -65,16 +74,35 @@ public class JellyFacade {
 		return null;
 	}
 
+	/**
+	 * Reads a user from the database with a given email
+	 * @param email
+	 * @return
+	 */
 	public User getUser(String email) {
 		UserDAO user = fact.getUserDAO();
 		return user.readUser(email);
 	}
 
+	/**
+	 * Updates a user of the database
+	 * @param firstNameUser
+	 * @param lastNameUser
+	 * @param mailUser
+	 * @param pseudoUser
+	 * @param passwordUser
+	 * @return
+	 */
 	public boolean updateUser(String firstNameUser, String lastNameUser, String mailUser, String pseudoUser, String passwordUser) {
 		UserDAO user = fact.getUserDAO();
 		return user.updateUser(firstNameUser, lastNameUser, mailUser, pseudoUser, passwordUser);
 	}
 
+	/**
+	 * Deletes a user from the databse
+	 * @param mailUser
+	 * @return
+	 */
 	public boolean deleteUser(String mailUser) {
 		UserDAO user = fact.getUserDAO();
 		return user.deleteUser(mailUser);
@@ -83,7 +111,7 @@ public class JellyFacade {
 	/************************** PROJECT METHODS ********************************/
 
 	/**
-	 *
+	 * Reads all projects by user
 	 * @param mailUser the email of the user to display projects for
 	 * @return list of projects
 	 */
@@ -93,7 +121,7 @@ public class JellyFacade {
 	}
 
 	/**
-	 *
+	 * Adds a project to the database
 	 * @param name 			the name of the project to create
 	 * @param description	the description of the project to create
 	 * @param initialDate	the initial date of the project to create
@@ -107,7 +135,7 @@ public class JellyFacade {
 	}
 
 	/**
-	 *
+	 * Updates a project of the database
 	 * @param idProject 	the ID of the project to update
 	 * @param name			the name of the project to update
 	 * @param description	the description of the project to update
@@ -121,7 +149,7 @@ public class JellyFacade {
 	}
 
 	/**
-	 *
+	 * 	Deletes a project from the database
 	 * @param idProject 	the ID of the project to delete
 	 * @return  true if the project was successfully delete
 	 */
@@ -131,7 +159,7 @@ public class JellyFacade {
 	}
 
 	/**
-	 *
+	 * 	Reads a project from the database
 	 * @param idProject		the ID of the project to display
 	 * @return  the project
 	 */
@@ -143,7 +171,7 @@ public class JellyFacade {
 	/************************** BOARD METHODS ********************************/
 
 	/**
-	 *
+	 * 	Reads all boards by project
 	 * @param idProject		the ID of the project to display the boards of
 	 * @return a list of boards corresponding to the given project
 	 */
@@ -153,7 +181,7 @@ public class JellyFacade {
 	}
 
 	/**
-	 *
+	 * 	Adds a board to the database
 	 * @param nameBoard		the name of the board to create
 	 * @param descriptionBoard the description of the board to create
 	 * @param idProject		the ID of the project which to board is associated to
@@ -165,7 +193,7 @@ public class JellyFacade {
 	}
 
 	/**
-	 *
+	 * 	Updates a board from the database
 	 * @param idBoard		the ID of the board to update
 	 * @param nameBoard		the name of the board to update
 	 * @param subjectBoard		the subject of the board to update
@@ -178,7 +206,7 @@ public class JellyFacade {
 	}
 
 	/**
-	 *
+	 * 	Deletes a board from the database
 	 * @param idBoard		the ID of the board to delete
 	 * @return true if the board was successfully deleted
 	 */
@@ -188,7 +216,7 @@ public class JellyFacade {
 	}
 
 	/**
-	 *
+	 * 	Reads a board from the database
 	 * @param idBoard		the ID of the board to display
 	 * @return the board to read
 	 */
@@ -200,7 +228,7 @@ public class JellyFacade {
 	/************************** STEP METHODS ********************************/
 
 	/**
-	 *
+	 * 	Reads all the steps by board
 	 * @param idBoard 	the ID of the board of which the steps to display belong to
 	 * @return a list of steps that belong to the given board
 	 */
@@ -210,7 +238,7 @@ public class JellyFacade {
 	}
 
 	/**
-	 *
+	 * 	Adds a step to the database
 	 * @param name			the name of the step to insert
 	 * @param initialDate	the initial date of the step to insert
 	 * @param finalDate 	the final date of the step to insert
@@ -224,7 +252,7 @@ public class JellyFacade {
 	}
 
 	/**
-	 *
+	 * 	Updates a step of the database
 	 * @param idStep		the ID of the step to update
 	 * @param stepName		the name of the step to update
 	 * @param startingDate	the initial date of the step to update
@@ -240,7 +268,7 @@ public class JellyFacade {
 	}
 
 	/**
-	 *
+	 * 	Deletes a step from the database
 	 * @param idStep		the ID of the step to delete
 	 * @return	true if the step was successfully deleted
 	 */
@@ -250,7 +278,7 @@ public class JellyFacade {
 	}
 
 	/**
-	 *
+	 * 	Reads a step from the database
 	 * @param idStep		the ID of the step to display
 	 * @return	the step read from the database
 	 */
@@ -262,7 +290,7 @@ public class JellyFacade {
 	/************************** TASK METHODS ********************************/
 
 	/**
-	 *
+	 * 	Reads all the tasks by step
 	 * @param idStep	the ID of the step of which the tasks to display belong to
 	 * @return a list of tasks that belong to the given step
 	 */
@@ -272,7 +300,7 @@ public class JellyFacade {
 	}
 
 	/**
-	 *
+	 * 	Adds a task to the database
 	 * @param desc		the description of the task to insert
 	 * @param state		the state of the task to insert
 	 * @param idStep	the ID of the step to which the task is associated to
@@ -284,7 +312,7 @@ public class JellyFacade {
 	}
 
 	/**
-	 *
+	 * 	Updates a task of the database
 	 * @param idTask	the ID of the task to update
 	 * @param desc		the description of the task to update
 	 * @param state		the state of the task to update
@@ -296,7 +324,7 @@ public class JellyFacade {
 	}
 
 	/**
-	 *
+	 * 	Deletes a task from the database
 	 * @param idTask	the ID of the task to delete
 	 * @return	true if the task was deleted successfully
 	 */
@@ -307,28 +335,56 @@ public class JellyFacade {
 
 		/************************** NOTIFICATIONS METHODS ********************************/
 
-	
+	/**
+	 * Reads unread notifications for a user
+	 * @param user 		the user to display notifications for
+	 * @return  Arraylist of notifications
+	 */
 	public ArrayList<Notification> getUnreadNotificationList(User user){
 		NotificationDAO notification = fact.getNotificationDAO();
 		return notification.unreadNotifications(user);
 	}
 
+	/**
+	 *  Adds a notification to the database
+	 * @param sender 		the Collaborator who sent the notification
+	 * @param users 		the collection of users who will receive the notification
+	 * @param message 		the message of the notification
+	 * @param action 		the action of the notification
+	 * @return true if the insertion was successful
+	 */
 	public boolean insertNotification(Collaborator sender, Collection<User> users, String message, String action) {
 		NotificationDAO notification = fact.getNotificationDAO();
 		return notification.insertNotification(sender, users, message, action);
 	}
-	
+
+	/**
+	 *  Deletes a notification from the database
+	 * @param idNotification 	ID of the notification to delete
+	 * @param user				the user who will get this notification deleted
+	 * @return true if the deletion was successful
+	 */
 	public boolean deleteNotification(int idNotification, User user) {
 		NotificationDAO notification = fact.getNotificationDAO();
 		return notification.deleteNotification(idNotification, user);
 	}
 
+	/**
+	 * Changes the state of the notification
+	 * @param idNotification 	ID of the notification to update
+	 * @param user				the user who will get this notification update
+	 * @return 	true if the update was successful
+	 */
 	public boolean changeStateNotification(int idNotification, User user) {
 		NotificationDAO notification = fact.getNotificationDAO();
 		return notification.updateNotification(idNotification, user);
 	}
 
-
+	/**
+	 *  Reads all notifications of a user
+	 * @param user 		the user to read the notifications for
+	 * @return 	an Arraylist of notifications
+	 */
 	public ArrayList<Notification> getAllNotificationList(User user) {
 		NotificationDAO notification = fact.getNotificationDAO();
 		return notification.readAllNotifications(user);
@@ -336,21 +392,44 @@ public class JellyFacade {
 
 	/************************** COLLABORATION METHODS ********************************/
 
+	/**
+	 * 	inserts a collaborator into the database
+	 * @param p
+	 * @param u
+	 * @return
+	 */
 	public Collaborator insertCollaborator(Project p, User u) {
 		CollaboratorDAO collaborator = fact.getCollaboratorDAO();
 		return collaborator.insertCollaborator(p, u);
 	}
 
+	/**
+	 *  updates a collaborator from the database
+	 * @param idCollaborator
+	 * @param p
+	 * @param u
+	 * @return
+	 */
 	public boolean updateCollaborator(int idCollaborator, Project p, User u) {
 		CollaboratorDAO collaborator = fact.getCollaboratorDAO();
 		return collaborator.updateCollaborator(idCollaborator, p, u);
 	}
 
+	/**
+	 *  deletes a collaborator from the database
+	 * @param idCollaborator
+	 * @return
+	 */
 	public boolean deleteCollaborator(int idCollaborator) {
 		CollaboratorDAO collaborator = fact.getCollaboratorDAO();
 		return collaborator.deleteCollaborator(idCollaborator);
 	}
 
+	/**
+	 *  reads a collaborator from the database
+	 * @param idCollaborator
+	 * @return
+	 */
 	public Collaborator readCollaborator(int idCollaborator) {
 		CollaboratorDAO collaborator = fact.getCollaboratorDAO();
 		return collaborator.readCollaborator(idCollaborator);

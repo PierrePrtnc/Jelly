@@ -42,12 +42,18 @@ public class SignUpController {
 	
 	public SignUpController() {
 	}
-	
+
+	/**
+	 * sets the attribute scene
+	 * @param scene
+	 */
     public void setScene(Scene scene) {
         this.scene = scene; 
     }
-    
-	
+
+	/**
+	 * modifies the display of a button when the mouse hovers it
+	 */
 	public void handleMouseEntered() {
 		this.scene.setCursor(Cursor.HAND);
 		signUpButton.setStyle("#ACD6FX");
@@ -58,19 +64,26 @@ public class SignUpController {
 		this.scene.setCursor(Cursor.DEFAULT);
 		signUpButton.setStyle("#ACD6FA");
 	}
-    
-    
-    public static boolean isValidEmailAddress(String email) {
-    	   boolean result = true;
-    	   try {
-    	      InternetAddress emailAddr = new InternetAddress(email);
-    	      emailAddr.validate();
-    	   } catch (AddressException ex) {
-    	      result = false;
-    	   }
-    	   return result;
-    	}
-    
+
+	/**
+	 * checks if the given mail address exists in the database
+	 * @param email
+	 * @return true if the provided mail address is correct
+	 */
+	public static boolean isValidEmailAddress(String email) {
+	   boolean result = true;
+	   try {
+		  InternetAddress emailAddr = new InternetAddress(email);
+		  emailAddr.validate();
+	   } catch (AddressException ex) {
+		  result = false;
+	   }
+	   return result;
+	}
+
+	/**
+	 * calls the JavaFX page to log the user in
+	 */
 	public void handleLogin() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/loginUI.fxml"));
@@ -145,7 +158,14 @@ public class SignUpController {
 			}
 
 	}
-		
+
+	/**
+	 * displays an alert
+	 * @param alertType     the type of alert to display
+	 * @param owner         the window part that owns the alert (where the alert should be displayed)
+	 * @param title         the title of the alert
+	 * @param message       the message of the alert
+	 */
 	public void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
 	    Alert alert = new Alert(alertType);
 	    alert.setTitle(title);

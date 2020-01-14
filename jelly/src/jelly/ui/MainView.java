@@ -10,12 +10,17 @@ import jelly.JellyFacade;
 import jelly.ui.controller.LoginController;
 
 /**
- * Class LoginView.
+ * Class MainView.
  * @author Pierre Partinico
  *
  */
 
 public class MainView extends Application {
+
+	/**
+	 * starting method of the project Jelly
+	 * @param stage
+	 */
 	@Override
 	public void start(Stage stage){
 		try {
@@ -37,6 +42,10 @@ public class MainView extends Application {
 	}
 
 
+	/**
+	 * launches the application Jelly
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

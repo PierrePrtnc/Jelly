@@ -46,12 +46,18 @@ public class UpdateAccountInformationController {
 	public UpdateAccountInformationController() {
 		
 	}
-	
+
+	/**
+	 * sets the scene attribute
+	 * @param scene
+	 */
     public void setScene(Scene scene) {
         this.scene = scene; 
     }
-    
-	
+
+	/**
+	 * modifies the display of a button when the mouse hovers it
+	 */
 	public void handleMouseEntered() {
 		this.scene.setCursor(Cursor.HAND);
 		updateButton.setStyle("#ACD6FX");
@@ -62,7 +68,10 @@ public class UpdateAccountInformationController {
 		this.scene.setCursor(Cursor.DEFAULT);
 		updateButton.setStyle("#ACD6FA");
 	}
-    
+
+	/**
+	 * removes the account of the connected user
+	 */
 	public void handleDelete() {
 		if(jellyFacade.deleteUser(emailField.getText())){
 			try {
@@ -78,7 +87,13 @@ public class UpdateAccountInformationController {
 			}
 		}
 	}
-	
+
+	/**
+	 * calls the JavaFX component "NotificationUI" to display unread notifications
+	 * @see NotificationsController#emailUser
+	 * @see NotificationsController#currentUser
+	 * @see NotificationsController#setScene(Scene)
+	 */
     public void showUnreadNotifications() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
@@ -94,7 +109,10 @@ public class UpdateAccountInformationController {
             e.printStackTrace();
         }
     }
-	
+
+	/**
+	 * updates the connected user with new information fetched from the fields of the displayed form
+	 */
 	public void handle() {
 		if(firstNameField.getText().isEmpty() || lastNameField.getText().isEmpty() || pseudoField.getText().isEmpty() || emailField.getText().isEmpty() || passwordField.getText().isEmpty() || passwordConfirmationField.getText().isEmpty()) {
 			String emptyFields = "Please enter your:\n";
@@ -135,7 +153,15 @@ public class UpdateAccountInformationController {
 			}
 		}
 	}
-	
+
+	/**
+	 * calls the JavaFX component "home" to display the home page
+	 * @see HomeController#connectedUser
+	 * @see HomeController#jellyFacade
+	 * @see HomeController#notificationNumber
+	 * @see HomeController#setScene(Scene)
+	 * @throws IOException
+	 */
     public void showHome() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
         Parent root;
@@ -146,7 +172,14 @@ public class UpdateAccountInformationController {
 		((HomeController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(connectedUser).size());
         ((HomeController)loader.getController()).setScene(scene);
     }
-	
+
+	/**
+	 * displays an alert
+	 * @param alertType     the type of alert to display
+	 * @param owner         the window part that owns the alert (where the alert should be displayed)
+	 * @param title         the title of the alert
+	 * @param message       the message of the alert
+	 */
 	public void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
 	    Alert alert = new Alert(alertType);
 	    alert.setTitle(title);

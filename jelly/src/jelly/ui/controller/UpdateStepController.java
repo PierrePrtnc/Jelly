@@ -60,6 +60,10 @@ public class UpdateStepController {
     @FXML
     protected DatePicker endingDatePicker;
 
+    /**
+     * setters for the startMenuButton and difficultyMenuButton to take possible values of a step state
+     * @param actionEvent
+     */
     public void toDoMenu(javafx.event.ActionEvent actionEvent) {
         stateMenuButton.setText("To do");
     }
@@ -88,6 +92,9 @@ public class UpdateStepController {
         difficultyMenuButton.setText("Hard");
     }
 
+    /**
+     * calls the JavaFX page to cancel the step page update
+     */
     public void returnToStepPage() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/stepPage.fxml"));
         Parent root;
@@ -106,6 +113,9 @@ public class UpdateStepController {
         ((StepPageController)loader.getController()).setScene(scene);
     }
 
+    /**
+     * updates a step into the database
+     */
     public void updateStep() {
         if(stepNameField.getText().isEmpty() ||  stateMenuButton.getText().equals("Choose state") || difficultyMenuButton.getText().equals("Choose difficulty") || startingDatePicker.getValue() == null || endingDatePicker.getValue() == null || descriptionArea.getText().isEmpty()) {
             String emptyFields = "Please enter :\n";
@@ -183,6 +193,12 @@ public class UpdateStepController {
         }
     }
 
+    /**
+     * calls the JavaFX component "NotificationUI" to display unread notifications
+     * @see NotificationsController#emailUser
+     * @see NotificationsController#currentUser
+     * @see NotificationsController#setScene(Scene)
+     */
     public void showUnreadNotifications() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
@@ -198,10 +214,21 @@ public class UpdateStepController {
         }
     }
 
+    /**
+     * sets the scene attribute
+     * @param scene
+     */
     public void setScene(Scene scene) {
         this.scene = scene;
     }
 
+    /**
+     * displays an alert
+     * @param alertType     the type of alert to display
+     * @param owner         the window part that owns the alert (where the alert should be displayed)
+     * @param title         the title of the alert
+     * @param message       the message of the alert
+     */
     public void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);

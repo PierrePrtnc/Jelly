@@ -68,6 +68,11 @@ public class UpdateBoardController {
         ((BoardPageController)loader.getController()).setScene(scene);
     }
 
+    /**
+     * updates the current board in the database
+     * @see jelly.dao.project.MySqlDAOBoard#updateBoard(int, int, String, String, String)
+     * @throws IOException
+     */
     public void updateBoard() throws IOException {
         if(boardNameField.getText().isEmpty() || subjectField.getText().isEmpty() || descriptionArea.getText().isEmpty()) {
             String emptyFields = "Please enter :\n";
@@ -101,7 +106,13 @@ public class UpdateBoardController {
             }
         }
     }
-   
+
+    /**
+     * calls the JavaFX component "NotificationUI" to display unread notifications
+     * @see NotificationsController#emailUser
+     * @see NotificationsController#currentUser
+     * @see NotificationsController#setScene(Scene)
+     */
     public void showUnreadNotifications() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
@@ -115,11 +126,22 @@ public class UpdateBoardController {
             e.printStackTrace();
         }
     }
-    
+
+    /**
+     * sets the scene attribute
+     * @param scene
+     */
     public void setScene(Scene scene) {
         this.scene = scene;
     }
 
+    /**
+     * displays an alert
+     * @param alertType     the type of alert to display
+     * @param owner         the window part that owns the alert (where the alert should be displayed)
+     * @param title         the title of the alert
+     * @param message       the message of the alert
+     */
     public void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);

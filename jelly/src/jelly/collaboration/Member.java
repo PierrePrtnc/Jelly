@@ -13,8 +13,8 @@ public class Member extends Collaborator {
     /**
      * Builds a Member with a given project and user calling the super-constructor
      * Pre : Project and User must exist before calling the constructor
-     * @param Project 
-     * @param User
+     * @param p 
+     * @param u
      */
     public Member(Project p, User u) {
         // TODO implement here
@@ -23,8 +23,7 @@ public class Member extends Collaborator {
 
     /**
      * removes the current member from the super.project
-     * @see removeMember(User)
-     * @return
+     * @see Creator#removeMember(User)
      */
     public void leaveProject() {
         // TODO implement here

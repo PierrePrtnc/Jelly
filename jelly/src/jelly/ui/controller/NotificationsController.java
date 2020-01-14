@@ -45,17 +45,29 @@ public class NotificationsController {
 	
 	ArrayList<Notification> notifications;
 
-	
+	/**
+	 * gets the attribute emailUser
+	 * @return the emailUser attribute
+	 */
 	public String getEmailUser() {
 		return emailUser;
 	}
 
+	/**
+	 * sets the attribute emailUser
+	 * @param emailUser the emailUser value to set
+	 */
 	public void setEmailUser(String emailUser) {
 		this.emailUser = emailUser;
 	}
-    
+
+	/**
+	 * sets the attribute scene
+	 * displays the notification of the connected user
+	 * @param scene
+	 */
 	public void setScene(Scene scene) {
-		notifications = jellyFacade.getUnreadNotificationList(jellyFacade.getUser(emailUser));        
+		notifications = jellyFacade.getUnreadNotificationList(jellyFacade.getUser(emailUser));
 		User currentuser = jellyFacade.getUser(emailUser);
         notificationsGridPane.setPrefHeight(460);
         notificationsGridPane.setPrefWidth(600);
@@ -111,7 +123,15 @@ public class NotificationsController {
         
         this.scene = scene;
     }
-	
+
+	/**
+	 * calls the JavaFX component "home" to display the home page
+	 * @see HomeController#connectedUser
+	 * @see HomeController#jellyFacade
+	 * @see HomeController#notificationNumber
+	 * @see HomeController#setScene(Scene)
+	 * @throws IOException
+	 */
     public void showHome() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
         Parent root;
@@ -122,7 +142,14 @@ public class NotificationsController {
 		((HomeController)loader.getController()).notificationNumber.setText(""+jellyFacade.getUnreadNotificationList(jellyFacade.getUser(emailUser)).size());
         ((HomeController)loader.getController()).setScene(scene);
     }
-    
+
+	/**
+	 * calls the JavaFX component "AllNotificationsUI" to display the notifications page
+	 * @see AllNotificationsController#emailUser
+	 * @see AllNotificationsController#currentUser
+	 * @see AllNotificationsController#setScene(Scene)
+	 * @throws IOException
+	 */
     public void allNotifications() {
     	User currentuser = jellyFacade.getUser(emailUser);
     	try {

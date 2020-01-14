@@ -17,9 +17,6 @@ public class NotificationHandler {
      */
     public Notification notification;
 
-
-
-
     /**
      * @param notification a notification
      */

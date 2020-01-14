@@ -23,11 +23,11 @@ public class MySqlDAOBoard implements BoardDAO {
     MySqlClient sql = MySqlDAOFactory.getConnection();
 
     /**
-     *
-     * @param nameBoard
-     * @param descriptionBoard
-     * @param idProject
-     * @return
+     *  inserts a board into the database
+     * @param nameBoard             the name of the board to insert
+     * @param descriptionBoard      the description of the board to insert
+     * @param idProject             the ID of the project to which the board belongs to
+     * @return  the board inserted into the database
      */
     @Override
     public Board insertBoard(String nameBoard, String subjectBoard, String descriptionBoard, int idProject) {
@@ -57,11 +57,13 @@ public class MySqlDAOBoard implements BoardDAO {
     }
 
     /**
-     *
-     * @param idBoard
-     * @param nameBoard
-     * @param descriptionBoard
-     * @return
+     *      updates a board from the database
+     * @param idBoard               the ID of the board to update
+     * @param idProject             the new value for the project to which the board is associated to
+     * @param nameBoard             the new value for the name of the board to update
+     * @param subjectBoard          the new value for the subject of the board to update
+     * @param descriptionBoard      the new value for the description of the board to update
+     * @return  true if the board was successfully updated
      */
     @Override
     public boolean updateBoard(int idBoard, int idProject, String nameBoard, String subjectBoard, String descriptionBoard) {
@@ -88,9 +90,9 @@ public class MySqlDAOBoard implements BoardDAO {
     }
 
     /**
-     *
-     * @param idBoard
-     * @return
+     *  deletes a board from the database
+     * @param idBoard       the ID of the board to delete
+     * @return  true if the board was successfully deleted
      */
     @Override
     public boolean deleteBoard(int idBoard) {
@@ -110,9 +112,9 @@ public class MySqlDAOBoard implements BoardDAO {
     }
 
     /**
-     *
-     * @param idBoard
-     * @return
+     *  reads a board from the database
+     * @param idBoard   the ID of the board to display
+     * @return  the board read from the database
      */
     @Override
     public Board readBoard(int idBoard) {
@@ -138,8 +140,8 @@ public class MySqlDAOBoard implements BoardDAO {
     }
 
     /**
-     *
-     * @return
+     *      reads all the board from the database
+     * @return  a resultset describing all the boards from the database
      */
     @Override
     public ResultSet readAllBoards() {
@@ -158,9 +160,9 @@ public class MySqlDAOBoard implements BoardDAO {
     }
 
     /**
-     *
-     * @param idProject
-     * @return
+     *  reads all the boards for a given project
+     * @param idProject         the ID of the project to read the boards associated to it
+     * @return  an arraylist of boards
      */
     @Override
     public ArrayList<Board> getAllBoardsByProject(int idProject) {
@@ -195,22 +197,4 @@ public class MySqlDAOBoard implements BoardDAO {
         return null;
     }
 
-
-/*
-    public static void main(String[] args) {
-        MySqlDAOBoard db = new MySqlDAOBoard();
-		if(db.insertBoard(12, "testJava2", State.ToDo, 2)) {
-			System.out.println("Insert OK");
-		}
-        System.out.println(db.readBoard(1));
-		if(db.updateBoard(1, "testJava", State.InProgress)) {
-			System.out.println("Update OK");
-		}
-        System.out.println(db.readBoard(5).getBoardName());
-		if(db.deleteBoard(1)) {
-			System.out.println("Delete OK");
-		}
-		System.out.println("Check login : " + db.readAllBoards());
-
-    }*/
 }

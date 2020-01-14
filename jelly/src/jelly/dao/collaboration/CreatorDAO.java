@@ -7,7 +7,17 @@ import java.sql.ResultSet;
 
 public interface CreatorDAO extends CollaboratorDAO {
 
+    /**
+     *
+     * @param idCreator
+     * @return
+     */
     public User readCreator(int idCreator);
+
+    /**
+     *
+     * @return
+     */
     public ResultSet readAllCreators();
 
 }

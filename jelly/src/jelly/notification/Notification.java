@@ -7,7 +7,7 @@ import java.util.*;
 
 /**
  * Notification management class
- * @author Anthony Dupré, Pierre Partinico
+ * @author Anthony DuprÃ©, Pierre Partinico
  * @version 0.1
  */
 public class Notification {
@@ -31,68 +31,74 @@ public class Notification {
      */
     public Collaborator originator;
 
-    public String getMessage() {
+	/**
+	 * getter for the attribute message
+	 * @return the attribute message
+	 */
+	public String getMessage() {
 		return message;
 	}
 
-
-
-
+	/**
+	 * setter for the attribute message
+	 * @param message
+	 */
 	public void setMessage(String message) {
 		this.message = message;
 	}
 
-
-
-
+	/**
+	 * getter for the attribute destination
+	 * @return the attribute destination
+	 */
 	public User[] getDestination() {
 		return destination;
 	}
 
-
-
-
+	/**
+	 * setter for the attribute destination
+	 * @param destination
+	 */
 	public void setDestination(User[] destination) {
 		this.destination = destination;
 	}
 
-
-
-
+	/**
+	 * getter for the attribute originator
+	 * @return the attribute originator
+	 */
 	public Collaborator getOriginator() {
 		return originator;
 	}
 
-
-
-
+	/**
+	 * setter for the attribute originator
+	 * @param originator
+	 */
 	public void setOriginator(Collaborator originator) {
 		this.originator = originator;
 	}
 
-
-
-
+	/**
+	 * getter for the attribute action
+	 * @return the attribute action
+	 */
 	public String getAction() {
 		return action;
 	}
 
-
-
-
+	/**
+	 * setter for the attribute action
+	 * @param action
+	 */
 	public void setAction(String action) {
 		this.action = action;
 	}
-
-
-
 
 	/**
      * actions that you can do with the notification
      */
     public String action;
-
-
 
 
     /**
@@ -110,16 +116,18 @@ public class Notification {
         this.action = action;
     }
 
-
-
-
+	/**
+	 * getter for the attribute idNotification
+	 * @return the attribute idNotification
+	 */
 	public int getIdNotification() {
 		return idNotification;
 	}
 
-
-
-
+	/**
+	 * setter for the attribute idNotification
+	 * @param idNotification
+	 */
 	public void setIdNotification(int idNotification) {
 		this.idNotification = idNotification;
 	}
