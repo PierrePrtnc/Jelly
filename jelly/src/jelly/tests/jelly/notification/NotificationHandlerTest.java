@@ -1,4 +1,4 @@
-package jelly.notification;
+package jelly.tests.jelly.notification;
 
 import org.junit.After;
 import org.junit.Before;

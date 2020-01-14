@@ -218,9 +218,8 @@ public class StepPageController {
             GridPane taskGP = new GridPane();
             CheckBox cb = new CheckBox();
             cb.setText("Task " + (i+1) + " : ");
-            System.out.println("state "+ i + tasks.get(i).getTaskState());
-            if (((Integer) tasks.get(i).getTaskState()).equals(1)){ cb.setSelected(true); }
-            else{ cb.setSelected(false); }
+            if (tasks.get(i).getTaskState() == 1){ cb.setSelected(true); }
+            else{ cb.setDisable(true); }
             taskGP.add(cb,0, i);
             cb.setSelected(true);;
             taskGP.add((new Label (tasks.get(i).getTaskDesc())), 1, i);
@@ -280,7 +279,7 @@ public class StepPageController {
                         ((UpdateTaskController)loader.getController()).jellyFacade = jellyFacade;
                         ((UpdateTaskController)loader.getController()).descriptionArea.setText(task.getTaskDesc());
                         String state = "";
-                        switch(step.getStepState()) {
+                        switch(task.getTaskState()) {
                             case 1:
                                 state = "Done";
                                 break;

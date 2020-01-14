@@ -66,7 +66,7 @@ public class MySqlDAOTask implements TaskDAO {
                 pQuery.setInt(1, idTask);
                 pQuery.setString(2, desc);
                 pQuery.setInt(3, state);
-                pQuery.setInt(4, idTask);
+                pQuery.setInt(4, idStep);
                 pQuery.setInt(5, idTask);
                 pQuery.executeUpdate();
                 pQuery.close();
