@@ -50,6 +50,6 @@ Please contact us for details on our code of conduct, and the process for submit
 
 
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/PierrePrtnc/Jelly/contributors) who participated in this project.
 
 
