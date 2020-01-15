@@ -3,6 +3,7 @@ package jelly.ui.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -54,7 +55,7 @@ public class GanttViewController {
      * @throws IOException
      */
     public void showHome() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/home.fxml"));
         Parent root;
         root = loader.load();
         this.scene.setRoot(root);
@@ -104,11 +105,11 @@ public class GanttViewController {
             long daysCount = TimeUnit.DAYS.convert(dateDiff, TimeUnit.MILLISECONDS);
             Label stepName = new Label(aStep.getStepName());
             stepName.setPadding(new Insets(0,2,0,2));
-            gridPane.add(stepName, 0, gridPane.getRowCount());
+            gridPane.add(stepName, 0, getRowCount(gridPane));
             Instant instant = startStep.toInstant();
             LocalDate startDate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
             int index = dates.indexOf(startDate);
-            int j = gridPane.getRowCount();
+            int j = getRowCount(gridPane);
 
             for (int i = index+1; i <= daysCount+(index+1); i++) {
                 Pane newP = new Pane();
@@ -119,6 +120,20 @@ public class GanttViewController {
         scrollPaneGantt.setContent(gridPane);
 
 
+    }
+    
+    private int getRowCount(GridPane pane) {
+        int numRows = pane.getRowConstraints().size();
+        for (int i = 0; i < pane.getChildren().size(); i++) {
+            Node child = pane.getChildren().get(i);
+            if (child.isManaged()) {
+                Integer rowIndex = GridPane.getRowIndex(child);
+                if(rowIndex != null){
+                    numRows = Math.max(numRows,rowIndex+1);
+                }
+            }
+        }
+        return numRows;
     }
 
     /**
@@ -150,7 +165,7 @@ public class GanttViewController {
      * @throws IOException
      */
     public void showProject() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/projectPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/projectPage.fxml"));
         Parent root;
         root = loader.load();
         scene.setRoot(root);
@@ -169,7 +184,7 @@ public class GanttViewController {
 	 */
     public void showUnreadNotifications() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/NotificationsUI.fxml"));
             Parent root;
             root = loader.load();
             this.scene.setRoot(root);

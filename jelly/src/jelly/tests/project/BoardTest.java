@@ -1,4 +1,4 @@
-package project;
+package jelly.tests.project;
 
 import org.junit.After;
 import org.junit.Before;

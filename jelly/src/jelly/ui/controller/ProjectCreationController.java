@@ -58,7 +58,7 @@ public class ProjectCreationController {
 	 * @throws IOException
 	 */
     public void showHome() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/home.fxml"));
         Parent root;
         root = loader.load();
         this.scene.setRoot(root);
@@ -73,7 +73,7 @@ public class ProjectCreationController {
      * @throws IOException
      */
     public void createGanttDiagram() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/gantt/GanttCreation.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/gantt/GanttCreation.fxml"));
         Parent root;
         root = loader.load();
         this.scene.setRoot(root);
@@ -91,7 +91,7 @@ public class ProjectCreationController {
      */
     public void showUnreadNotifications() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/NotificationsUI.fxml"));
             Parent root;
             root = loader.load();
             this.scene.setRoot(root);
@@ -127,7 +127,7 @@ public class ProjectCreationController {
             else {
                 if (jellyFacade.insertProject(projectNameInput.getText(), projectDescriptionInput.getText(), startingDate, endingDate, connectedUser) != null) {
                     showAlert(Alert.AlertType.INFORMATION, projectNameInput.getScene().getWindow(), "Success", "Project created !");
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/home.fxml"));
                     Parent root;
                     root = loader.load();
                     this.scene.setRoot(root);

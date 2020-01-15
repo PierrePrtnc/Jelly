@@ -80,7 +80,7 @@ public class NewBoardController {
      */
     public void showUnreadNotifications() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/NotificationsUI.fxml"));
             Parent root;
             root = loader.load();
             this.scene.setRoot(root);
@@ -98,7 +98,7 @@ public class NewBoardController {
      * calls the JavaFX page "projectPage" to go back to the project page
      */
     public void returnToProjectPage() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/projectPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/projectPage.fxml"));
         Parent root;
         try {
             root = loader.load();

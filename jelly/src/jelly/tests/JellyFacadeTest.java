@@ -1,3 +1,5 @@
+package jelly.tests;
+
 import jelly.JellyFacade;
 import jelly.User;
 import jelly.collaboration.Collaborator;

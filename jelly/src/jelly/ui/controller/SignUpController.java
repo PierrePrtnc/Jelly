@@ -86,7 +86,7 @@ public class SignUpController {
 	 */
 	public void handleLogin() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/loginUI.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/loginUI.fxml"));
 			Parent root;
 			root = loader.load();
 			this.scene.setRoot(root);
@@ -136,7 +136,7 @@ public class SignUpController {
 					else {
 						try {
 							User connectedUser = jellyFacade.addUser(firstNameField.getText(), lastNameField.getText(), pseudoField.getText(), emailField.getText(), passwordField.getText());
-					        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/loginUI.fxml"));
+					        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/loginUI.fxml"));
 					        Parent root;
 					        try {
 					            root = loader.load();

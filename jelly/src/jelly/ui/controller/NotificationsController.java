@@ -133,7 +133,7 @@ public class NotificationsController {
 	 * @throws IOException
 	 */
     public void showHome() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/home.fxml"));
         Parent root;
         root = loader.load();
         this.scene.setRoot(root);
@@ -153,7 +153,7 @@ public class NotificationsController {
     public void allNotifications() {
     	User currentuser = jellyFacade.getUser(emailUser);
     	try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/AllNotificationsUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/AllNotificationsUI.fxml"));
             Parent root;
             root = loader.load();
             this.scene.setRoot(root);

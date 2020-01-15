@@ -49,7 +49,7 @@ public class HomeController {
      */
     public void showUnreadNotifications() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/NotificationsUI.fxml"));
             Parent root;
             root = loader.load();
             this.scene.setRoot(root);
@@ -70,7 +70,7 @@ public class HomeController {
      */
     public void showPersonalInfo(ActionEvent actionEvent) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/updateInformationUI.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/updateInformationUI.fxml"));
                 Parent root;
                 root = loader.load();
                 this.scene.setRoot(root);
@@ -95,7 +95,7 @@ public class HomeController {
      */
     public void showCreateProject(ActionEvent actionEvent) {
         if(!(connectedUser.equals(null)||connectedUser.getFirstNameUser().contentEquals(""))) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/ProjectCreation.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/ProjectCreation.fxml"));
             Parent root;
             try {
                 root = loader.load();
@@ -118,7 +118,7 @@ public class HomeController {
      * @param actionEvent
      */
     public void logOff(ActionEvent actionEvent) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/loginUI.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/loginUI.fxml"));
         Parent root;
         try {
             root = loader.load();
@@ -206,7 +206,7 @@ public class HomeController {
                             project = new Project(idProject, idCreator, nameProject, descriptionProject, initialDateProject, finalDateProject);
                         }
                         try {
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/projectPage.fxml"));
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/projectPage.fxml"));
                             Parent root;
                             root = loader.load();
                             scene.setRoot(root);

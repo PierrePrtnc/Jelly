@@ -1,4 +1,4 @@
-package project;
+package jelly.tests.project;
 
 import jelly.User;
 import jelly.collaboration.Collaborator;

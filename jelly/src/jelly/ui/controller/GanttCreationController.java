@@ -69,7 +69,7 @@ public class GanttCreationController {
      */
     public void showUnreadNotifications() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/NotificationsUI.fxml"));
             Parent root;
             root = loader.load();
             this.scene.setRoot(root);
@@ -116,7 +116,7 @@ public class GanttCreationController {
             else {
                 Project project = new Project(projectNameInput.getText(), projectDescriptionInput.getText(), startingDate, endingDate);
                 project.addBoard(new Board(ganttNameInput.getText(), subjectGantt.getText(), "default board"));
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/gantt/GanttEdit.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/gantt/GanttEdit.fxml"));
                 Parent root;
                 root = loader.load();
                 this.scene.setRoot(root);
@@ -140,7 +140,7 @@ public class GanttCreationController {
      * @throws IOException
      */
     public void cancelCreation() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/ProjectCreation.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/ProjectCreation.fxml"));
         Parent root;
         root = loader.load();
         this.scene.setRoot(root);

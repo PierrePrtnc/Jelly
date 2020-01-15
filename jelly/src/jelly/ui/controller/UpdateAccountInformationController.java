@@ -75,7 +75,7 @@ public class UpdateAccountInformationController {
 	public void handleDelete() {
 		if(jellyFacade.deleteUser(emailField.getText())){
 			try {
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/loginUI.fxml"));
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/loginUI.fxml"));
 				Parent root;
 				root = loader.load();
 				this.scene.setRoot(root);
@@ -96,7 +96,7 @@ public class UpdateAccountInformationController {
 	 */
     public void showUnreadNotifications() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/NotificationsUI.fxml"));
             Parent root;
             root = loader.load();
             this.scene.setRoot(root);
@@ -163,7 +163,7 @@ public class UpdateAccountInformationController {
 	 * @throws IOException
 	 */
     public void showHome() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/home.fxml"));
         Parent root;
         root = loader.load();
         this.scene.setRoot(root);

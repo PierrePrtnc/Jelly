@@ -50,7 +50,7 @@ public class StepPageController {
     protected Label notificationNumber;
 
     public void addNewTask() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/newTask.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/newTask.fxml"));
         Parent root;
         try {
             root = loader.load();
@@ -68,7 +68,7 @@ public class StepPageController {
     }
 
     public void showGantt() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/gantt/GanttView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/gantt/GanttView.fxml"));
         Parent root;
         root = loader.load();
         this.scene.setRoot(root);
@@ -86,7 +86,7 @@ public class StepPageController {
      * @param actionEvent
      */
     public void editStep(ActionEvent actionEvent) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/updateStep.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/updateStep.fxml"));
         Parent root;
         try {
             root = loader.load();
@@ -145,7 +145,7 @@ public class StepPageController {
         showAlert(Alert.AlertType.INFORMATION, window.getScene().getWindow(), "Success", "Your board has been deleted");
         if(jellyFacade.deleteStep(step.getIdStep())){
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/boardPage.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/boardPage.fxml"));
                 Parent root;
                 root = loader.load();
                 this.scene.setRoot(root);
@@ -165,7 +165,7 @@ public class StepPageController {
      * calls the JavaFX page "projectPage" to go back to the project page
      */
     public void returnToBoard(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/boardPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/boardPage.fxml"));
         Parent root;
         root = loader.load();
         this.scene.setRoot(root);
@@ -185,7 +185,7 @@ public class StepPageController {
      */
     public void showUnreadNotifications() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/NotificationsUI.fxml"));
             Parent root;
             root = loader.load();
             this.scene.setRoot(root);
@@ -291,7 +291,7 @@ public class StepPageController {
                         task = new Task(idTask, descriptionTask, stateTask, idStep);
                     }
                     try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/updateTask.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/updateTask.fxml"));
                         Parent root;
                         root = loader.load();
                         scene.setRoot(root);
@@ -365,7 +365,7 @@ public class StepPageController {
                     showAlert(Alert.AlertType.INFORMATION, window.getScene().getWindow(), "Success", "Your task has been deleted");
                     if (jellyFacade.deleteTask(task.getIdTask())) {
                         try {
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/boardPage.fxml"));
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/boardPage.fxml"));
                             Parent root;
                             root = loader.load();
                             scene.setRoot(root);

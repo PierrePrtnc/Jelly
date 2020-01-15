@@ -65,7 +65,7 @@ public class InvitationsController {
         if (jellyFacade.insertNotification(c, users, "invitation", "invite")) {
             try {
                 showAlert(Alert.AlertType.INFORMATION, userMailField.getScene().getWindow(), "Success", "User invited.");
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/projectPage.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/projectPage.fxml"));
                 Parent root;
                 root = loader.load();
                 this.scene.setRoot(root);
@@ -113,7 +113,7 @@ public class InvitationsController {
      * calls the JavaFX page "projectPage" to go back to the project page
      */
     public void returnToProject() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/projectPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/projectPage.fxml"));
         Parent root;
         try {
             root = loader.load();

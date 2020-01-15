@@ -55,7 +55,7 @@ public class BoardPageController {
      * @throws IOException
      */
     public void showGantt() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/gantt/GanttView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/gantt/GanttView.fxml"));
         Parent root;
         root = loader.load();
         this.scene.setRoot(root);
@@ -81,7 +81,7 @@ public class BoardPageController {
      * @throws IOException
      */
     public void returnToProject(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/projectPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/projectPage.fxml"));
         Parent root;
         root = loader.load();
         this.scene.setRoot(root);
@@ -100,7 +100,7 @@ public class BoardPageController {
      */
     public void showUnreadNotifications() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/NotificationsUI.fxml"));
             Parent root;
             root = loader.load();
             this.scene.setRoot(root);
@@ -129,7 +129,7 @@ public class BoardPageController {
      * @see UpdateBoardController#setScene(Scene) 
      */
     public void editBoard(ActionEvent actionEvent) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/updateBoard.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/updateBoard.fxml"));
         Parent root;
         try {
             root = loader.load();
@@ -164,7 +164,7 @@ public class BoardPageController {
         showAlert(Alert.AlertType.INFORMATION, window.getScene().getWindow(), "Success", "Your board has been deleted");
         if(jellyFacade.deleteBoard(board.getIdBoard())){
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/projectPage.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/projectPage.fxml"));
                 Parent root;
                 root = loader.load();
                 this.scene.setRoot(root);
@@ -192,7 +192,7 @@ public class BoardPageController {
      * @param actionEvent
      */
     public void addNewStep(ActionEvent actionEvent) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/newStep.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/newStep.fxml"));
         Parent root;
         try {
             root = loader.load();
@@ -310,7 +310,7 @@ public class BoardPageController {
                             step = new Step(idStep, nameStep, initialDateStep, finalDateStep, idBoard, stateStep, difficultyStep, descriptionStep);
                         }
                         try {
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/stepPage.fxml"));
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/stepPage.fxml"));
                             Parent root;
                             root = loader.load();
                             scene.setRoot(root);

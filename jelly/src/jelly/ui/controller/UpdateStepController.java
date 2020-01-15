@@ -96,7 +96,7 @@ public class UpdateStepController {
      * calls the JavaFX page to cancel the step page update
      */
     public void returnToStepPage() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/stepPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/stepPage.fxml"));
         Parent root;
         try {
             root = loader.load();
@@ -171,7 +171,7 @@ public class UpdateStepController {
             }
             if(jellyFacade.updateStep(step.getIdStep(), stepNameField.getText(), startingDate, endingDate, board.getIdBoard(), state, difficulty, descriptionArea.getText())){
                 showAlert(Alert.AlertType.INFORMATION, window.getScene().getWindow(), "Success", "Your step has been updated");
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/boardPage.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/boardPage.fxml"));
                 Parent root;
                 try {
                     root = loader.load();
@@ -201,7 +201,7 @@ public class UpdateStepController {
      */
     public void showUnreadNotifications() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/NotificationsUI.fxml"));
             Parent root;
             root = loader.load();
             this.scene.setRoot(root);

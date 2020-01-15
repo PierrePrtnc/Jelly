@@ -62,7 +62,7 @@ public class NewStepController {
      */
     public void showUnreadNotifications() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/NotificationsUI.fxml"));
             Parent root;
             root = loader.load();
             this.scene.setRoot(root);
@@ -182,7 +182,7 @@ public class NewStepController {
      * calls the JavaFX page "boardPage" to go back to the board display page
      */
     public void returnToBoardPage() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/boardPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/boardPage.fxml"));
         Parent root;
         try {
             root = loader.load();

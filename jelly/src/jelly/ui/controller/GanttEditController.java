@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -154,7 +155,7 @@ public class GanttEditController {
      */
     public void showUnreadNotifications() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/NotificationsUI.fxml"));
             Parent root;
             root = loader.load();
             this.scene.setRoot(root);
@@ -214,9 +215,9 @@ public class GanttEditController {
                 board.addStep(step);
                 Label stepName = new Label(step.getStepName());
                 stepName.setPadding(new Insets(0,2,0,2));
-                gridPane.add(stepName, 0, gridPane.getRowCount());
+                gridPane.add(stepName, 0, getRowCount(gridPane));
                 int index = dates.indexOf(ganttStepStartingDateField.getValue());
-                int j = gridPane.getRowCount();
+                int j = getRowCount(gridPane);
 
                 for (int i = index+1; i <= daysCount+(index+1); i++) {
                     Pane newP = new Pane();
@@ -226,6 +227,21 @@ public class GanttEditController {
             }
 
         }
+    }
+    
+    
+    private int getRowCount(GridPane pane) {
+        int numRows = pane.getRowConstraints().size();
+        for (int i = 0; i < pane.getChildren().size(); i++) {
+            Node child = pane.getChildren().get(i);
+            if (child.isManaged()) {
+                Integer rowIndex = GridPane.getRowIndex(child);
+                if(rowIndex != null){
+                    numRows = Math.max(numRows,rowIndex+1);
+                }
+            }
+        }
+        return numRows;
     }
 
     /**
@@ -249,7 +265,7 @@ public class GanttEditController {
      * @throws IOException
      */
     public void cancel() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/ProjectCreation.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/ProjectCreation.fxml"));
         Parent root;
         root = loader.load();
         this.scene.setRoot(root);
@@ -298,7 +314,7 @@ public class GanttEditController {
      * @throws IOException
      */
     public void showHome() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/home.fxml"));
         Parent root;
         root = loader.load();
         this.scene.setRoot(root);

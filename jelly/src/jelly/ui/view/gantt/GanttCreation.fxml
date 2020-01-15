@@ -10,30 +10,11 @@
 
 <VBox prefHeight="458.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jelly.ui.controller.GanttCreationController">
   <children>
-     <MenuBar>
-        <menus>
-           <Menu mnemonicParsing="false" text="Home">
-              <items>
-                 <MenuItem mnemonicParsing="false" text="Close" />
-              </items>
-           </Menu>
-           <Menu mnemonicParsing="false" text="Sign in">
-              <items>
-                 <MenuItem mnemonicParsing="false" text="Delete" />
-              </items>
-           </Menu>
-           <Menu mnemonicParsing="false" text="Help">
-              <items>
-                 <MenuItem mnemonicParsing="false" text="About" />
-              </items>
-           </Menu>
-        </menus>
-     </MenuBar>
      <BorderPane prefHeight="100.0" prefWidth="600.0">
         <center>
            <ImageView fitHeight="73.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
               <image>
-                 <Image url="@../../../../../lib/jellyLogo.png" />
+                 <Image url="https://www.pngrepo.com/png/298931/170/jellyfish.png" />
               </image>
               <BorderPane.margin>
                  <Insets left="40.0" top="10.0" />

@@ -30,7 +30,7 @@
    <center>
       <ImageView fitHeight="78.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
          <image>
-            <Image url="@../../../../../lib/jellyLogo.png" />
+            <Image url="https://www.pngrepo.com/png/298931/170/jellyfish.png" />
          </image>
          <BorderPane.margin>
             <Insets right="90.0" top="15.0" />

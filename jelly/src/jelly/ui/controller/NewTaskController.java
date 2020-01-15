@@ -55,7 +55,7 @@ public class NewTaskController {
      * calls the JavaFX page "stepPage" to go back to display the step display page
      */
     public void returnToStepPage() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/stepPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/stepPage.fxml"));
         Parent root;
         try {
             root = loader.load();
@@ -116,7 +116,7 @@ public class NewTaskController {
      */
     public void showUnreadNotifications() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/NotificationsUI.fxml"));
             Parent root;
             root = loader.load();
             this.scene.setRoot(root);

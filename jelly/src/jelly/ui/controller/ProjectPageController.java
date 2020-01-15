@@ -61,7 +61,7 @@ public class ProjectPageController {
      * @throws IOException
      */
     public void showGantt() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/gantt/GanttView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/gantt/GanttView.fxml"));
         Parent root;
         root = loader.load();
         this.scene.setRoot(root);
@@ -87,7 +87,7 @@ public class ProjectPageController {
      * @throws IOException
      */
     public void returnHome(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/home.fxml"));
         Parent root;
         root = loader.load();
         this.scene.setRoot(root);
@@ -102,7 +102,7 @@ public class ProjectPageController {
      * @param actionEvent
      */
     public void addNewBoard(ActionEvent actionEvent) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/newBoard.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/newBoard.fxml"));
         Parent root;
         try {
             root = loader.load();
@@ -223,7 +223,7 @@ public class ProjectPageController {
                             board = new Board(idBoard, idProject, nameBoard, descriptionBoard, subjectBoard);
                         }
                         try {
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/boardPage.fxml"));
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/boardPage.fxml"));
                             Parent root;
                             root = loader.load();
                             scene.setRoot(root);
@@ -258,7 +258,7 @@ public class ProjectPageController {
      */
     public void showUnreadNotifications() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/NotificationsUI.fxml"));
             Parent root;
             root = loader.load();
             this.scene.setRoot(root);
@@ -281,7 +281,7 @@ public class ProjectPageController {
      * @throws IOException
      */
     public void returnHome() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/home.fxml"));
         Parent root;
         root = loader.load();
         this.scene.setRoot(root);
@@ -310,7 +310,7 @@ public class ProjectPageController {
      */
     public void editProject() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/editProjectPage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/editProjectPage.fxml"));
             Parent root;
             root = loader.load();
             this.scene.setRoot(root);
@@ -332,7 +332,7 @@ public class ProjectPageController {
         if (jellyFacade.deleteProject(project.getIdProject())) {
             try {
                 showAlert(Alert.AlertType.INFORMATION, projectDeletion.getScene().getWindow(), "Success", "Project deleted.");
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/home.fxml"));
                 Parent root;
                 root = loader.load();
                 this.scene.setRoot(root);
@@ -368,7 +368,7 @@ public class ProjectPageController {
     public void handleInvite() {
         System.out.println("START HANDLE INVITE");
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/inviteUserPage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/inviteUserPage.fxml"));
             Parent root;
             root = loader.load();
             this.scene.setRoot(root);

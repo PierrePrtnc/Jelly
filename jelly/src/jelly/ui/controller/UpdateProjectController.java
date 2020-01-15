@@ -46,7 +46,7 @@ public class UpdateProjectController {
      * calls the JavaFX page "projectPage"
      */
     public void returnToProject() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/projectPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/projectPage.fxml"));
         Parent root;
         try {
             root = loader.load();
@@ -80,7 +80,7 @@ public class UpdateProjectController {
         if (jellyFacade.updateProject(project.getIdProject(), projectNameField.getText(), projectDescriptionText.getText(), startingDate, endingDate)) {
             try {
                 showAlert(Alert.AlertType.INFORMATION, editProjectButton.getScene().getWindow(), "Success", "Project updated.");
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/projectPage.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/projectPage.fxml"));
                 Parent root;
                 root = loader.load();
                 this.scene.setRoot(root);

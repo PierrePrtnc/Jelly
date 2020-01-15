@@ -78,7 +78,7 @@ public class LoginController implements Initializable{
 	 */
 	public void handleSignUp() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/SignupUI.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/SignupUI.fxml"));
 			Parent root;
 			root = loader.load();
 			this.scene.setRoot(root);
@@ -109,7 +109,7 @@ public class LoginController implements Initializable{
 			try {
 				User connectedUser = jellyFacade.login(emailField.getText(), passwordField.getText());
 				if(!(connectedUser.equals(null)||connectedUser.getFirstNameUser().contentEquals(""))) {
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/home.fxml"));
 					Parent root;
 					root = loader.load();
 					this.scene.setRoot(root);

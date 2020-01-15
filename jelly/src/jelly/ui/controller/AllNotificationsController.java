@@ -64,7 +64,7 @@ public class AllNotificationsController {
 	 */
     public void showUnreadNotifications() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/NotificationsUI.fxml"));
             Parent root;
             root = loader.load();
             this.scene.setRoot(root);
@@ -134,7 +134,7 @@ public class AllNotificationsController {
 				deleteNotification.setOnAction(e ->{
 					jellyFacade.deleteNotification(notifications.get(k).getIdNotification(), currentuser);
 			        try {
-			            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/AllNotificationsUI.fxml"));
+			            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/AllNotificationsUI.fxml"));
 			            Parent root;
 			            root = loader.load();
 			            this.scene.setRoot(root);
@@ -165,7 +165,7 @@ public class AllNotificationsController {
 	 * @throws IOException
 	 */
 	public void showHome() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/home.fxml"));
         Parent root;
         root = loader.load();
         this.scene.setRoot(root);
@@ -184,7 +184,7 @@ public class AllNotificationsController {
     public void unreadNotifications() {
     	User currentuser = jellyFacade.getUser(emailUser);
     	try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/NotificationsUI.fxml"));
             Parent root;
             root = loader.load();
             this.scene.setRoot(root);

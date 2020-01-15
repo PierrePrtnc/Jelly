@@ -52,7 +52,7 @@ public class UpdateBoardController {
     protected TextArea descriptionArea;
 
     public void returnToBoardPage() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/boardPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/boardPage.fxml"));
         Parent root;
         try {
             root = loader.load();
@@ -90,7 +90,7 @@ public class UpdateBoardController {
         else {
             if(jellyFacade.updateBoard(board.getIdBoard(), board.getIdProjectOfBoard(), boardNameField.getText(), subjectField.getText(), descriptionArea.getText())){
                 showAlert(Alert.AlertType.INFORMATION, window.getScene().getWindow(), "Success", "Your board has been updated");
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project/projectPage.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/project/projectPage.fxml"));
                 Parent root;
                 root = loader.load();
                 this.scene.setRoot(root);
@@ -115,7 +115,7 @@ public class UpdateBoardController {
      */
     public void showUnreadNotifications() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/user/NotificationsUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/jelly/ui/view/user/NotificationsUI.fxml"));
             Parent root;
             root = loader.load();
             this.scene.setRoot(root);
