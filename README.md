@@ -20,16 +20,27 @@ These instructions will get you a copy of the project up and running on your loc
 ### Installing
 
 ```
-Step 1 : Download the jar Jelly.jar.
+Step 1 : Download the jar jelly.jar.
 ```
 
 ```
-Step 2 :Click on it to launch the application. You are then on the login view, able to login to use the application.
+Step 2 : Download javafx-sdk-13.0.1, extract it and put it in the same directory as jelly.jar
 ```
+
+```
+Step 3 : Run this command in your command line : java --module-path javafx-sdk-13.0.1\lib --add-modules javafx.controls,javafx.fxml -jar jelly.jar
+```
+
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+```
+Step 1 : Download the jar jellyUnitTests.jar 
+```
+
+```
+Step 2 : Run java -jar jellyUnitTests.jar in your command line
+```
 
 ## Built With
 
